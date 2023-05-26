@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.FollowYourShifts" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme attributes -->
+        <!-- For example, you can change the primary color -->
+        <item name="colorPrimary">@color/blue_300</item>
+        <!-- Add other theme attributes as needed -->
+    </style>
+</resources>
