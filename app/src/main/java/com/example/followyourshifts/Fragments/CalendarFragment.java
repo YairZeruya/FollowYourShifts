@@ -16,7 +16,6 @@ import com.example.followyourshifts.Adapters.CalendarAdapter;
 import com.example.followyourshifts.CalendarCallBack;
 import com.example.followyourshifts.R;
 import com.example.followyourshifts.SignalGenerator;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -38,6 +37,11 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         initViews(view);
         selectedDate = LocalDate.now();
         setMonthView(view);
+        onClickListeners(view);
+        return view;
+    }
+
+    private void onClickListeners(View view) {
         nextMonthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,8 +54,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
                 previousMonthAction(view);
             }
         });
-        return view;
     }
+
     private void initViews(View view)
     {
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);

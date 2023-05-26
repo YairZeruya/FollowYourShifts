@@ -30,6 +30,6 @@
         android:layout_height="0dp"
         android:layout_weight="60"
         android:background="@android:color/white"
-        tools:listitem="@layout/shift_item" />
+        tools:listitem="@layout/workplace_item" />
 
 </LinearLayout>

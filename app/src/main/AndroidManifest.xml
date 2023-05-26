@@ -15,6 +15,7 @@
         android:theme="@style/Theme.FollowYourShifts"
         tools:targetApi="31">
         <activity android:name = ".Activities.ChooseIncomeActivity"/>
+        <activity android:name = ".Activities.ViewIncomeActivity"/>
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">

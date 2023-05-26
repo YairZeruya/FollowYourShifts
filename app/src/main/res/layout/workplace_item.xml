@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
+    android:layout_margin="4dp"
+    android:elevation="8dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="@color/blue_300">
+
+    <RelativeLayout
+        android:id="@+id/workplace_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shift_IMG_clock"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:padding="3dp"
+            android:layout_alignBottom="@id/shift_LBL_salaryPerHour"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginHorizontal="20dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/dollars_svgrepo_com" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/shift_LBL_workplace"
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@id/shift_IMG_clock"
+            android:maxLines="2"
+            android:minLines="2"
+            android:text="Workplace"
+            android:textColor="@color/orange_300"
+            android:textSize="22sp"
+            android:textStyle="bold|italic" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/shift_LBL_salaryPerHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shift_LBL_workplace"
+            android:layout_alignStart="@id/shift_LBL_workplace"
+            android:layout_marginTop="8dp"
+            android:text="00"
+            android:textSize="25sp"
+            android:textColor="@color/orange_300"
+            android:textStyle="bold|italic"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -55,7 +55,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftsViewHo
     @Override
     public void onBindViewHolder(@NonNull ShiftAdapter.ShiftsViewHolder holder, int position) {
         Shift shift = getItem(position);
-        holder.shift_LBL_workplace.setText(shift.getWorkplace());
+        holder.shift_LBL_workplace.setText(shift.getWorkplace().getWorkplaceName());
         //holder.record_LBL_score.setText(shift.getScore());
         //holder.record_layout.setOnClickListener(v -> recordClicked(record.getLatitude(), record.getLongitude()));
     }
