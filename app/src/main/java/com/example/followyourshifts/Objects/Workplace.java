@@ -1,76 +1,64 @@
 package com.example.followyourshifts.Objects;
 
+import java.util.ArrayList;
+
 public class Workplace {
-    private String workplaceName;
+    private String name;
     private double salaryPerHour;
-    private double hours100;
-    private double hours125;
-    private double hours150;
-    private double totalSalary;
-    //maybe a list of dates.
+    private ArrayList<Shift> shifts;
 
-    public Workplace(String workplaceName, double salaryPerHour) {
-        this.workplaceName = workplaceName;
+    public Workplace(String name, double salaryPerHour) {
+        this.name = name;
         this.salaryPerHour = salaryPerHour;
+        this.shifts = new ArrayList<>();
     }
 
-    public String getWorkplaceName() {
-        return workplaceName;
+    public void addShift(Shift shift) {
+        shifts.add(shift);
+    }
+    public Workplace getWorkplaceByName(String name){
+        if(this.name.equals(name)){
+            return this;
+        }
+        return null;
     }
 
-    public void setWorkplaceName(String workplaceName) {
-        this.workplaceName = workplaceName;
+    // Getters and setters for other properties
+
+
+    public String getName() {
+        return name;
     }
 
-    public double getSalaryPerHour() {
-        return salaryPerHour;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setSalaryPerHour(double salaryPerHour) {
         this.salaryPerHour = salaryPerHour;
     }
 
-    public double getHours100() {
-        return hours100;
+    public void setShifts(ArrayList<Shift> shifts) {
+        this.shifts = shifts;
     }
 
-    public void setHours100(double hours100) {
-        this.hours100 = hours100;
+    public double getSalaryPerHour() {
+        return salaryPerHour;
     }
 
-    public double getHours125() {
-        return hours125;
+    public void setSalaryPerHour(int salaryPerHour) {
+        this.salaryPerHour = salaryPerHour;
     }
 
-    public void setHours125(double hours125) {
-        this.hours125 = hours125;
-    }
-
-    public double getHours150() {
-        return hours150;
-    }
-
-    public void setHours150(double hours150) {
-        this.hours150 = hours150;
-    }
-
-    public double getTotalSalary() {
-        return totalSalary;
-    }
-
-    public void setTotalSalary(double totalSalary) {
-        this.totalSalary = totalSalary;
+    public ArrayList<Shift> getShifts() {
+        return shifts;
     }
 
     @Override
     public String toString() {
         return "Workplace{" +
-                "workplaceName='" + workplaceName + '\'' +
+                "name='" + name + '\'' +
                 ", salaryPerHour=" + salaryPerHour +
-                ", hours100=" + hours100 +
-                ", hours125=" + hours125 +
-                ", hours150=" + hours150 +
-                ", totalSalary=" + totalSalary +
                 '}';
     }
 }

@@ -3,6 +3,9 @@ package com.example.followyourshifts;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
 import java.util.ArrayList;
 
 public class DataManager {
@@ -26,8 +29,14 @@ public class DataManager {
 //            }
 //        }
         ArrayList shifts = new ArrayList();
-        shifts.add(new Shift(holmes_place, holmes_place.getSalaryPerHour(),0,0,0));
-        shifts.add(new Shift(kantri,kantri.getSalaryPerHour(),0,0,0));
+        LocalDate date1 = LocalDate.of(2023, 6, 1);
+        LocalDate date2 = LocalDate.of(2023, 5, 10);
+
+        Shift shift1 = new Shift(date1, LocalTime.of(9, 0), LocalTime.of(17, 0), holmes_place);
+        Shift shift2 = new Shift(date2, LocalTime.of(8, 0), LocalTime.of(16, 0),kantri);
+
+        shifts.add(shift1);
+        shifts.add(shift2);
         return shifts;
     }
     public static ArrayList<Workplace> getWorkPlace() {
@@ -42,8 +51,22 @@ public class DataManager {
 //            }
 //        }
         ArrayList workplaces = new ArrayList();
+        holmes_place.addShift(getShifts().get(0));
         workplaces.add(holmes_place);
+        kantri.addShift(getShifts().get(1));
         workplaces.add(kantri);
         return workplaces;
+    }
+
+    public static ArrayList<Shift> getShiftsByMonthAndWorkplace(Month month, Workplace workplace) {
+        ArrayList<Shift> shiftsByMonthAndWorkplace = new ArrayList<>();
+
+        for (Shift shift : workplace.getShifts()) {
+            if (shift.getDate().getMonth().equals(month)) {
+                shiftsByMonthAndWorkplace.add(shift);
+            }
+        }
+
+        return shiftsByMonthAndWorkplace;
     }
 }

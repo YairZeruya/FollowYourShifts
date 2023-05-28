@@ -7,12 +7,18 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.Toast;
 
+import com.example.followyourshifts.Objects.Shift;
+import com.example.followyourshifts.Objects.Workplace;
+
+import java.util.ArrayList;
+
 public class SignalGenerator {
     private static SignalGenerator instance;
     private Context context;
     private static Vibrator vibrator;
     private static MediaPlayer backgroundMediaPlayer;
     private static MediaPlayer eventsMediaPlayer;
+   // private static DataManager dataManager;
 
     private SignalGenerator(Context context) {
         this.context = context;
@@ -22,10 +28,18 @@ public class SignalGenerator {
         if (instance == null) {
             instance = new SignalGenerator(context);
             vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+            //dataManager = new DataManager();
             //backgroundMediaPlayer = MediaPlayer.create(context, R.raw.birds_background);
             //eventsMediaPlayer = MediaPlayer.create(context, R.raw.crash);
         }
     }
+
+//    public static ArrayList<Workplace>  getWorkplaces(){
+//        return dataManager.getWorkPlacesAndShifts();
+//    }
+//    public static ArrayList<Shift>  getShifts(){
+//        return dataManager.getShifts();
+//    }
 
     public static SignalGenerator getInstance() {
         return instance;
@@ -59,5 +73,6 @@ public class SignalGenerator {
             vibrator.vibrate(ms);
         }
     }
+
 
 }

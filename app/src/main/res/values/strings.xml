@@ -2,4 +2,9 @@
     <string name="app_name">Follow Your Shifts</string>
     <string name="back"><![CDATA[<-]]></string>
     <string name="forward"><![CDATA[->]]></string>
+    <string name="ShiftInfoText">Total Income: 0 "\n"
+                     Total Hours Worked: 0  "\n"
+                     Extra Hours (1.25x): 0 "\n"
+                     Extra Hours (1.5x): 0 "\n"
+                     Number of Shifts: 0</string>
 </resources>

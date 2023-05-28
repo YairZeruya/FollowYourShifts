@@ -1,5 +1,6 @@
 package com.example.followyourshifts.Adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,22 +57,18 @@ public class WorkplaceAdapter extends RecyclerView.Adapter<WorkplaceAdapter.Work
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WorkplaceAdapter.WorkplaceViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WorkplaceAdapter.WorkplaceViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Workplace workplace = getItem(position);
-        holder.shift_LBL_workplace.setText(workplace.getWorkplaceName());
+        holder.shift_LBL_workplace.setText(workplace.getName());
         holder.shift_LBL_salaryPerHour.setText(workplace.getSalaryPerHour() + " per hour");
-        String workplaceName =workplace.getWorkplaceName();
+        String workplaceName =workplace.getName();
         double salaryPerHour = workplace.getSalaryPerHour();
-        double hours100 = workplace.getHours100();
-        double hours125 = workplace.getHours125();
-        double hours150 = workplace.getHours150();
-        double totalSalary = workplace.getTotalSalary();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(workplaceCallBack != null){
                     workplaceCallBack.workplaceClicked
-                            (workplaceName,salaryPerHour,hours100,hours125,hours150,totalSalary,position);
+                            (workplaceName,position);
                 }
             }
         });
@@ -101,7 +98,7 @@ public class WorkplaceAdapter extends RecyclerView.Adapter<WorkplaceAdapter.Work
         return this.workplaces.get(position);
     }
     public interface WorkplaceCallBack {
-        void workplaceClicked(String workplaceName, double salaryPerHour,double hours100,double hours125,double hours150,double totalSalary, int position);
+        void workplaceClicked(String workplaceName, int position);
     }
 
     public class WorkplaceViewHolder extends RecyclerView.ViewHolder {

@@ -2,19 +2,103 @@ package com.example.followyourshifts.Objects;
 
 import com.example.followyourshifts.Objects.Workplace;
 
-public class Shift {
-    private Workplace workplace;
-    private double salaryPerHour;
-    private int hours100;
-    private int hours125;
-    private int hours150;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-    public Shift(Workplace workplace, double salaryPerHour, int hours100, int hours125, int hours150) {
-        this.workplace = workplace;
-        this.salaryPerHour = salaryPerHour;
-        this.hours100 = hours100;
-        this.hours125 = hours125;
-        this.hours150 = hours150;
+public class Shift {
+        private LocalDate date;
+        private LocalTime startTime;
+        private LocalTime endTime;
+        private double income;
+        private double extraHours1_25;
+        private double extraHours1_5;
+        private Workplace workplace;
+
+        public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, Workplace workplace) {
+            this.date = date;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.workplace = workplace;
+            calculateIncome();
+        }
+
+    public double calculateIncome() {
+        long duration = calculateDuration();
+        double salaryPerHour = workplace.getSalaryPerHour();
+        double baseSalary = salaryPerHour;
+
+        double extraHours1_25 = 0; // Variable to store the number of hours worked with 1.25 multiplier
+        double extraHours1_5 = 0;  // Variable to store the number of hours worked with 1.5 multiplier
+
+        if (duration > 9) {
+            extraHours1_25 = Math.min(duration - 9, 2); // Calculate the number of hours with 1.25 multiplier (up to 2 hours)
+            baseSalary *= 1.25; // Apply 1.25 multiplier for hours from 9-11
+        }
+
+        if (duration > 11) {
+            extraHours1_5 = duration - 11; // Calculate the number of hours with 1.5 multiplier (hours after 11)
+            baseSalary *= 1.5; // Apply 1.5 multiplier for hours from 11 onwards
+        }
+
+        income = baseSalary * duration;
+
+        // Store the extra hours worked with multipliers in the shift object
+        this.extraHours1_25 = extraHours1_25;
+        this.extraHours1_5 = extraHours1_5;
+
+        return income;
+    }
+
+    public double getExtraHours1_25() {
+        return extraHours1_25;
+    }
+
+    public void setExtraHours1_25(double extraHours1_25) {
+        this.extraHours1_25 = extraHours1_25;
+    }
+
+    public double getExtraHours1_5() {
+        return extraHours1_5;
+    }
+
+    public void setExtraHours1_5(double extraHours1_5) {
+        this.extraHours1_5 = extraHours1_5;
+    }
+
+    public long calculateDuration() {
+        Duration duration = Duration.between(startTime, endTime);
+        return duration.toHours();
+    }
+
+        // Getters for other properties
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
     }
 
     public Workplace getWorkplace() {
@@ -25,35 +109,8 @@ public class Shift {
         this.workplace = workplace;
     }
 
-    public double getSalaryPerHour() {
-        return salaryPerHour;
-    }
+    public double getIncome() {
+            return income;
+        }
 
-    public void setSalaryPerHour(double salaryPerHour) {
-        this.salaryPerHour = salaryPerHour;
-    }
-
-    public int getHours100() {
-        return hours100;
-    }
-
-    public void setHours100(int hours100) {
-        this.hours100 = hours100;
-    }
-
-    public int getHours125() {
-        return hours125;
-    }
-
-    public void setHours125(int hours125) {
-        this.hours125 = hours125;
-    }
-
-    public int getHours150() {
-        return hours150;
-    }
-
-    public void setHours150(int hours150) {
-        this.hours150 = hours150;
-    }
 }

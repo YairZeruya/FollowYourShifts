@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         int id = option.getId();
 
         if (id == R.id.add_shift_BTN) {
-            // Handle option 1 click
-            SignalGenerator.getInstance().toast("addshift",Toast.LENGTH_LONG);
+            Intent intent = new Intent(this, AddShiftActivity.class);
+            startActivity(intent);
         } else if (id == R.id.add_workplace_BTN) {
             // Handle option 2 click
         } else if (id == R.id.remove_shift_BTN) {

@@ -66,7 +66,7 @@
     <TextView
         android:id="@+id/VI_shifts_details"
         android:layout_centerInParent="true"
-        android:text="Your Text"
+        android:text="@string/ShiftInfoText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
