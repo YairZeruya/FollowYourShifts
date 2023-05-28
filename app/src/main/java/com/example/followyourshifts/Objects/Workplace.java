@@ -1,6 +1,4 @@
-package com.example.followyourshifts;
-
-import java.util.ArrayList;
+package com.example.followyourshifts.Objects;
 
 public class Workplace {
     private String workplaceName;

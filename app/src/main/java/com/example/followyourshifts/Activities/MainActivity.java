@@ -3,62 +3,117 @@ package com.example.followyourshifts.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.followyourshifts.Fragments.CalendarFragment;
 import com.example.followyourshifts.Fragments.ShiftFragment;
 import com.example.followyourshifts.R;
+import com.example.followyourshifts.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
 
-
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     private CalendarFragment calendarFragment;
     private ShiftFragment shiftFragment;
     private MaterialButton main_BTN_viewIncome;
-    private MaterialButton main_BTN_add_shift;
+    private MaterialButton main_BTN_viewOptions;
+    private PopupWindow popupWindow;
+    private LinearLayout toolbarOptions;
+    private boolean optionsIsOpen = false;
+    private boolean optionsVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initFragments();
-        findviews();
+        findViews();
         beginTransactions();
-        onClicklisteners();
+        setOnClickListeners();
     }
 
-    private void onClicklisteners() {
-        main_BTN_viewIncome.setOnClickListener(new View.OnClickListener() {
+    private void setOnClickListeners() {
+//        main_BTN_viewIncome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openChooseIncomeActivity();
+//            }
+//        });
+        main_BTN_viewOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openChooseIncomeActivity();
-
+                if(!optionsIsOpen) {
+                    toggleOptionsVisibility();
+                    optionsIsOpen = true;
+                    main_BTN_viewOptions.setText("Close options");
+                }
+                else{
+                    toggleOptionsVisibility();
+                    main_BTN_viewOptions.setText("View Options");
+                    optionsIsOpen = false;
+                }
             }
         });
-        main_BTN_add_shift.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //add shifts
-            }
-        });
+        for (int i = 0; i < toolbarOptions.getChildCount(); i++) {
+            View option = toolbarOptions.getChildAt(i);
+            option.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    handleOptionClick(option);
+                }
+            });
+        }
     }
+
+    private void handleOptionClick(View option) {
+        int id = option.getId();
+
+        if (id == R.id.add_shift_BTN) {
+            // Handle option 1 click
+            SignalGenerator.getInstance().toast("addshift",Toast.LENGTH_LONG);
+        } else if (id == R.id.add_workplace_BTN) {
+            // Handle option 2 click
+        } else if (id == R.id.remove_shift_BTN) {
+            // Handle option 3 click
+        } else if (id == R.id.remove_workplace_BTN) {
+            // Handle option 4 click
+        } else if(id == R.id.main_BTN_viewIncome){
+            openChooseIncomeActivity();
+            // Handle other options if needed
+        }
+    }
+
+    private void toggleOptionsVisibility() {
+        if (optionsVisible) {
+            toolbarOptions.setVisibility(View.GONE);
+            optionsVisible = false;
+        } else {
+            toolbarOptions.setVisibility(View.VISIBLE);
+            optionsVisible = true;
+        }
+    }
+
+
     private void openChooseIncomeActivity() {
         Intent intent = new Intent(this, ChooseIncomeActivity.class);
         startActivity(intent);
     }
 
-    private void findviews() {
+    private void findViews() {
         main_BTN_viewIncome = findViewById(R.id.main_BTN_viewIncome);
-        main_BTN_add_shift = findViewById(R.id.main_BTN_add_shift);
+        main_BTN_viewOptions = findViewById(R.id.main_BTN_viewOptions);
+        toolbarOptions = findViewById(R.id.main_TOOLBAR_options);
     }
-//    private RecordCallBack recordCallBack = new RecordCallBack() {
-//        @Override
-//        public void recordClicked(double latitude, double longitude) {
-//            mapFragment.zoomOnRecord(latitude, longitude);
-//        }
-//    };
-
 
     private void beginTransactions() {
         getSupportFragmentManager().beginTransaction().add(R.id.main_FRAME_shifts, shiftFragment).commit();

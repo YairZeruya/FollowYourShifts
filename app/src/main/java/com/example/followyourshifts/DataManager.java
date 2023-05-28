@@ -1,6 +1,8 @@
 package com.example.followyourshifts;
 
-import java.time.LocalDate;
+import com.example.followyourshifts.Objects.Shift;
+import com.example.followyourshifts.Objects.Workplace;
+
 import java.util.ArrayList;
 
 public class DataManager {
@@ -11,7 +13,7 @@ public class DataManager {
     public static final String KEY_HOURS_150 = "KEY_HOURS_150";
     public static final String KEY_TOTAL_SALARY = "KEY_TOTAL_SALARY";
     static Workplace holmes_place = new Workplace("Holmes Place", 65);
-     static Workplace kantri = new Workplace("kantri", 60);
+    static Workplace kantri = new Workplace("kantri", 60);
     public static ArrayList<Shift> getShifts() {
 
 //        ArrayList records = new ArrayList();
@@ -24,8 +26,8 @@ public class DataManager {
 //            }
 //        }
         ArrayList shifts = new ArrayList();
-        shifts.add(new Shift(holmes_place, LocalDate.now()));
-        shifts.add(new Shift(kantri,LocalDate.now()));
+        shifts.add(new Shift(holmes_place, holmes_place.getSalaryPerHour(),0,0,0));
+        shifts.add(new Shift(kantri,kantri.getSalaryPerHour(),0,0,0));
         return shifts;
     }
     public static ArrayList<Workplace> getWorkPlace() {

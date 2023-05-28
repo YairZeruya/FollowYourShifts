@@ -3,17 +3,14 @@ package com.example.followyourshifts.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.followyourshifts.R;
-import com.example.followyourshifts.Shift;
-import com.example.followyourshifts.Workplace;
+import com.example.followyourshifts.Objects.Workplace;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 
 public class WorkplaceAdapter extends RecyclerView.Adapter<WorkplaceAdapter.WorkplaceViewHolder> {

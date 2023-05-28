@@ -10,8 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.followyourshifts.DataManager;
 import com.example.followyourshifts.R;
-import com.example.followyourshifts.SignalGenerator;
-import com.example.followyourshifts.Workplace;
+import com.example.followyourshifts.Objects.Workplace;
 
 
 import java.time.LocalDate;

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.followyourshifts.Adapters.CalendarAdapter;
 import com.example.followyourshifts.CalendarCallBack;
+import com.example.followyourshifts.CalendarUtils;
 import com.example.followyourshifts.R;
 import com.example.followyourshifts.SignalGenerator;
 import java.time.LocalDate;
@@ -28,14 +29,12 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private RecyclerView calendarRecyclerView;
     private Button nextMonthButton;
     private Button previousMonthButton;
-    private LocalDate selectedDate;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.calendar_fragment, container, false);
         initViews(view);
-        selectedDate = LocalDate.now();
+        CalendarUtils.selectedDate = LocalDate.now();
         setMonthView(view);
         onClickListeners(view);
         return view;
@@ -66,8 +65,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     private void setMonthView(View view)
     {
-        monthYearText.setText(monthYearFromDate(selectedDate));
-        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        ArrayList<String> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
@@ -81,7 +80,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
         int daysInMonth = yearMonth.lengthOfMonth();
 
-        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+        LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
         for(int i = 1; i <= 42; i++)
@@ -106,13 +105,13 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     public void previousMonthAction(View view)
     {
-        selectedDate = selectedDate.minusMonths(1);
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
         setMonthView(view);
     }
 
     public void nextMonthAction(View view)
     {
-        selectedDate = selectedDate.plusMonths(1);
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
         setMonthView(view);
     }
 
@@ -120,7 +119,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     public void onItemClick(int position, String dayText) {
         if(!dayText.equals(""))
         {
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
+            String message = "Selected Date " + dayText + " " + monthYearFromDate(CalendarUtils.selectedDate);
             SignalGenerator.getInstance().toast(message, Toast.LENGTH_LONG);
         }
     }
