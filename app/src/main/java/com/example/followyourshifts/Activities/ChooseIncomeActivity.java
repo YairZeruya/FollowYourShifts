@@ -28,11 +28,6 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
     private void openViewIncomeActivity(String workplaceName) {
         Intent intent = new Intent(this, ViewIncomeActivity.class);
         intent.putExtra((DataManager.KEY_WORKPLACE_NAME), workplaceName);
-//        intent.putExtra((DataManager.KEY_SALARY_PER_HOUR), salaryPerHour);
-//        intent.putExtra((DataManager.KEY_HOURS_100), hours100);
-//        intent.putExtra((DataManager.KEY_HOURS_125), hours125);
-//        intent.putExtra((DataManager.KEY_HOURS_150), hours150);
-//        intent.putExtra((DataManager.KEY_TOTAL_SALARY), totalSalary);
         startActivity(intent);
     }
 
@@ -63,7 +58,4 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
         workplaceList = findViewById(R.id.workplace_list);
     }
 
-//    public void setWorkplaceCallBack(WorkplaceCallBack workplaceCallBack) {
-//        this.workplaceCallBack = workplaceCallBack;
-//    }
 }

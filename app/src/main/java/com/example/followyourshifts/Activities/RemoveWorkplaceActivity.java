@@ -14,6 +14,7 @@ import com.example.followyourshifts.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.R;
+import com.example.followyourshifts.SignalGenerator;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,7 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
             workplaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             workplaceSpinner.setAdapter(workplaceAdapter);
         } else {
-            Toast.makeText(this, "No workplaces found.", Toast.LENGTH_SHORT).show();
+            SignalGenerator.getInstance().toast( "No workplaces found.", Toast.LENGTH_SHORT);
         }
     }
 
@@ -66,12 +67,12 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
                     removeShiftsForWorkplace(selectedWorkplace);
 
                     // Display a message or perform other actions
-                    Toast.makeText(RemoveWorkplaceActivity.this, "Workplace removed successfully!", Toast.LENGTH_SHORT).show();
+                    SignalGenerator.getInstance().toast( "Workplace removed successfully!", Toast.LENGTH_SHORT);
                     finish();
                 }
                 else {
                 // Display an error message or take appropriate action
-                Toast.makeText(RemoveWorkplaceActivity.this, "No workplace selected.", Toast.LENGTH_SHORT).show();
+                SignalGenerator.getInstance().toast("No workplace selected.", Toast.LENGTH_SHORT);
             }
             }
         });

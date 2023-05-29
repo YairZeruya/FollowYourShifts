@@ -14,6 +14,7 @@ import com.example.followyourshifts.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.R;
+import com.example.followyourshifts.SignalGenerator;
 
 import java.util.ArrayList;
 
@@ -77,11 +78,11 @@ public class RemoveShiftActivity extends AppCompatActivity {
                     }
 
                     // Display a message or perform other actions
-                    Toast.makeText(RemoveShiftActivity.this, "Shift removed successfully!", Toast.LENGTH_SHORT).show();
+                    SignalGenerator.getInstance().toast("Shift removed successfully!", Toast.LENGTH_SHORT);
                     finish();
                 } else {
                     // Display an error message or take appropriate action
-                    Toast.makeText(RemoveShiftActivity.this, "No shift selected.", Toast.LENGTH_SHORT).show();
+                    SignalGenerator.getInstance().toast("No shift selected.", Toast.LENGTH_SHORT);
                 }
             }
         });

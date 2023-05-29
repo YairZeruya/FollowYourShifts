@@ -44,12 +44,12 @@ public class AddWorkplaceActivity extends AppCompatActivity {
                 String salaryInput = salaryEditText.getText().toString();
 
                 if (TextUtils.isEmpty(salaryInput)) {
-                    Toast.makeText(AddWorkplaceActivity.this, "Please enter the salary per hour", Toast.LENGTH_SHORT).show();
+                    SignalGenerator.getInstance().toast("Please enter the salary per hour", Toast.LENGTH_SHORT);
                     return;
                 }
 
                 if (TextUtils.isEmpty(name)) {
-                    Toast.makeText(AddWorkplaceActivity.this, "Please enter name", Toast.LENGTH_SHORT).show();
+                    SignalGenerator.getInstance().toast( "Please enter name", Toast.LENGTH_SHORT);
                     return;
                 }
 
@@ -71,7 +71,7 @@ public class AddWorkplaceActivity extends AppCompatActivity {
                 }
 
                 if (duplicateFound) {
-                    Toast.makeText(AddWorkplaceActivity.this, "A workplace with the same name already exists", Toast.LENGTH_SHORT).show();
+                    SignalGenerator.getInstance().toast("A workplace with the same name already exists", Toast.LENGTH_SHORT);
                     return;
                 }
 

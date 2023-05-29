@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
     private ShiftFragment shiftFragment;
     private MaterialButton main_BTN_viewIncome;
     private MaterialButton main_BTN_viewOptions;
-    private PopupWindow popupWindow;
     private LinearLayout toolbarOptions;
     private boolean optionsIsOpen = false;
     private boolean optionsVisible = false;

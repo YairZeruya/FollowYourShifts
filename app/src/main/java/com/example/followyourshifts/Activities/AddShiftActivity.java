@@ -62,7 +62,7 @@ public class AddShiftActivity extends AppCompatActivity {
             workplaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             workplaceSpinner.setAdapter(workplaceAdapter);
         } else {
-            Toast.makeText(this, "No workplaces found.", Toast.LENGTH_SHORT).show();
+            SignalGenerator.getInstance().toast( "No workplaces found.", Toast.LENGTH_SHORT);
         }
     }
 
