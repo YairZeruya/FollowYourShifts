@@ -72,6 +72,11 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
+
+        // Set the selected item position in the adapter
+        if (selectedItemPosition != -1) {
+            calendarRecyclerView.scrollToPosition(selectedItemPosition);
+        }
     }
 
     public void setSelectedDate(LocalDate selectedDate) {
@@ -113,12 +118,14 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     public void previousMonthAction(View view)
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
+        selectedItemPosition = -1;// Reset the selected item position
         setMonthView(view);
     }
 
     public void nextMonthAction(View view)
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
+        selectedItemPosition = -1;// Reset the selected item position
         setMonthView(view);
     }
 

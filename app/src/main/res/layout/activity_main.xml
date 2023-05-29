@@ -8,6 +8,16 @@
     tools:context=".Activities.MainActivity"
     android:background="@color/orange_300"
     tools:ignore="ExtraText">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="Welcome Back User, days in white indicate shifts"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/black" />
 
     <FrameLayout
         android:id="@+id/main_FRAME_calendar"

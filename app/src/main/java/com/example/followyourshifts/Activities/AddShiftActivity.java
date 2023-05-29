@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.followyourshifts.CalendarUtils;
 import com.example.followyourshifts.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
@@ -150,11 +151,20 @@ public class AddShiftActivity extends AppCompatActivity {
                     if (startTime.isBefore(shift.getStartTime()) && endTime.isAfter(shift.getEndTime())) {
                         return true;
                     }
+                    // Check if the new shift's start time is equal to the existing shift's start time, and the end time is after the existing shift's end time
+                    if (startTime.equals(shift.getStartTime()) && endTime.isAfter(shift.getEndTime())) {
+                        return true;
+                    }
+                    // Check if the new shift's start time is before the existing shift's start time, and the end time is equal to the existing shift's end time
+                    if (startTime.isBefore(shift.getStartTime()) && endTime.equals(shift.getEndTime())) {
+                        return true;
+                    }
                 }
             }
         }
         return false;
     }
+
 
 
 
