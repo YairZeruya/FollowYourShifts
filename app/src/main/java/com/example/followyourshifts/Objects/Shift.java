@@ -137,11 +137,9 @@ public class Shift {
 
     @Override
     public String toString() {
-        return "Shift{" +
-                "date=" + date +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", workplace=" + workplace +
-                '}';
+        return  date +
+                " ," + startTime +
+                "-" + endTime +
+                ", Workplace-" + workplace.getName();
     }
 }

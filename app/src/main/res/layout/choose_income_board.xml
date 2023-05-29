@@ -16,9 +16,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Your Text"
+            android:text="Hi User, choose a workplace to view its income!"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="25sp"
+            android:padding="16dp"
+            android:textStyle="bold|italic"/>
 
     </RelativeLayout>
 

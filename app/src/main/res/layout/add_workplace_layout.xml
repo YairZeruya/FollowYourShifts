@@ -12,14 +12,18 @@
         android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Workplace Name" />
+        android:hint="Workplace Name"
+        android:padding="30dp"
+        android:textSize="35dp"/>
 
     <EditText
         android:id="@+id/salaryEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Salary per Hour"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:padding="30dp"
+        android:textSize="35dp"/>
 
     <Button
         android:id="@+id/addButton"

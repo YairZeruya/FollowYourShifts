@@ -120,8 +120,8 @@ public class ViewIncomeActivity extends AppCompatActivity {
                 extraHours1_5 += shift.getExtraHours1_5();
             }
             work_place_name_textView.setText("Workplace Name: " + name);
-            salary_text_view.setText(totalIncome + "$");
-            hours_days_text_view.setText("Total Hours Worked: " + totalHoursWorked + " ," + numShifts + " Days");
+            salary_text_view.setText("Total Income: " + totalIncome + "$");
+            hours_days_text_view.setText(totalHoursWorked + " Hours Total ," + numShifts + " Days");
             hours_worked_text_view.setText("Hours (1.0x): " + (totalHoursWorked- extraHours1_5- extraHours1_25) + " Hours");
             extra_hours_125_text_view.setText("Extra Hours (1.25x): " + extraHours1_25);
             extra_hours_150_text_view.setText("Extra Hours (1.50x): " + extraHours1_5);

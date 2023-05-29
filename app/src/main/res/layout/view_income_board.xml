@@ -78,15 +78,6 @@
             android:padding="16dp" />
 
         <!-- Hours and Days TextView -->
-        <TextView
-            android:id="@+id/hours_days_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/salary_text_view"
-            android:text="0.0 Hours, 0 Days"
-            android:textColor="@android:color/white"
-            android:textSize="40sp"
-            android:padding="16dp" />
     </RelativeLayout>
 
 
@@ -127,6 +118,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/extra_hours_125_text_view"
             android:text="Extra Hours (1.5x): 0"
+            android:textColor="@color/blue_300"
+            android:textSize="35sp"
+            android:padding="16dp" />
+        <TextView
+            android:id="@+id/hours_days_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/extra_hours_150_text_view"
+            android:text="0.0 Hours, 0 Days"
             android:textColor="@color/blue_300"
             android:textSize="35sp"
             android:padding="16dp" />

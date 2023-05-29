@@ -43,7 +43,6 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
         findViews();
         initViews();
 
-        topTextView.setText("Hi Yair, choose a workplace to view its income!");
         onClicklisteners();
     }
 

@@ -59,10 +59,7 @@ public class Workplace {
 
     @Override
     public String toString() {
-        return "Workplace{" +
-                "name='" + name + '\'' +
-                ", salaryPerHour=" + salaryPerHour +
-                '}';
+        return name  + ", " + ", salary Per Hour-" + salaryPerHour;
     }
 
     public void removeShift(Shift selectedShift) {
