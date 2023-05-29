@@ -33,6 +33,13 @@ public class ViewIncomeActivity extends AppCompatActivity {
     private LocalDate selectedDate;
     private TextView shifts_details;
     private Workplace workplace;
+    private TextView work_place_name_textView;
+
+    private TextView salary_text_view;
+    private TextView hours_days_text_view;
+    private TextView hours_worked_text_view;
+    private TextView extra_hours_125_text_view;
+    private TextView extra_hours_150_text_view;
 
 //    private WorkplaceCallBack workplaceCallBack = new WorkplaceCallBack() {
 //        @Override
@@ -76,10 +83,12 @@ public class ViewIncomeActivity extends AppCompatActivity {
                     // here move for all the workplaces and their shifts
                     for (Shift shift : workplace.getShifts()) {
                         Month month = shift.getDate().getMonth();
-                        displayShiftsInfoByMonthAndWorkplace(month, workplace, shifts_details);
+                        displayShiftsInfoByMonthAndWorkplace(month, workplace, work_place_name_textView,salary_text_view, hours_days_text_view,hours_worked_text_view
+                        ,extra_hours_125_text_view, extra_hours_150_text_view);
                     }
                 } else {
-                    displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace,shifts_details);
+                    displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace, work_place_name_textView,salary_text_view, hours_days_text_view,hours_worked_text_view
+                            ,extra_hours_125_text_view, extra_hours_150_text_view);
                 }
             }
         }
@@ -87,15 +96,22 @@ public class ViewIncomeActivity extends AppCompatActivity {
 
 
 
-    public void displayShiftsInfoByMonthAndWorkplace(Month month, Workplace workplace, TextView textView) {
+    public void displayShiftsInfoByMonthAndWorkplace(
+            Month month, Workplace workplace, TextView work_place_name_textView,
+                                                     TextView salary_text_view,TextView hours_days_text_view,
+    TextView hours_worked_text_view,TextView extra_hours_125_text_view,TextView extra_hours_150_text_view) {
         ArrayList<Shift> shifts = getShiftsByMonthAndWorkplace(month, workplace);
         if (month == selectedDate.getMonth()) {
             // Calculate total income, total hours worked, extra hours with 1.25 multiplier, extra hours with 1.5 multiplier, and number of shifts
+            String name = "";
             double totalIncome = 0;
             double totalHoursWorked = 0;
             double extraHours1_25 = 0;
             double extraHours1_5 = 0;
             int numShifts = shifts.size();
+            if(numShifts > 0) {
+                name = shifts.get(0).getWorkplace().getName();
+            }
 
             for (Shift shift : shifts) {
                 totalIncome += shift.calculateIncome();
@@ -103,16 +119,12 @@ public class ViewIncomeActivity extends AppCompatActivity {
                 extraHours1_25 += shift.getExtraHours1_25();
                 extraHours1_5 += shift.getExtraHours1_5();
             }
-
-            // Prepare the text to display
-            String infoText = "Total Income: " + totalIncome + "\n"
-                    + "Total Hours Worked: " + totalHoursWorked + "\n"
-                    + "Extra Hours (1.25x): " + extraHours1_25 + "\n"
-                    + "Extra Hours (1.5x): " + extraHours1_5 + "\n"
-                    + "Number of Shifts: " + numShifts;
-
-            // Set the text in the TextView
-            textView.setText(infoText);
+            work_place_name_textView.setText("Workplace Name: " + name);
+            salary_text_view.setText(totalIncome + "$");
+            hours_days_text_view.setText("Total Hours Worked: " + totalHoursWorked + " ," + numShifts + " Days");
+            hours_worked_text_view.setText("Hours (1.0x): " + (totalHoursWorked- extraHours1_5- extraHours1_25) + " Hours");
+            extra_hours_125_text_view.setText("Extra Hours (1.25x): " + extraHours1_25);
+            extra_hours_150_text_view.setText("Extra Hours (1.50x): " + extraHours1_5);
         }
     }
 
@@ -129,7 +141,8 @@ public class ViewIncomeActivity extends AppCompatActivity {
         selectedDate = selectedDate.minusMonths(1);
         setMonthView();
         if(workplace != null){
-            displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace,shifts_details);
+            displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace, work_place_name_textView,salary_text_view, hours_days_text_view,hours_worked_text_view
+                    ,extra_hours_125_text_view, extra_hours_150_text_view);
         }
     }
 
@@ -142,7 +155,8 @@ public class ViewIncomeActivity extends AppCompatActivity {
         selectedDate = selectedDate.plusMonths(1);
         setMonthView();
         if(workplace != null){
-            displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace,shifts_details);
+            displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace, work_place_name_textView,salary_text_view, hours_days_text_view,hours_worked_text_view
+                    ,extra_hours_125_text_view, extra_hours_150_text_view);
         }
     }
 
@@ -162,10 +176,17 @@ public class ViewIncomeActivity extends AppCompatActivity {
         });
     }
 
+
     private void findviews() {
         monthYearText = findViewById(R.id.VI_monthYearTV);
         nextMonthButton =findViewById(R.id.VI_next_month_button);
         previousMonthButton = findViewById(R.id.VI_previous_month_button);
-        shifts_details = findViewById(R.id.VI_shifts_details);
+        salary_text_view = findViewById(R.id.salary_text_view);
+        hours_days_text_view = findViewById(R.id.hours_days_text_view);
+        hours_worked_text_view= findViewById(R.id.hours_worked_text_view);
+        extra_hours_125_text_view = findViewById(R.id.extra_hours_125_text_view);
+        extra_hours_150_text_view =findViewById(R.id.extra_hours_150_text_view);
+        work_place_name_textView = findViewById(R.id.work_place_name_textView);
+        hours_worked_text_view = findViewById(R.id.hours_worked_text_view);
     }
 }

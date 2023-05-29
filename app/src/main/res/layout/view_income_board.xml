@@ -1,9 +1,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/orange_300">
 
-    <!-- Top section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/blue_300"
+        android:layout_below="@id/hours_days_text_view">
+
+        <!-- Previous Month Button -->
+        <Button
+            android:id="@+id/VI_previous_month_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/back"
+            android:textColor="@android:color/white"
+            android:background="@null"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <!-- Month and Year TextView -->
+        <TextView
+            android:id="@+id/VI_monthYearTV"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Feb 2021"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"/>
+
+        <!-- Next Month Button -->
+        <Button
+            android:id="@+id/VI_next_month_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/forward"
+            android:textColor="@android:color/white"
+            android:background="@null"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
     <RelativeLayout
         android:id="@+id/VI_topSection"
         android:layout_width="match_parent"
@@ -11,66 +55,81 @@
         android:layout_weight="40"
         android:background="@color/blue_300">
 
-        <LinearLayout
+        <!-- Name of workplace TextView -->
+        <TextView
+            android:id="@+id/work_place_name_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp">
-            <Button
-                android:id="@+id/VI_previous_month_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/back"
-                android:textColor="@color/white"
-                android:background="@null"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:id="@+id/VI_monthYearTV"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:text="Feb 2021"
-                android:textSize="20sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"/>
-
-            <Button
-                android:id="@+id/VI_next_month_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/forward"
-                android:textColor="@color/white"
-                android:background="@null"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/VI_topTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Your Text"
+            android:layout_alignParentTop="true"
+            android:text="Name of workplace"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="40sp"
+            android:padding="16dp" />
 
+        <!-- Salary TextView -->
+        <TextView
+            android:id="@+id/salary_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/work_place_name_textView"
+            android:text="0000 $"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            android:padding="16dp" />
+
+        <!-- Hours and Days TextView -->
+        <TextView
+            android:id="@+id/hours_days_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/salary_text_view"
+            android:text="0.0 Hours, 0 Days"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            android:padding="16dp" />
     </RelativeLayout>
 
+
     <!-- Bottom section -->
-    <TextView
-        android:id="@+id/VI_shifts_details"
-        android:layout_centerInParent="true"
-        android:text="@string/ShiftInfoText"
+    <RelativeLayout
+        android:id="@+id/VI_shift_details"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        >
+
+        <!-- Name of workplace TextView -->
+        <TextView
+            android:id="@+id/hours_worked_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="Hours Worked: 0"
+            android:textColor="@color/blue_300"
+            android:textSize="35sp"
+            android:padding="16dp" />
+
+        <!-- Salary TextView -->
+        <TextView
+            android:id="@+id/extra_hours_125_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hours_worked_text_view"
+            android:text="Extra Hours (1.25x): 0"
+            android:textColor="@color/blue_300"
+            android:textSize="35sp"
+            android:padding="16dp" />
+
+        <!-- Hours and Days TextView -->
+        <TextView
+            android:id="@+id/extra_hours_150_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/extra_hours_125_text_view"
+            android:text="Extra Hours (1.5x): 0"
+            android:textColor="@color/blue_300"
+            android:textSize="35sp"
+            android:padding="16dp" />
+    </RelativeLayout>
 
 </LinearLayout>
