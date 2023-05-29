@@ -15,46 +15,33 @@ public class DataManager {
     public static final String KEY_HOURS_125 = "KEY_HOURS_125";
     public static final String KEY_HOURS_150 = "KEY_HOURS_150";
     public static final String KEY_TOTAL_SALARY = "KEY_TOTAL_SALARY";
+    public static ArrayList<Workplace> workplaces = new ArrayList();
+    public static ArrayList<Shift> shifts = new ArrayList();
+    private static boolean isWorkplaceInit = false;
+    private static boolean isShiftInit = false;
     static Workplace holmes_place = new Workplace("Holmes Place", 65);
     static Workplace kantri = new Workplace("kantri", 60);
     public static ArrayList<Shift> getShifts() {
+        if(!isShiftInit) {
+            LocalDate date1 = LocalDate.of(2023, 6, 1);
+            LocalDate date2 = LocalDate.of(2023, 5, 10);
 
-//        ArrayList records = new ArrayList();
-//        int numOfRecords = MySPv.getInstance().getInt("Num Of Records", DEFAULT_VALUE);
-//        for (int i = 0; i < numOfRecords; i++) {
-//            String s = MySPv.getInstance().getString("Rank: " + (i + 1), "");
-//            if (s != "") {
-//                Record record = new Gson().fromJson(s, Record.class);
-//                records.add(record);
-//            }
-//        }
-        ArrayList shifts = new ArrayList();
-        LocalDate date1 = LocalDate.of(2023, 6, 1);
-        LocalDate date2 = LocalDate.of(2023, 5, 10);
-
-        Shift shift1 = new Shift(date1, LocalTime.of(9, 0), LocalTime.of(17, 0), holmes_place);
-        Shift shift2 = new Shift(date2, LocalTime.of(8, 0), LocalTime.of(16, 0),kantri);
-
-        shifts.add(shift1);
-        shifts.add(shift2);
+//            Shift shift1 = new Shift(date1, LocalTime.of(9, 0), LocalTime.of(17, 0), holmes_place);
+//            Shift shift2 = new Shift(date2, LocalTime.of(8, 0), LocalTime.of(16, 0), kantri);
+//
+//            shifts.add(shift1);
+//            shifts.add(shift2);
+        }
         return shifts;
     }
     public static ArrayList<Workplace> getWorkPlace() {
 
-//        ArrayList records = new ArrayList();
-//        int numOfRecords = MySPv.getInstance().getInt("Num Of Records", DEFAULT_VALUE);
-//        for (int i = 0; i < numOfRecords; i++) {
-//            String s = MySPv.getInstance().getString("Rank: " + (i + 1), "");
-//            if (s != "") {
-//                Record record = new Gson().fromJson(s, Record.class);
-//                records.add(record);
-//            }
-//        }
-        ArrayList workplaces = new ArrayList();
-        holmes_place.addShift(getShifts().get(0));
-        workplaces.add(holmes_place);
-        kantri.addShift(getShifts().get(1));
-        workplaces.add(kantri);
+        if(!isWorkplaceInit) {
+            //holmes_place.addShift(getShifts().get(0));
+            //workplaces.add(holmes_place);
+            //kantri.addShift(getShifts().get(1));
+            //workplaces.add(kantri);
+        }
         return workplaces;
     }
 
@@ -68,5 +55,21 @@ public class DataManager {
         }
 
         return shiftsByMonthAndWorkplace;
+    }
+
+    public static void removeWorkplace(Workplace selectedWorkplace) {
+        for (int i = 0; i<workplaces.size();i++) {
+            if(workplaces.get(i).getName().equals(selectedWorkplace.getName())){
+                workplaces.remove(i);
+            }
+        }
+    }
+
+    public static void removeShift(Shift selectedShift) {
+        for(int i = 0; i<shifts.size();i++){
+            if(selectedShift.equals(shifts.get(i))){
+                shifts.remove(i);
+            }
+        }
     }
 }

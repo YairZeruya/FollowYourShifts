@@ -47,18 +47,31 @@ public class ViewIncomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_income_board);
         selectedDate = LocalDate.now();
-        //chooseIncomeActivity.setWorkplaceCallBack(workplaceCallBack);
         findviews();
         setMonthView();
+        handleIntentData();
+//        Intent previousIntent = getIntent();
+//        for (Workplace workplace: DataManager.getWorkPlace()) {
+//            if(workplace.getName().equals(previousIntent.getStringExtra(DataManager.KEY_WORKPLACE_NAME))) {
+//                this.workplace = workplace;
+//                if (workplace.getShifts().size() > 0) {
+//                    // here move for all the workplaces and their shifts
+//                    for (Shift shift : workplace.getShifts()) {
+//                        Month month = shift.getDate().getMonth();
+//                        displayShiftsInfoByMonthAndWorkplace(month, workplace, shifts_details);
+//                    }
+//                } else {
+//                    displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace,shifts_details);
+//                }
+//            }
+//        }
+        onClicklisteners();
+    }
+    public void handleIntentData(){
         Intent previousIntent = getIntent();
         for (Workplace workplace: DataManager.getWorkPlace()) {
             if(workplace.getName().equals(previousIntent.getStringExtra(DataManager.KEY_WORKPLACE_NAME))) {
                 this.workplace = workplace;
-//            if(workplace.getName().equals("Holmes Place"))
-//                workplace.addShift(DataManager.getShifts().get(0));
-//            else
-//                workplace.addShift(DataManager.getShifts().get(1));
-
                 if (workplace.getShifts().size() > 0) {
                     // here move for all the workplaces and their shifts
                     for (Shift shift : workplace.getShifts()) {
@@ -69,23 +82,10 @@ public class ViewIncomeActivity extends AppCompatActivity {
                     displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace,shifts_details);
                 }
             }
-
         }
-        //workplace = new Workplace(previousIntent.getStringExtra(DataManager.KEY_WORKPLACE_NAME),previousIntent.getDoubleExtra(DataManager.KEY_SALARY_PER_HOUR,DEFAULT_VALUE));
-        //workplace.setName(previousIntent.getStringExtra(DataManager.KEY_WORKPLACE_NAME));
-        //workplace.setSalaryPerHour(previousIntent.getDoubleExtra(DataManager.KEY_SALARY_PER_HOUR,DEFAULT_VALUE));
-        //here is the problem;
-        //ArrayList<Shift> shiftsByMonthAndWorkplace = getShiftsByMonthAndWorkplace(workplace.getShifts().get(0).getDate().getMonth(),workplace);
-
-
-
-//        workplace.setHours100(previousIntent.getDoubleExtra(DataManager.KEY_HOURS_100,DEFAULT_VALUE));
-//        workplace.setHours125(previousIntent.getDoubleExtra(DataManager.KEY_HOURS_125, DEFAULT_VALUE));
-//        workplace.setHours150(previousIntent.getDoubleExtra(DataManager.KEY_HOURS_150, DEFAULT_VALUE));
-//        workplace.setTotalSalary(previousIntent.getDoubleExtra(DataManager.KEY_TOTAL_SALARY,DEFAULT_VALUE));
-//        shifts_details.setText(workplace.toString());
-        onClicklisteners();
     }
+
+
 
     public void displayShiftsInfoByMonthAndWorkplace(Month month, Workplace workplace, TextView textView) {
         ArrayList<Shift> shifts = getShiftsByMonthAndWorkplace(month, workplace);

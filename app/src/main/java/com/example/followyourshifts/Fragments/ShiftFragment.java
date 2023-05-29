@@ -27,6 +27,7 @@ public class ShiftFragment extends Fragment {
     }
 
     private void initViews(View view) {
+
         ShiftAdapter shiftAdapter = new ShiftAdapter(DataManager.getShifts());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);

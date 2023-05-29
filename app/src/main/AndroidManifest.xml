@@ -17,6 +17,10 @@
         <activity android:name = ".Activities.ChooseIncomeActivity"/>
         <activity android:name = ".Activities.ViewIncomeActivity"/>
         <activity android:name = ".Activities.AddShiftActivity"/>
+        <activity android:name = ".Activities.AddWorkplaceActivity"/>
+        <activity android:name = ".Activities.RemoveWorkplaceActivity"/>
+        <activity android:name = ".Activities.RemoveShiftActivity"/>
+
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">

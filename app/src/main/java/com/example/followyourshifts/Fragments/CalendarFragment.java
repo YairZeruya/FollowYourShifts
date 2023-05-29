@@ -122,6 +122,9 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             String message = "Selected Date " + dayText + " " + monthYearFromDate(CalendarUtils.selectedDate);
             SignalGenerator.getInstance().toast(message, Toast.LENGTH_LONG);
         }
+//        if (calendarCallBack != null) {
+//            calendarCallBack.onDateSelected(CalendarUtils.selectedDate);
+//        }
     }
 
     public void setCalendarCallBack(CalendarCallBack calendarCallBack) {

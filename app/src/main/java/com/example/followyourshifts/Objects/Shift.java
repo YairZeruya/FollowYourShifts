@@ -5,6 +5,7 @@ import com.example.followyourshifts.Objects.Workplace;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 public class Shift {
         private LocalDate date;
@@ -24,7 +25,7 @@ public class Shift {
         }
 
     public double calculateIncome() {
-        long duration = calculateDuration();
+        double duration = calculateDuration();
         double salaryPerHour = workplace.getSalaryPerHour();
         double baseSalary = salaryPerHour;
 
@@ -50,6 +51,20 @@ public class Shift {
         return income;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shift shift = (Shift) o;
+        return Double.compare(shift.income, income) == 0 &&
+                Double.compare(shift.extraHours1_25, extraHours1_25) == 0 &&
+                Double.compare(shift.extraHours1_5, extraHours1_5) == 0 &&
+                Objects.equals(date, shift.date) &&
+                Objects.equals(startTime, shift.startTime) &&
+                Objects.equals(endTime, shift.endTime) &&
+                Objects.equals(workplace, shift.workplace);
+    }
+
     public double getExtraHours1_25() {
         return extraHours1_25;
     }
@@ -66,12 +81,19 @@ public class Shift {
         this.extraHours1_5 = extraHours1_5;
     }
 
-    public long calculateDuration() {
+//    public long calculateDuration() {
+//        Duration duration = Duration.between(startTime, endTime);
+//        return duration.toHours();
+//    }
+    public double calculateDuration() {
         Duration duration = Duration.between(startTime, endTime);
-        return duration.toHours();
+        long minutes = duration.toMinutes();
+        double hours = minutes / 60.0;
+        return hours;
     }
 
-        // Getters for other properties
+
+    // Getters for other properties
 
     public LocalDate getDate() {
         return date;
@@ -113,4 +135,13 @@ public class Shift {
             return income;
         }
 
+    @Override
+    public String toString() {
+        return "Shift{" +
+                "date=" + date +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", workplace=" + workplace +
+                '}';
+    }
 }

@@ -40,28 +40,32 @@ public class AddShiftActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_shift_layout);
 
+        findViews();
+        populateWorkplaceSpinner();
+        onClickListeners();
+    }
+
+    private void findViews() {
         datePicker = findViewById(R.id.datePicker);
         submitButton = findViewById(R.id.submitButton);
         startTimeButton = findViewById(R.id.startTimeButton);
         endTimeButton = findViewById(R.id.endTimeButton);
         workplaceSpinner = findViewById(R.id.workplaceSpinner);
+    }
 
-        // Get the list of workplaces from your getWorkplaces() function
+    private void populateWorkplaceSpinner() {
         workplaces = DataManager.getWorkPlace();
 
-        // Check if the workplaces list is null or empty
         if (workplaces != null && !workplaces.isEmpty()) {
-            // Create an ArrayAdapter to populate the workplaceSpinner with the list of workplaces
             ArrayAdapter<Workplace> workplaceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, workplaces);
             workplaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             workplaceSpinner.setAdapter(workplaceAdapter);
         } else {
-            // Handle the case when the workplaces list is null or empty
-            // You can display an error message or take appropriate action
             Toast.makeText(this, "No workplaces found.", Toast.LENGTH_SHORT).show();
         }
+    }
 
-
+    private void onClickListeners() {
         startTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,28 +83,54 @@ public class AddShiftActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retrieve the selected date from the DatePicker
-                int year = datePicker.getYear();
-                int month = datePicker.getMonth() + 1;  // Month starts from 0
-                int day = datePicker.getDayOfMonth();
-
-                // Create a LocalDate object from the selected date
-                LocalDate selectedDate = LocalDate.of(year, month, day);
-
-                // Get the selected workplace from the spinner
-                Workplace selectedWorkplace = (Workplace) workplaceSpinner.getSelectedItem();
-
-                // Create a Shift object with the selected date, start time, end time, and workplace
-                Shift shift = new Shift(selectedDate, startTime, endTime, selectedWorkplace);
-
-                // Use the shift object as needed
-                // You can access shift.getStartTime(), shift.getEndTime(), shift.getWorkplace(), etc.
-
-                // Display a message or perform other actions
-                SignalGenerator.getInstance().toast("Shift added successfully!", Toast.LENGTH_SHORT);
+                handleShiftSubmission();
             }
         });
     }
+
+    private void handleShiftSubmission() {
+        int year = datePicker.getYear();
+        int month = datePicker.getMonth() + 1;
+        int day = datePicker.getDayOfMonth();
+        LocalDate selectedDate = LocalDate.of(year, month, day);
+
+        Workplace selectedWorkplace = (Workplace) workplaceSpinner.getSelectedItem();
+
+        if (startTime == null || endTime == null) {
+            SignalGenerator.getInstance().toast("Please select start and end times", Toast.LENGTH_SHORT);
+            return;
+        }
+
+
+        if (DataManager.getWorkPlace().isEmpty()) {
+            SignalGenerator.getInstance().toast("No workplaces found. Please add a workplace before adding a shift.", Toast.LENGTH_SHORT);
+            return;
+        }
+
+        if (selectedWorkplace == null) {
+            SignalGenerator.getInstance().toast("Please select a workplace", Toast.LENGTH_SHORT);
+            return;
+        }
+
+        if (startTime.isBefore(endTime)) {
+            Shift shift = new Shift(selectedDate, startTime, endTime, selectedWorkplace);
+            DataManager.getShifts().add(shift);
+
+            for (Workplace workplace : DataManager.getWorkPlace()) {
+                if (workplace.getName().equals(selectedWorkplace.getName())) {
+                    workplace.addShift(shift);
+                }
+            }
+
+            SignalGenerator.getInstance().toast("Shift added successfully!", Toast.LENGTH_SHORT);
+            finish();
+        } else {
+            SignalGenerator.getInstance().toast("Start time must be before end time", Toast.LENGTH_SHORT);
+        }
+    }
+
+
+
 
 
 

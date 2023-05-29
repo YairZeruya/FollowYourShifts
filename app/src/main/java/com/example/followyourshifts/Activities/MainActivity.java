@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.followyourshifts.Fragments.CalendarFragment;
 import com.example.followyourshifts.Fragments.ShiftFragment;
 import com.example.followyourshifts.R;
+
 import com.example.followyourshifts.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
 
@@ -82,10 +83,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AddShiftActivity.class);
             startActivity(intent);
         } else if (id == R.id.add_workplace_BTN) {
-            // Handle option 2 click
+            Intent intent = new Intent(this, AddWorkplaceActivity.class);
+            startActivity(intent);
         } else if (id == R.id.remove_shift_BTN) {
+            Intent intent = new Intent(this, RemoveShiftActivity.class);
+            startActivity(intent);
             // Handle option 3 click
         } else if (id == R.id.remove_workplace_BTN) {
+            Intent intent = new Intent(this, RemoveWorkplaceActivity.class);
+            startActivity(intent);
             // Handle option 4 click
         } else if(id == R.id.main_BTN_viewIncome){
             openChooseIncomeActivity();

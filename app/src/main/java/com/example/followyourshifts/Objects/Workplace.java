@@ -16,12 +16,7 @@ public class Workplace {
     public void addShift(Shift shift) {
         shifts.add(shift);
     }
-    public Workplace getWorkplaceByName(String name){
-        if(this.name.equals(name)){
-            return this;
-        }
-        return null;
-    }
+
 
     // Getters and setters for other properties
 
@@ -54,11 +49,27 @@ public class Workplace {
         return shifts;
     }
 
+    public Workplace getWorkplaceByName(String name) {
+        if (name.equals(this.name)) {
+            return this;
+        }
+        return null;
+    }
+
+
     @Override
     public String toString() {
         return "Workplace{" +
                 "name='" + name + '\'' +
                 ", salaryPerHour=" + salaryPerHour +
                 '}';
+    }
+
+    public void removeShift(Shift selectedShift) {
+        for (int i = 0; i< shifts.size();i++){
+            if(shifts.get(i).equals(selectedShift)){
+                shifts.remove(i);
+            }
+        }
     }
 }
