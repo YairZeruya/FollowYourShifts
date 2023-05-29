@@ -9,14 +9,14 @@
         android:id="@+id/start_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click on a date to see its shifts"
+        android:text="Click on a date to see its shifts, days in white indicate shifts."
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="@color/blue_300"
-        android:textSize="25sp"
-        android:padding="16dp"
+        android:textSize="20sp"
+        android:padding="4dp"
         android:textStyle="bold|italic"
         />
 

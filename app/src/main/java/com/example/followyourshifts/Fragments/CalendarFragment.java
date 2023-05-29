@@ -118,14 +118,14 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     public void previousMonthAction(View view)
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
-        selectedItemPosition = -1;// Reset the selected item position
+        //selectedItemPosition = -1;// Reset the selected item position
         setMonthView(view);
     }
 
     public void nextMonthAction(View view)
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
-        selectedItemPosition = -1;// Reset the selected item position
+        //selectedItemPosition = -1;// Reset the selected item position
         setMonthView(view);
     }
 
@@ -139,6 +139,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             }
         }
     }
+
+
 
     public void setCalendarCallBack(CalendarCallBack calendarCallBack) {
         this.calendarCallBack = calendarCallBack;

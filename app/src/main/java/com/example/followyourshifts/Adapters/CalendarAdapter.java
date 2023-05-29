@@ -69,6 +69,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
             } else {
                 holder.itemView.setBackgroundResource(0);
             }
+
+
         } else {
             // Handle the case when the day string is empty
             holder.dayOfMonth.setText("");
