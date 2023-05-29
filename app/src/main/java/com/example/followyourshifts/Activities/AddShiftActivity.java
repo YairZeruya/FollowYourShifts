@@ -89,44 +89,71 @@ public class AddShiftActivity extends AppCompatActivity {
     }
 
     private void handleShiftSubmission() {
+        // Retrieve the selected date from the DatePicker
         int year = datePicker.getYear();
         int month = datePicker.getMonth() + 1;
         int day = datePicker.getDayOfMonth();
         LocalDate selectedDate = LocalDate.of(year, month, day);
 
+        // Retrieve the selected workplace from the spinner
         Workplace selectedWorkplace = (Workplace) workplaceSpinner.getSelectedItem();
 
+        // Check if both start time and end time are selected
         if (startTime == null || endTime == null) {
             SignalGenerator.getInstance().toast("Please select start and end times", Toast.LENGTH_SHORT);
             return;
         }
 
-
+        // Check if any workplaces are available
         if (DataManager.getWorkPlace().isEmpty()) {
             SignalGenerator.getInstance().toast("No workplaces found. Please add a workplace before adding a shift.", Toast.LENGTH_SHORT);
             return;
         }
 
+        // Check if a workplace is selected
         if (selectedWorkplace == null) {
             SignalGenerator.getInstance().toast("Please select a workplace", Toast.LENGTH_SHORT);
             return;
         }
 
+        // Check if the start time is before the end time
         if (startTime.isBefore(endTime)) {
-            Shift shift = new Shift(selectedDate, startTime, endTime, selectedWorkplace);
-            DataManager.getShifts().add(shift);
-
-            for (Workplace workplace : DataManager.getWorkPlace()) {
-                if (workplace.getName().equals(selectedWorkplace.getName())) {
-                    workplace.addShift(shift);
-                }
+            // Check for overlapping shifts
+            if (hasOverlappingShifts(selectedDate, startTime, endTime)) {
+                SignalGenerator.getInstance().toast("Shift overlaps with existing shifts", Toast.LENGTH_SHORT);
+            } else {
+                // Create and add the new shift
+                Shift shift = new Shift(selectedDate, startTime, endTime, selectedWorkplace);
+                DataManager.getShifts().add(shift);
+                selectedWorkplace.addShift(shift);
+                SignalGenerator.getInstance().toast("Shift added successfully!", Toast.LENGTH_SHORT);
+                finish();
             }
-
-            SignalGenerator.getInstance().toast("Shift added successfully!", Toast.LENGTH_SHORT);
-            finish();
         } else {
             SignalGenerator.getInstance().toast("Start time must be before end time", Toast.LENGTH_SHORT);
         }
+    }
+
+    private boolean hasOverlappingShifts(LocalDate date, LocalTime startTime, LocalTime endTime) {
+        for (Workplace workplace : DataManager.getWorkPlace()) {
+            for (Shift shift : workplace.getShifts()) {
+                if (shift.getDate().isEqual(date)) {
+                    // Check if the new shift's start time is between the existing shift's start and end times
+                    if (startTime.isAfter(shift.getStartTime()) && startTime.isBefore(shift.getEndTime())) {
+                        return true;
+                    }
+                    // Check if the new shift's end time is between the existing shift's start and end times
+                    if (endTime.isAfter(shift.getStartTime()) && endTime.isBefore(shift.getEndTime())) {
+                        return true;
+                    }
+                    // Check if the new shift's start and end times fully encompass the existing shift's start and end times
+                    if (startTime.isBefore(shift.getStartTime()) && endTime.isAfter(shift.getEndTime())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 

@@ -16,6 +16,8 @@ import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.followyourshifts.CalendarCallBack;
+import com.example.followyourshifts.CalendarUtils;
 import com.example.followyourshifts.Fragments.CalendarFragment;
 import com.example.followyourshifts.Fragments.ShiftFragment;
 import com.example.followyourshifts.R;
@@ -23,7 +25,9 @@ import com.example.followyourshifts.R;
 import com.example.followyourshifts.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
 
-public class MainActivity extends AppCompatActivity {
+import java.time.LocalDate;
+
+public class MainActivity extends AppCompatActivity implements CalendarCallBack {
     private CalendarFragment calendarFragment;
     private ShiftFragment shiftFragment;
     private MaterialButton main_BTN_viewIncome;
@@ -41,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         findViews();
         beginTransactions();
         setOnClickListeners();
+        // Set the CalendarCallBack for the CalendarFragment
+        calendarFragment.setCalendarCallBack(this);
+        // Set the current date as the selected date
+        //calendarFragment.setSelectedDate(LocalDate.now());
     }
 
     private void setOnClickListeners() {
@@ -132,4 +140,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemClick(int position, String dayText) {
+        if (!dayText.equals("")) {
+            // Update the selected date and highlight the selected day
+            LocalDate selectedDate = CalendarUtils.selectedDate.withDayOfMonth(Integer.parseInt(dayText));
+            calendarFragment.setSelectedDate(selectedDate);
+        }
+    }
+
+    @Override
+    public void onDateSelected(LocalDate selectedDate) {
+        // Pass the selected date to the ShiftFragment
+        if (shiftFragment != null) {
+            shiftFragment.onDateSelected(selectedDate);
+        }
+    }
 }

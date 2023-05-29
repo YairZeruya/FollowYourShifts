@@ -55,6 +55,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftsViewHo
     public void onBindViewHolder(@NonNull ShiftAdapter.ShiftsViewHolder holder, int position) {
         Shift shift = getItem(position);
         holder.shift_LBL_workplace.setText(shift.getWorkplace().getName());
+        holder.shift_LBL_hours.setText(shift.getStartTime() + "-" + shift.getEndTime() + "");
         //holder.record_LBL_score.setText(shift.getScore());
         //holder.record_layout.setOnClickListener(v -> recordClicked(record.getLatitude(), record.getLongitude()));
     }
@@ -74,6 +75,8 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftsViewHo
         return this.shifts.get(position);
     }
 
+
+
     public class ShiftsViewHolder extends RecyclerView.ViewHolder {
         private TextView shift_LBL_workplace;
         private TextView shift_LBL_hours;
@@ -83,6 +86,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftsViewHo
         public ShiftsViewHolder(@NonNull View itemView) {
             super(itemView);
             shift_LBL_workplace = itemView.findViewById(R.id.shift_LBL_workplace);
+            shift_LBL_hours = itemView.findViewById(R.id.shift_LBL_hours);
 //            record_LBL_score = itemView.findViewById(R.id.score_textview);
 //            record_layout = itemView.findViewById(R.id.record_layout);
         }

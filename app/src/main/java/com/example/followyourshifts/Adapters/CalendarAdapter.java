@@ -17,11 +17,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 {
     private final ArrayList<String> daysOfMonth;
     private final OnItemListener onItemListener;
+    private int selectedItemPosition;
 
-    public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener)
+    public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener, int selectedItemPosition)
     {
         this.daysOfMonth = daysOfMonth;
         this.onItemListener = onItemListener;
+        this.selectedItemPosition = selectedItemPosition;
     }
 
     @NonNull
@@ -39,6 +41,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
         holder.dayOfMonth.setText(daysOfMonth.get(position));
+        if (position == selectedItemPosition) {
+            holder.itemView.setBackgroundResource(R.drawable.dollars_svgrepo_com);
+        } else {
+            holder.itemView.setBackgroundResource(0);
+        }
     }
 
     @Override

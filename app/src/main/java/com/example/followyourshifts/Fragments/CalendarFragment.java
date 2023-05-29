@@ -29,14 +29,15 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private RecyclerView calendarRecyclerView;
     private Button nextMonthButton;
     private Button previousMonthButton;
+    private int selectedItemPosition = -1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.calendar_fragment, container, false);
         initViews(view);
         CalendarUtils.selectedDate = LocalDate.now();
-        setMonthView(view);
         onClickListeners(view);
+        setMonthView(view);
         return view;
     }
 
@@ -67,11 +68,17 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this,selectedItemPosition);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
+
+    public void setSelectedDate(LocalDate selectedDate) {
+        CalendarUtils.selectedDate = selectedDate;
+        setMonthView(getView());
+    }
+
 
     private ArrayList<String> daysInMonthArray(LocalDate date)
     {
@@ -117,14 +124,13 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     @Override
     public void onItemClick(int position, String dayText) {
-        if(!dayText.equals(""))
-        {
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(CalendarUtils.selectedDate);
-            SignalGenerator.getInstance().toast(message, Toast.LENGTH_LONG);
+        if (!dayText.equals("")) {
+            // Update the selected date and highlight the selected day
+            setSelectedDate(CalendarUtils.selectedDate.withDayOfMonth(Integer.parseInt(dayText)));
+            if (calendarCallBack != null) {
+                calendarCallBack.onDateSelected(CalendarUtils.selectedDate);
+            }
         }
-//        if (calendarCallBack != null) {
-//            calendarCallBack.onDateSelected(CalendarUtils.selectedDate);
-//        }
     }
 
     public void setCalendarCallBack(CalendarCallBack calendarCallBack) {

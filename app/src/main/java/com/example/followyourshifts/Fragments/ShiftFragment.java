@@ -4,17 +4,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.followyourshifts.Adapters.ShiftAdapter;
+import com.example.followyourshifts.CalendarCallBack;
 import com.example.followyourshifts.DataManager;
+import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.R;
+import com.example.followyourshifts.SignalGenerator;
 
-public class ShiftFragment extends Fragment {
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class ShiftFragment extends Fragment implements CalendarCallBack {
     private RecyclerView main_LST_shifts;
+    private ShiftAdapter shiftAdapter;
+    private ArrayList<Shift> displayedShifts;
+    private TextView start_message;
     //private RecordCallBack recordCallBack;
 
     @Override
@@ -27,8 +38,8 @@ public class ShiftFragment extends Fragment {
     }
 
     private void initViews(View view) {
-
-        ShiftAdapter shiftAdapter = new ShiftAdapter(DataManager.getShifts());
+        displayedShifts = new ArrayList<>();
+        shiftAdapter = new ShiftAdapter(displayedShifts);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         main_LST_shifts.setAdapter(shiftAdapter);
@@ -44,9 +55,37 @@ public class ShiftFragment extends Fragment {
 
     private void findViews(View view) {
         main_LST_shifts = view.findViewById(R.id.main_LST_shifts);
+        start_message = view.findViewById(R.id.start_message);
+    }
+
+    @Override
+    public void onItemClick(int position, String dayText) {
+
+    }
+
+    @Override
+    public void onDateSelected(LocalDate selectedDate) {
+        // Filter shifts based on the selected date
+        displayedShifts.clear();
+        for (Shift shift : DataManager.getShifts()) {
+            if (shift.getDate().isEqual(selectedDate)) {
+                displayedShifts.add(shift);
+            }
+        }
+
+        // Update the RecyclerView with the filtered shifts
+        shiftAdapter.notifyDataSetChanged();
+
+        // Show a toast if no shifts are available for the selected date
+        if (displayedShifts.isEmpty()) {
+            SignalGenerator.getInstance().toast("No shifts available for selected date", Toast.LENGTH_SHORT);
+        }
     }
 
 //    public void setRecordCallBack(RecordCallBack recordCallBack) {
 //        this.recordCallBack = recordCallBack;
 //    }
+
+
+
 }
