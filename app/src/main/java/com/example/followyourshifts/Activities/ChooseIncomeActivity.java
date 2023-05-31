@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.followyourshifts.Adapters.WorkplaceAdapter;
-import com.example.followyourshifts.DataManager;
+import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.R;
-import com.example.followyourshifts.SignalGenerator;
+import com.example.followyourshifts.Utilities.SignalGenerator;
 
 
 public class ChooseIncomeActivity extends AppCompatActivity implements WorkplaceAdapter.WorkplaceCallBack{
@@ -37,7 +37,8 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
         setContentView(R.layout.choose_income_board);
         findViews();
         initViews();
-
+//        Intent intent = new Intent();
+//        topTextView.setText(intent.getStringExtra("username"));
         onClicklisteners();
     }
 

@@ -1,6 +1,5 @@
 package com.example.followyourshifts.Adapters;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +8,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.followyourshifts.CalendarUtils;
-import com.example.followyourshifts.DataManager;
-import com.example.followyourshifts.Objects.Shift;
+import com.example.followyourshifts.Utilities.CalendarUtils;
+import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.R;
 
-import java.time.YearMonth;
 import java.util.ArrayList;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder> {

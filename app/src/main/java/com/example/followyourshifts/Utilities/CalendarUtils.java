@@ -1,4 +1,4 @@
-package com.example.followyourshifts;
+package com.example.followyourshifts.Utilities;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

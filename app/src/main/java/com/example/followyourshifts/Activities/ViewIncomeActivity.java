@@ -1,8 +1,6 @@
 package com.example.followyourshifts.Activities;
 
-import static com.example.followyourshifts.DataManager.KEY_WORKPLACE_NAME;
-import static com.example.followyourshifts.DataManager.getShifts;
-import static com.example.followyourshifts.DataManager.getShiftsByMonthAndWorkplace;
+import static com.example.followyourshifts.Logic.DataManager.getShiftsByMonthAndWorkplace;
 
 
 import android.content.Intent;
@@ -13,11 +11,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.followyourshifts.DataManager;
+import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.R;
 import com.example.followyourshifts.Objects.Workplace;
-import com.example.followyourshifts.SignalGenerator;
 
 
 import java.time.LocalDate;

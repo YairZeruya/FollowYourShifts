@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.followyourshifts.Adapters.ShiftAdapter;
-import com.example.followyourshifts.CalendarCallBack;
-import com.example.followyourshifts.DataManager;
+import com.example.followyourshifts.Interfaces.CalendarCallBack;
+import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.R;
-import com.example.followyourshifts.SignalGenerator;
+import com.example.followyourshifts.Utilities.SignalGenerator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,7 +27,7 @@ public class ShiftFragment extends Fragment implements CalendarCallBack {
     private ShiftAdapter shiftAdapter;
     private ArrayList<Shift> displayedShifts;
     private TextView start_message;
-    //private RecordCallBack recordCallBack;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,13 +46,6 @@ public class ShiftFragment extends Fragment implements CalendarCallBack {
         main_LST_shifts.setAdapter(shiftAdapter);
         main_LST_shifts.setLayoutManager(linearLayoutManager);
     }
-//    private void initViews(View view) {
-//        RecordAdapter recordAdapter = new RecordAdapter(DataManager.getRecords(), recordCallBack);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
-//        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-//        main_LST_records.setAdapter(recordAdapter);
-//        main_LST_records.setLayoutManager(linearLayoutManager);
-//    }
 
     private void findViews(View view) {
         main_LST_shifts = view.findViewById(R.id.main_LST_shifts);

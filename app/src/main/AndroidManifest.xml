@@ -20,9 +20,10 @@
         <activity android:name = ".Activities.AddWorkplaceActivity"/>
         <activity android:name = ".Activities.RemoveWorkplaceActivity"/>
         <activity android:name = ".Activities.RemoveShiftActivity"/>
+        <activity android:name = ".Activities.MainActivity"/>
 
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

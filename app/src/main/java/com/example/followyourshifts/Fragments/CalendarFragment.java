@@ -6,17 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.followyourshifts.Adapters.CalendarAdapter;
-import com.example.followyourshifts.CalendarCallBack;
-import com.example.followyourshifts.CalendarUtils;
+import com.example.followyourshifts.Interfaces.CalendarCallBack;
+import com.example.followyourshifts.Utilities.CalendarUtils;
 import com.example.followyourshifts.R;
-import com.example.followyourshifts.SignalGenerator;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -139,8 +138,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             }
         }
     }
-
-
 
     public void setCalendarCallBack(CalendarCallBack calendarCallBack) {
         this.calendarCallBack = calendarCallBack;

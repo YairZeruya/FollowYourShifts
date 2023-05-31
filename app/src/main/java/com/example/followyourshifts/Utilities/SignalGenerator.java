@@ -1,4 +1,4 @@
-package com.example.followyourshifts;
+package com.example.followyourshifts.Utilities;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -6,11 +6,6 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.Toast;
-
-import com.example.followyourshifts.Objects.Shift;
-import com.example.followyourshifts.Objects.Workplace;
-
-import java.util.ArrayList;
 
 public class SignalGenerator {
     private static SignalGenerator instance;

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/orange_300"
+    android:background="@color/strong_green2"
     tools:context=".Activities.AddWorkplaceActivity">
 
     <EditText
@@ -14,6 +14,8 @@
         android:layout_height="wrap_content"
         android:hint="Workplace Name"
         android:padding="30dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="35dp"/>
 
     <EditText
@@ -23,6 +25,8 @@
         android:hint="Salary per Hour"
         android:inputType="numberDecimal"
         android:padding="30dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="35dp"/>
 
     <Button
@@ -30,6 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         />
 
 </LinearLayout>

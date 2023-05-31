@@ -1,4 +1,4 @@
-package com.example.followyourshifts;
+package com.example.followyourshifts.Interfaces;
 
 import java.time.LocalDate;
 

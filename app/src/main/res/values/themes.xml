@@ -3,7 +3,7 @@
     <style name="Theme.FollowYourShifts" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme attributes -->
         <!-- For example, you can change the primary color -->
-        <item name="colorPrimary">@color/blue_300</item>
+        <item name="colorPrimary">@color/light_green</item>
         <!-- Add other theme attributes as needed -->
     </style>
 </resources>

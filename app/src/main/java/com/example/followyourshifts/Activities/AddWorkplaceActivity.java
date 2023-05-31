@@ -9,10 +9,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.followyourshifts.DataManager;
+import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.R;
-import com.example.followyourshifts.SignalGenerator;
+import com.example.followyourshifts.Utilities.SignalGenerator;
 
 public class AddWorkplaceActivity extends AppCompatActivity {
 
@@ -81,6 +81,7 @@ public class AddWorkplaceActivity extends AppCompatActivity {
 
                 // Perform any necessary actions with the new Workplace object
                 // ...
+                SignalGenerator.getInstance().toast("Workplace added successfully!",Toast.LENGTH_SHORT);
 
                 // Finish the current activity and return to the previous one
                 finish();

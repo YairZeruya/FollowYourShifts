@@ -12,12 +12,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.followyourshifts.CalendarUtils;
-import com.example.followyourshifts.DataManager;
+import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.R;
-import com.example.followyourshifts.SignalGenerator;
+import com.example.followyourshifts.Utilities.SignalGenerator;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -128,6 +127,7 @@ public class AddShiftActivity extends AppCompatActivity {
                 DataManager.getShifts().add(shift);
                 selectedWorkplace.addShift(shift);
                 SignalGenerator.getInstance().toast("Shift added successfully!", Toast.LENGTH_SHORT);
+                SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in white indicate shifts.", Toast.LENGTH_LONG);
                 finish();
             }
         } else {

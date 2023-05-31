@@ -3,26 +3,19 @@ package com.example.followyourshifts.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.PopupWindow;
-import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.followyourshifts.CalendarCallBack;
-import com.example.followyourshifts.CalendarUtils;
+import com.example.followyourshifts.Interfaces.CalendarCallBack;
+import com.example.followyourshifts.Utilities.CalendarUtils;
 import com.example.followyourshifts.Fragments.CalendarFragment;
 import com.example.followyourshifts.Fragments.ShiftFragment;
 import com.example.followyourshifts.R;
 
-import com.example.followyourshifts.SignalGenerator;
+import com.example.followyourshifts.Utilities.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
 
 import java.time.LocalDate;
@@ -33,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
     private MaterialButton main_BTN_viewIncome;
     private MaterialButton main_BTN_viewOptions;
     private LinearLayout toolbarOptions;
+    private TextView main_LBL_message;
     private boolean optionsIsOpen = false;
     private boolean optionsVisible = false;
 
@@ -42,12 +36,31 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         setContentView(R.layout.activity_main);
         initFragments();
         findViews();
+        initViews();
         beginTransactions();
         setOnClickListeners();
         // Set the CalendarCallBack for the CalendarFragment
         calendarFragment.setCalendarCallBack(this);
         // Set the current date as the selected date
         //calendarFragment.setSelectedDate(LocalDate.now());
+    }
+
+    private void initViews() {
+        Intent intent = getIntent();
+        main_LBL_message.setText("Welcome Back " + intent.getStringExtra("username"));
+        SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in white indicate shifts.", Toast.LENGTH_LONG);
+//        main_BTN_update.setOnClickListener(v -> {
+//            changeTitle(main_ET_text.getText().toString());
+//        });
+//        main_BTN_save.setOnClickListener(v -> {
+//            saveVehicleToDB();
+//        });
+//        main_BTN_updatePrice.setOnClickListener(v -> {
+//            updatePrice();
+//        });
+//        main_BTN_load.setOnClickListener(v -> {
+//            loadVehicleFromDB();
+//        });
     }
 
     private void setOnClickListeners() {
@@ -119,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 
     private void openChooseIncomeActivity() {
         Intent intent = new Intent(this, ChooseIncomeActivity.class);
+//        intent.putExtra("username",intent.getStringExtra("username"));
         startActivity(intent);
     }
 
@@ -126,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         main_BTN_viewIncome = findViewById(R.id.main_BTN_viewIncome);
         main_BTN_viewOptions = findViewById(R.id.main_BTN_viewOptions);
         toolbarOptions = findViewById(R.id.main_TOOLBAR_options);
+        main_LBL_message = findViewById(R.id.main_LBL_message);
     }
 
     private void beginTransactions() {

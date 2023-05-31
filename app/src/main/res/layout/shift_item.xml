@@ -7,7 +7,7 @@
     android:layout_margin="4dp"
     android:elevation="8dp"
     app:cardElevation="8dp"
-    app:cardBackgroundColor="@color/blue_300">
+    app:cardBackgroundColor="@color/light_green">
 
     <RelativeLayout
         android:id="@+id/shift_layout"
@@ -24,7 +24,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginHorizontal="20dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/dollars_svgrepo_com" />
+            app:srcCompat="@drawable/money_svgrepo_com" />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -37,7 +37,7 @@
             android:maxLines="2"
             android:minLines="2"
             android:text="Workplace"
-            android:textColor="@color/orange_300"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold|italic" />
 
@@ -50,7 +50,7 @@
             android:layout_marginTop="8dp"
             android:text="00:00-00:00"
             android:textSize="25sp"
-            android:textColor="@color/orange_300"
+            android:textColor="@color/black"
             android:textStyle="bold|italic"/>
 
     </RelativeLayout>

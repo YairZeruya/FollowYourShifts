@@ -6,9 +6,10 @@
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".Activities.MainActivity"
-    android:background="@color/orange_300"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    android:background="@color/strong_green2">
     <TextView
+        android:id="@+id/main_LBL_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -48,6 +49,7 @@
             android:textStyle="bold"
             android:layout_gravity="end"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
           />
     </LinearLayout>
     <!-- Toolbar with options initially hidden -->
@@ -56,14 +58,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/main_BTN_viewIncome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View Income"
-            android:layout_gravity="start" />
+            android:layout_gravity="start"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
 
         <!-- Option 1 -->
         <com.google.android.material.button.MaterialButton
@@ -71,6 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Shift"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             />
 
         <!-- Option 2 -->
@@ -79,6 +86,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Workplace"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             />
 
         <!-- Option 3 -->
@@ -87,6 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remove Shift"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             />
 
         <!-- Option 4 -->
@@ -95,6 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remove Workplace"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             />
     </LinearLayout>
 

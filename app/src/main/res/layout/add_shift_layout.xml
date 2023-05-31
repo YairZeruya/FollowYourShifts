@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/orange_300"
+    android:background="@color/strong_green2"
     tools:context=".Activities.AddShiftActivity">
 
     <DatePicker
@@ -18,6 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Start Time"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
 
     <Button
@@ -25,13 +27,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select End Time"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
 
     <Spinner
         android:id="@+id/workplaceSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:padding="16dp" />
 
     <Button
@@ -39,6 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

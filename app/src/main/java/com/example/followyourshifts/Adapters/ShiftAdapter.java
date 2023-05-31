@@ -27,6 +27,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftsViewHo
 //        this.records = records;
 //        this.recordCallBack = recordCallBack;
 //    }
+
     public ShiftAdapter(ArrayList<Shift> shifts){
         this.shifts = shifts;
     }

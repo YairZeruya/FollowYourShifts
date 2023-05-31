@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/light_green">
 
     <!-- Top section -->
     <RelativeLayout
@@ -9,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="40"
-        android:background="@color/blue_300">
+        android:background="@color/strong_green2">
 
         <TextView
             android:id="@+id/topTextView"
@@ -17,10 +18,11 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Hi User, choose a workplace to view its income!"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="25sp"
             android:padding="16dp"
-            android:textStyle="bold|italic"/>
+            android:textStyle="bold|italic"
+            />
 
     </RelativeLayout>
 
@@ -31,7 +33,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
-        android:background="@android:color/white"
         tools:listitem="@layout/workplace_item" />
+    <ImageView
+        android:id="@+id/salary_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/workplace_list"
+        android:src="@drawable/workpeople"
+        android:padding="16dp"
+        />
 
 </LinearLayout>
