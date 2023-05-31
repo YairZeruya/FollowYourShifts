@@ -9,7 +9,7 @@
         android:id="@+id/start_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click on a date to see its shifts, days in white indicate shifts."
+        android:text=""
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_alignParentTop="true"

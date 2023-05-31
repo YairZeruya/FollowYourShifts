@@ -5,4 +5,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange_300">#FFE082</color>
     <color name="blue_300">#9FA8DA</color>
+    <color name="blue_800">#3190BB</color>
 </resources>

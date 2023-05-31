@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:text="Welcome Back User"
+        android:text="Welcome Back User, Click on a date to see its shifts, days in white indicate shifts."
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"

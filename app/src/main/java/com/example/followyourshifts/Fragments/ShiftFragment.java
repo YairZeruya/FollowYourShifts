@@ -19,6 +19,7 @@ import com.example.followyourshifts.R;
 import com.example.followyourshifts.SignalGenerator;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ShiftFragment extends Fragment implements CalendarCallBack {
@@ -73,9 +74,11 @@ public class ShiftFragment extends Fragment implements CalendarCallBack {
             }
         }
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd / MMMM / yyyy");
+        String newMessage = selectedDate.format(formatter);
+        start_message.setText(newMessage + " Shifts: ");
         // Update the RecyclerView with the filtered shifts
         shiftAdapter.notifyDataSetChanged();
-
         // Show a toast if no shifts are available for the selected date
         if (displayedShifts.isEmpty()) {
             SignalGenerator.getInstance().toast("No shifts available for selected date", Toast.LENGTH_SHORT);
