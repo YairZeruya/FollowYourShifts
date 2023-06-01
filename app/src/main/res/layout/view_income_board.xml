@@ -134,6 +134,7 @@
             android:src="@drawable/calculator_part_2_svgrepo_com"
             android:padding="16dp"
             android:layout_marginLeft="200dp"/>
+        
     </RelativeLayout>
 
 </LinearLayout>
