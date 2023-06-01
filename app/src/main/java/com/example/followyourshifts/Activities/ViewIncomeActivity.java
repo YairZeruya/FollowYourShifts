@@ -23,14 +23,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ViewIncomeActivity extends AppCompatActivity {
-    private static final int DEFAULT_VALUE = 0;
-    private TextView monthYearText;
-    private Button nextMonthButton;
-    private Button previousMonthButton;
+    private TextView VI_month_and_year;
+    private Button VI_next_month_button;
+    private Button VI_previous_month_button;
     private LocalDate selectedDate;
     private Workplace workplace;
     private TextView work_place_name_textView;
-
     private TextView salary_text_view;
     private TextView hours_days_text_view;
     private TextView hours_worked_text_view;
@@ -43,7 +41,7 @@ public class ViewIncomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_income_board);
         selectedDate = LocalDate.now();
-        findviews();
+        findViews();
         setMonthView();
         handleIntentData();
         onClicklisteners();
@@ -72,11 +70,11 @@ public class ViewIncomeActivity extends AppCompatActivity {
 
     public void displayShiftsInfoByMonthAndWorkplace(
             Month month, Workplace workplace, TextView work_place_name_textView,
-                                                     TextView salary_text_view,TextView hours_days_text_view,
-    TextView hours_worked_text_view,TextView extra_hours_125_text_view,TextView extra_hours_150_text_view) {
+            TextView salary_text_view,TextView hours_days_text_view,
+            TextView hours_worked_text_view,TextView extra_hours_125_text_view,TextView extra_hours_150_text_view) {
+
         ArrayList<Shift> shifts = getShiftsByMonthAndWorkplace(month, workplace);
         if (month == selectedDate.getMonth()) {
-            // Calculate total income, total hours worked, extra hours with 1.25 multiplier, extra hours with 1.5 multiplier, and number of shifts
             String name = "";
             if(workplace !=null) {
                 name = workplace.getName();
@@ -124,7 +122,7 @@ public class ViewIncomeActivity extends AppCompatActivity {
     }
 
     private void setMonthView() {
-        monthYearText.setText(monthYearFromDate(selectedDate));
+        VI_month_and_year.setText(monthYearFromDate(selectedDate));
     }
 
     public void nextMonthAction()
@@ -139,13 +137,13 @@ public class ViewIncomeActivity extends AppCompatActivity {
 
 
     private void onClicklisteners() {
-        nextMonthButton.setOnClickListener(new View.OnClickListener() {
+        VI_next_month_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextMonthAction();
             }
         });
-        previousMonthButton.setOnClickListener(new View.OnClickListener() {
+        VI_previous_month_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 previousMonthAction();
@@ -154,10 +152,10 @@ public class ViewIncomeActivity extends AppCompatActivity {
     }
 
 
-    private void findviews() {
-        monthYearText = findViewById(R.id.VI_monthYearTV);
-        nextMonthButton =findViewById(R.id.VI_next_month_button);
-        previousMonthButton = findViewById(R.id.VI_previous_month_button);
+    private void findViews() {
+        VI_month_and_year = findViewById(R.id.VI_month_and_year);
+        VI_next_month_button =findViewById(R.id.VI_next_month_button);
+        VI_previous_month_button = findViewById(R.id.VI_previous_month_button);
         salary_text_view = findViewById(R.id.salary_text_view);
         hours_days_text_view = findViewById(R.id.hours_days_text_view);
         hours_worked_text_view= findViewById(R.id.hours_worked_text_view);

@@ -64,7 +64,6 @@ public class ShiftFragment extends Fragment implements CalendarCallBack {
 
     @Override
     public void onItemClick(int position, String dayText) {
-
     }
 
     @Override
@@ -76,22 +75,12 @@ public class ShiftFragment extends Fragment implements CalendarCallBack {
                 displayedShifts.add(shift);
             }
         }
-
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd / MMMM / yyyy");
-//        String newMessage = selectedDate.format(formatter);
-//        start_message.setText(newMessage + " Shifts: ");
-//        // Update the RecyclerView with the filtered shifts
-//        shiftAdapter.notifyDataSetChanged();
         showShifts();
-        // Show a toast if no shifts are available for the selected date
         if (displayedShifts.isEmpty()) {
             SignalGenerator.getInstance().toast("No shifts available for selected date", Toast.LENGTH_SHORT);
         }
     }
 
-//    public void setRecordCallBack(RecordCallBack recordCallBack) {
-//        this.recordCallBack = recordCallBack;
-//    }
 
 
 

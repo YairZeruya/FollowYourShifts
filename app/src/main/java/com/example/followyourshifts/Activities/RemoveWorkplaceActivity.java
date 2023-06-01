@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 public class RemoveWorkplaceActivity extends AppCompatActivity {
 
-    private Spinner workplaceSpinner;
-    private Button removeButton;
+    private Spinner workplace_spinner;
+    private Button remove_button;
 
     private ArrayList<Workplace> workplaces;
 
@@ -28,15 +28,14 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.remove_workplace_layout);
-
-        initializeViews();
+        findViews();
         setupWorkplaceSpinner();
         setupRemoveButton();
     }
 
-    private void initializeViews() {
-        workplaceSpinner = findViewById(R.id.workplace_spinner);
-        removeButton = findViewById(R.id.removeButton);
+    private void findViews() {
+        workplace_spinner = findViewById(R.id.workplace_spinner);
+        remove_button = findViewById(R.id.remove_button);
     }
 
     private void setupWorkplaceSpinner() {
@@ -45,43 +44,32 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
         if (workplaces != null && !workplaces.isEmpty()) {
             ArrayAdapter<Workplace> workplaceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, workplaces);
             workplaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            workplaceSpinner.setAdapter(workplaceAdapter);
+            workplace_spinner.setAdapter(workplaceAdapter);
         } else {
             SignalGenerator.getInstance().toast( "No workplaces found.", Toast.LENGTH_SHORT);
         }
     }
 
     private void setupRemoveButton() {
-        removeButton.setOnClickListener(new View.OnClickListener() {
+        remove_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retrieve the selected workplace from the spinner
-                Workplace selectedWorkplace = (Workplace) workplaceSpinner.getSelectedItem();
+                Workplace selectedWorkplace = (Workplace) workplace_spinner.getSelectedItem();
                 if(selectedWorkplace != null) {
-
-                    // Remove the selected workplace from the DataManager
                     DataManager.removeWorkplace(selectedWorkplace);
-
-                    // Remove shifts associated with the removed workplace
                     removeShiftsForWorkplace(selectedWorkplace);
-
-                    // Display a message or perform other actions
                     SignalGenerator.getInstance().toast( "Workplace removed successfully!", Toast.LENGTH_SHORT);
                     finish();
                 }
                 else {
-                // Display an error message or take appropriate action
                 SignalGenerator.getInstance().toast("No workplace selected.", Toast.LENGTH_SHORT);
             }
             }
         });
     }
 
-// Function to remove shifts associated with a workplace
         private void removeShiftsForWorkplace(Workplace removedWorkplace) {
-            ArrayList<Shift> shifts = DataManager.getShifts(); // Assuming you have a method to retrieve shifts
-
-            // Iterate over the shifts and remove the ones associated with the removed workplace
+            ArrayList<Shift> shifts = DataManager.getShifts();
             for (int i = shifts.size() - 1; i >= 0; i--) {
                 Shift shift = shifts.get(i);
                 if (shift.getWorkplace().equals(removedWorkplace)) {
@@ -89,7 +77,6 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
                 }
             }
         }
-
     }
 
 

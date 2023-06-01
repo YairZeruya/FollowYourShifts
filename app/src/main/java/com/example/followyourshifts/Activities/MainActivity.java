@@ -24,7 +24,6 @@ import java.time.LocalDate;
 public class MainActivity extends AppCompatActivity implements CalendarCallBack {
     private CalendarFragment calendarFragment;
     private ShiftFragment shiftFragment;
-    private MaterialButton main_BTN_viewIncome;
     private MaterialButton main_BTN_viewOptions;
     private LinearLayout toolbarOptions;
     private TextView main_LBL_message;
@@ -40,10 +39,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         initViews();
         beginTransactions();
         setOnClickListeners();
-        // Set the CalendarCallBack for the CalendarFragment
         calendarFragment.setCalendarCallBack(this);
-        // Set the current date as the selected date
-        //calendarFragment.setSelectedDate(LocalDate.now());
     }
 
     private void initViews() {
@@ -65,12 +61,6 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
     }
 
     private void setOnClickListeners() {
-//        main_BTN_viewIncome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openChooseIncomeActivity();
-//            }
-//        });
         main_BTN_viewOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 
 
     private void findViews() {
-        main_BTN_viewIncome = findViewById(R.id.main_BTN_viewIncome);
         main_BTN_viewOptions = findViewById(R.id.main_BTN_viewOptions);
         toolbarOptions = findViewById(R.id.main_TOOLBAR_options);
         main_LBL_message = findViewById(R.id.main_LBL_message);

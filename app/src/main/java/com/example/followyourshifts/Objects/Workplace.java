@@ -17,10 +17,6 @@ public class Workplace {
         shifts.add(shift);
     }
 
-
-    // Getters and setters for other properties
-
-
     public String getName() {
         return name;
     }

@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 public class WorkplaceAdapter extends RecyclerView.Adapter<WorkplaceAdapter.WorkplaceViewHolder> {
 
-
-
     private ArrayList<Workplace> workplaces;
     private  WorkplaceCallBack workplaceCallBack;
 
@@ -47,7 +45,6 @@ public class WorkplaceAdapter extends RecyclerView.Adapter<WorkplaceAdapter.Work
         holder.shift_LBL_workplace.setText(workplace.getName());
         holder.shift_LBL_salaryPerHour.setText(workplace.getSalaryPerHour() + " per hour");
         String workplaceName =workplace.getName();
-        double salaryPerHour = workplace.getSalaryPerHour();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

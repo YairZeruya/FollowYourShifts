@@ -24,29 +24,29 @@ import java.util.ArrayList;
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener  {
 
     private CalendarCallBack calendarCallBack;
-    private TextView monthYearText;
-    private RecyclerView calendarRecyclerView;
-    private Button nextMonthButton;
-    private Button previousMonthButton;
+    private TextView month_and_year;
+    private RecyclerView calendar_recycler_view;
+    private Button next_month_button;
+    private Button previous_month_button;
     private int selectedItemPosition = -1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.calendar_fragment, container, false);
-        initViews(view);
+        findViews(view);
         onClickListeners(view);
         setMonthView(view);
         return view;
     }
 
     private void onClickListeners(View view) {
-        nextMonthButton.setOnClickListener(new View.OnClickListener() {
+        next_month_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextMonthAction(view);
             }
         });
-        previousMonthButton.setOnClickListener(new View.OnClickListener() {
+        previous_month_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 previousMonthAction(view);
@@ -54,27 +54,27 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         });
     }
 
-    private void initViews(View view)
+    private void findViews(View view)
     {
         CalendarUtils.selectedDate = LocalDate.now();
-        calendarRecyclerView = view.findViewById(R.id.calendar_recycler_view);
-        monthYearText = view.findViewById(R.id.month_and_year);
-        nextMonthButton = view.findViewById(R.id.next_month_button);
-        previousMonthButton = view.findViewById(R.id.previous_month_button);
+        calendar_recycler_view = view.findViewById(R.id.calendar_recycler_view);
+        month_and_year = view.findViewById(R.id.month_and_year);
+        next_month_button = view.findViewById(R.id.next_month_button);
+        previous_month_button = view.findViewById(R.id.previous_month_button);
     }
 
     private void setMonthView(View view)
     {
-        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        month_and_year.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this,selectedItemPosition);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 7);
-        calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarRecyclerView.setAdapter(calendarAdapter);
+        calendar_recycler_view.setLayoutManager(layoutManager);
+        calendar_recycler_view.setAdapter(calendarAdapter);
 
         // Set the selected item position in the adapter
         if (selectedItemPosition != -1) {
-            calendarRecyclerView.scrollToPosition(selectedItemPosition);
+            calendar_recycler_view.scrollToPosition(selectedItemPosition);
         }
     }
 

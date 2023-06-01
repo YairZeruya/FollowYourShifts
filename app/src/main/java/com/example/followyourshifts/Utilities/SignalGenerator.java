@@ -13,8 +13,7 @@ public class SignalGenerator {
     private static SignalGenerator instance;
     private Context context;
     private static Vibrator vibrator;
-    private static MediaPlayer shiftAddedMediaPlayer;
-    private static MediaPlayer eventsMediaPlayer;
+    private static MediaPlayer mediaPlayer;
 
 
     private SignalGenerator(Context context) {
@@ -25,9 +24,7 @@ public class SignalGenerator {
         if (instance == null) {
             instance = new SignalGenerator(context);
             vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-            //dataManager = new DataManager();
-            shiftAddedMediaPlayer = MediaPlayer.create(context, R.raw.money_sound);
-            //eventsMediaPlayer = MediaPlayer.create(context, R.raw.crash);
+            mediaPlayer = MediaPlayer.create(context, R.raw.money_sound);
         }
     }
 
@@ -42,20 +39,11 @@ public class SignalGenerator {
     }
 
     public void playSound(int soundId) {
-        shiftAddedMediaPlayer.release();
-        shiftAddedMediaPlayer = MediaPlayer.create(context, soundId);
-        shiftAddedMediaPlayer.start();
+        mediaPlayer.release();
+        mediaPlayer = MediaPlayer.create(context, soundId);
+        mediaPlayer.start();
     }
 
-//    public void playBackgroundSound(int soundId) {
-//        backgroundMediaPlayer = MediaPlayer.create(context, soundId);
-//        backgroundMediaPlayer.setLooping(true);
-//        backgroundMediaPlayer.start();
-//    }
-
-    //public void pauseBackgroundSound(int soundId) {
-     //   backgroundMediaPlayer.pause();
-  //  }
 
     public void vibrate(long ms) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

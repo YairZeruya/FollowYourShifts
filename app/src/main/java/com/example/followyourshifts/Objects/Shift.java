@@ -1,6 +1,5 @@
 package com.example.followyourshifts.Objects;
 
-import com.example.followyourshifts.Objects.Workplace;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -30,17 +29,17 @@ public class Shift {
         double tempIncome = 0;
 
         if (duration <= 9) {
-            tempIncome = salaryPerHour * duration; // Calculate base salary for hours up to 9
+            tempIncome = salaryPerHour * duration;
         } else if (duration <= 11) {
-            tempIncome = salaryPerHour * 9; // Calculate base salary for the first 9 hours
-            extraHours1_25 = duration - 9; // Calculate the number of hours with 1.25 multiplier
-            tempIncome = salaryPerHour * 1.25 * extraHours1_25; // Add the extra hours with 1.25 multiplier
+            tempIncome = salaryPerHour * 9;
+            extraHours1_25 = duration - 9;
+            tempIncome = salaryPerHour * 1.25 * extraHours1_25;
         } else {
-            tempIncome = salaryPerHour * 9; // Calculate base salary for the first 9 hours
-            extraHours1_25 = 2; // Number of hours with 1.25 multiplier (9-11)
-            tempIncome += salaryPerHour * 1.25 * extraHours1_25; // Add the extra hours with 1.25 multiplier
-            extraHours1_5 = duration - 11; // Calculate the number of hours with 1.5 multiplier (hours after 11)
-            tempIncome += salaryPerHour * 1.5 * extraHours1_5; // Add the extra hours with 1.5 multiplier
+            tempIncome = salaryPerHour * 9;
+            extraHours1_25 = 2;
+            tempIncome += salaryPerHour * 1.25 * extraHours1_25;
+            extraHours1_5 = duration - 11;
+            tempIncome += salaryPerHour * 1.5 * extraHours1_5;
         }
 
         income = tempIncome;
@@ -79,19 +78,12 @@ public class Shift {
         this.extraHours1_5 = extraHours1_5;
     }
 
-//    public long calculateDuration() {
-//        Duration duration = Duration.between(startTime, endTime);
-//        return duration.toHours();
-//    }
     public double calculateDuration() {
         Duration duration = Duration.between(startTime, endTime);
         long minutes = duration.toMinutes();
         double hours = minutes / 60.0;
         return hours;
     }
-
-
-    // Getters for other properties
 
     public LocalDate getDate() {
         return date;

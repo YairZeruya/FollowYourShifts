@@ -26,7 +26,7 @@
 
         <!-- Month and Year TextView -->
         <TextView
-            android:id="@+id/VI_monthYearTV"
+            android:id="@+id/VI_month_and_year"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
 
     </LinearLayout>
     <RelativeLayout
-        android:id="@+id/VI_topSection"
+        android:id="@+id/VI_top_section"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="40"
@@ -79,13 +79,8 @@
             android:textStyle="bold"
             android:textSize="40sp"
             android:padding="16dp" />
-
-
-        <!-- Hours and Days TextView -->
     </RelativeLayout>
 
-
-    <!-- Bottom section -->
     <RelativeLayout
         android:id="@+id/VI_shift_details"
         android:layout_width="match_parent"
@@ -93,7 +88,6 @@
         android:layout_weight="60"
         >
 
-        <!-- Name of workplace TextView -->
         <TextView
             android:id="@+id/hours_worked_text_view"
             android:layout_width="match_parent"
@@ -104,7 +98,6 @@
             android:textSize="25sp"
             android:padding="16dp" />
 
-        <!-- Salary TextView -->
         <TextView
             android:id="@+id/extra_hours_125_text_view"
             android:layout_width="match_parent"
@@ -115,7 +108,6 @@
             android:textSize="25sp"
             android:padding="16dp" />
 
-        <!-- Hours and Days TextView -->
         <TextView
             android:id="@+id/extra_hours_150_text_view"
             android:layout_width="match_parent"
@@ -136,7 +128,6 @@
             android:padding="16dp" />
 
         <ImageView
-            android:id="@+id/salary_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/hours_days_text_view"

@@ -40,9 +40,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         String dayString = daysOfMonth.get(position);
         if (!dayString.isEmpty()) {
             int day = Integer.parseInt(dayString);
-
             holder.dayOfMonth.setText(dayString);
-
             // Get the selected year and month from the CalendarFragment
             int currentYear = CalendarUtils.selectedDate.getYear();
             int currentMonth = CalendarUtils.selectedDate.getMonthValue();
@@ -51,16 +49,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
             boolean hasShifts = DataManager.hasShiftsForDayAndMonth(day, currentMonth, currentYear);
 
             if (hasShifts) {
-                // If there are shifts, set the text color and background accordingly
                 holder.dayOfMonth.setTextColor(holder.itemView.getResources().getColor(R.color.strong_green));
                 holder.itemView.setBackgroundResource(R.color.gray);
             } else {
-                // If there are no shifts, reset the text color and background
                 holder.dayOfMonth.setTextColor(holder.itemView.getResources().getColor(android.R.color.black));
                 holder.itemView.setBackgroundResource(0);
             }
 
-            // Highlight the selected item
             if (selectedItemPosition == position) {
                 holder.itemView.setBackgroundResource(R.color.black);
             } else {
@@ -100,7 +95,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         @Override
         public void onClick(View view) {
             selectedItemPosition = getAdapterPosition(); // Update the selected item position
-            notifyDataSetChanged(); // Notify the adapter that the data has changed
+            notifyDataSetChanged();
             onItemListener.onItemClick(getAdapterPosition(), (String) dayOfMonth.getText());
         }
     }

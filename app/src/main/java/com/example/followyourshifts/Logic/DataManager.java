@@ -21,14 +21,13 @@ public class DataManager {
     }
 
     public static ArrayList<Shift> getShiftsByMonthAndWorkplace(Month month, Workplace workplace) {
-        ArrayList<Shift> shiftsByMonthAndWorkplace = new ArrayList<>();
 
+        ArrayList<Shift> shiftsByMonthAndWorkplace = new ArrayList<>();
         for (Shift shift : workplace.getShifts()) {
             if (shift.getDate().getMonth().equals(month)) {
                 shiftsByMonthAndWorkplace.add(shift);
             }
         }
-
         return shiftsByMonthAndWorkplace;
     }
 
@@ -48,15 +47,14 @@ public class DataManager {
         }
     }
     public static boolean hasShiftsForDayAndMonth(int day, int month, int year) {
-        // Iterate through the list of shifts and check if any shift matches the given day, month, and year
         for (Shift shift : shifts) {
             int shiftDay = shift.getDate().getDayOfMonth();
             int shiftMonth = shift.getDate().getMonthValue();
             int shiftYear = shift.getDate().getYear();
             if (shiftDay == day && shiftMonth == month && shiftYear == year) {
-                return true; // Return true if a shift is found for the given day, month, and year
+                return true;
             }
         }
-        return false; // Return false if no shift is found for the given day, month, and year
+        return false;
     }
 }
