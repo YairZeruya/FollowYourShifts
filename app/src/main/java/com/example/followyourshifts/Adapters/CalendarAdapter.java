@@ -52,7 +52,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 
             if (hasShifts) {
                 // If there are shifts, set the text color and background accordingly
-                holder.dayOfMonth.setTextColor(holder.itemView.getResources().getColor(R.color.white));
+                holder.dayOfMonth.setTextColor(holder.itemView.getResources().getColor(R.color.strong_green));
                 holder.itemView.setBackgroundResource(R.color.gray);
             } else {
                 // If there are no shifts, reset the text color and background

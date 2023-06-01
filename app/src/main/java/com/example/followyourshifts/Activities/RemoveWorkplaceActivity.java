@@ -35,7 +35,7 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        workplaceSpinner = findViewById(R.id.workplaceSpinner);
+        workplaceSpinner = findViewById(R.id.workplace_spinner);
         removeButton = findViewById(R.id.removeButton);
     }
 

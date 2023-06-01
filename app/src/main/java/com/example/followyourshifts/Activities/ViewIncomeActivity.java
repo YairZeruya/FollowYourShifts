@@ -28,7 +28,6 @@ public class ViewIncomeActivity extends AppCompatActivity {
     private Button nextMonthButton;
     private Button previousMonthButton;
     private LocalDate selectedDate;
-    private TextView shifts_details;
     private Workplace workplace;
     private TextView work_place_name_textView;
 
@@ -38,13 +37,6 @@ public class ViewIncomeActivity extends AppCompatActivity {
     private TextView extra_hours_125_text_view;
     private TextView extra_hours_150_text_view;
 
-//    private WorkplaceCallBack workplaceCallBack = new WorkplaceCallBack() {
-//        @Override
-//        public void workplaceClicked(String workplaceName, double salaryPerHour, int hours100, int hours125, int hours150, double totalSalary) {
-//            //openViewIncomeActivity(workplaceName,salaryPerHour,hours100,hours125, hours150, totalSalary);
-//            SignalGenerator.getInstance().toast("yesh!",1);
-//        }
-//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,21 +46,6 @@ public class ViewIncomeActivity extends AppCompatActivity {
         findviews();
         setMonthView();
         handleIntentData();
-//        Intent previousIntent = getIntent();
-//        for (Workplace workplace: DataManager.getWorkPlace()) {
-//            if(workplace.getName().equals(previousIntent.getStringExtra(DataManager.KEY_WORKPLACE_NAME))) {
-//                this.workplace = workplace;
-//                if (workplace.getShifts().size() > 0) {
-//                    // here move for all the workplaces and their shifts
-//                    for (Shift shift : workplace.getShifts()) {
-//                        Month month = shift.getDate().getMonth();
-//                        displayShiftsInfoByMonthAndWorkplace(month, workplace, shifts_details);
-//                    }
-//                } else {
-//                    displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace,shifts_details);
-//                }
-//            }
-//        }
         onClicklisteners();
     }
     public void handleIntentData(){
@@ -101,6 +78,9 @@ public class ViewIncomeActivity extends AppCompatActivity {
         if (month == selectedDate.getMonth()) {
             // Calculate total income, total hours worked, extra hours with 1.25 multiplier, extra hours with 1.5 multiplier, and number of shifts
             String name = "";
+            if(workplace !=null) {
+                name = workplace.getName();
+            }
             double totalIncome = 0;
             double totalHoursWorked = 0;
             double extraHours1_25 = 0;

@@ -34,7 +34,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.calendar_fragment, container, false);
         initViews(view);
-        CalendarUtils.selectedDate = LocalDate.now();
         onClickListeners(view);
         setMonthView(view);
         return view;
@@ -57,8 +56,9 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     private void initViews(View view)
     {
-        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
-        monthYearText = view.findViewById(R.id.monthYearTV);
+        CalendarUtils.selectedDate = LocalDate.now();
+        calendarRecyclerView = view.findViewById(R.id.calendar_recycler_view);
+        monthYearText = view.findViewById(R.id.month_and_year);
         nextMonthButton = view.findViewById(R.id.next_month_button);
         previousMonthButton = view.findViewById(R.id.previous_month_button);
     }
@@ -88,13 +88,11 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
-
         int daysInMonth = yearMonth.lengthOfMonth();
-
         LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
-        for(int i = 1; i <= 42; i++)
+        for(int i = 1; i <= CalendarUtils.DAYS_IN_MONTH; i++)
         {
             if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
             {
@@ -117,14 +115,12 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     public void previousMonthAction(View view)
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
-        //selectedItemPosition = -1;// Reset the selected item position
         setMonthView(view);
     }
 
     public void nextMonthAction(View view)
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
-        //selectedItemPosition = -1;// Reset the selected item position
         setMonthView(view);
     }
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class DataManager {
     public static final String KEY_WORKPLACE_NAME = "KEY_WORKPLACE_NAME";
+    public static final int VIBRATE_TIME = 1000;
     public static ArrayList<Workplace> workplaces = new ArrayList();
     public static ArrayList<Shift> shifts = new ArrayList();
     public static ArrayList<Shift> getShifts() {

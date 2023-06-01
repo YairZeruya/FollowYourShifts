@@ -16,6 +16,7 @@ import com.example.followyourshifts.Interfaces.CalendarCallBack;
 import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.R;
+import com.example.followyourshifts.Utilities.CalendarUtils;
 import com.example.followyourshifts.Utilities.SignalGenerator;
 
 import java.time.LocalDate;
@@ -35,7 +36,16 @@ public class ShiftFragment extends Fragment implements CalendarCallBack {
         View view = inflater.inflate(R.layout.shifts_fragment, container, false);
         findViews(view);
         initViews(view);
+        CalendarUtils.selectedDate = LocalDate.now();
+        showShifts();
         return view;
+    }
+
+    private void showShifts() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd / MMMM / yyyy");
+        String newMessage = CalendarUtils.selectedDate.format(formatter);
+        start_message.setText(newMessage + " Shifts: ");
+        shiftAdapter.notifyDataSetChanged();
     }
 
     private void initViews(View view) {
@@ -67,11 +77,12 @@ public class ShiftFragment extends Fragment implements CalendarCallBack {
             }
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd / MMMM / yyyy");
-        String newMessage = selectedDate.format(formatter);
-        start_message.setText(newMessage + " Shifts: ");
-        // Update the RecyclerView with the filtered shifts
-        shiftAdapter.notifyDataSetChanged();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd / MMMM / yyyy");
+//        String newMessage = selectedDate.format(formatter);
+//        start_message.setText(newMessage + " Shifts: ");
+//        // Update the RecyclerView with the filtered shifts
+//        shiftAdapter.notifyDataSetChanged();
+        showShifts();
         // Show a toast if no shifts are available for the selected date
         if (displayedShifts.isEmpty()) {
             SignalGenerator.getInstance().toast("No shifts available for selected date", Toast.LENGTH_SHORT);

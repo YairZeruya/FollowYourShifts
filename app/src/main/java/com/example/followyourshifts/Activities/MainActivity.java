@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.followyourshifts.Interfaces.CalendarCallBack;
+import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Utilities.CalendarUtils;
 import com.example.followyourshifts.Fragments.CalendarFragment;
 import com.example.followyourshifts.Fragments.ShiftFragment;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
     private void initViews() {
         Intent intent = getIntent();
         main_LBL_message.setText("Welcome Back " + intent.getStringExtra("username"));
-        SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in white indicate shifts.", Toast.LENGTH_LONG);
+        SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in green indicate shifts.", Toast.LENGTH_LONG);
 //        main_BTN_update.setOnClickListener(v -> {
 //            changeTitle(main_ET_text.getText().toString());
 //        });
@@ -100,22 +101,58 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         int id = option.getId();
 
         if (id == R.id.add_shift_BTN) {
-            Intent intent = new Intent(this, AddShiftActivity.class);
-            startActivity(intent);
+            openAddShiftActivity();
+
         } else if (id == R.id.add_workplace_BTN) {
-            Intent intent = new Intent(this, AddWorkplaceActivity.class);
-            startActivity(intent);
+            openAddWorkplaceActivity();
+
         } else if (id == R.id.remove_shift_BTN) {
+            openRemoveShiftActivity();
+
+        } else if (id == R.id.remove_workplace_BTN) {
+            openRemoveWorkplaceActivity();
+
+        } else if (id == R.id.main_BTN_viewIncome) {
+            openChooseIncomeActivity();
+        }
+    }
+
+    private void openRemoveShiftActivity() {
+        if(DataManager.getShifts().size() > 0) {
             Intent intent = new Intent(this, RemoveShiftActivity.class);
             startActivity(intent);
-            // Handle option 3 click
-        } else if (id == R.id.remove_workplace_BTN) {
+        }
+        else{
+            SignalGenerator.getInstance().toast("Add shift before you want to remove one.",Toast.LENGTH_SHORT);
+        }
+    }
+
+    private void openAddWorkplaceActivity() {
+        Intent intent = new Intent(this, AddWorkplaceActivity.class);
+        startActivity(intent);
+    }
+
+    private void openAddShiftActivity() {
+        Intent intent = new Intent(this, AddShiftActivity.class);
+        startActivity(intent);
+    }
+
+    private void openRemoveWorkplaceActivity() {
+        if(DataManager.getWorkPlace().size() > 0) {
             Intent intent = new Intent(this, RemoveWorkplaceActivity.class);
             startActivity(intent);
-            // Handle option 4 click
-        } else if(id == R.id.main_BTN_viewIncome){
-            openChooseIncomeActivity();
-            // Handle other options if needed
+        }
+        else{
+            SignalGenerator.getInstance().toast("Add workplace before you want to remove one.",Toast.LENGTH_SHORT);
+        }
+    }
+    private void openChooseIncomeActivity() {
+        if(DataManager.getWorkPlace().size() > 0) {
+            Intent intent = new Intent(this, ChooseIncomeActivity.class);
+            startActivity(intent);
+        }
+        else{
+            SignalGenerator.getInstance().toast("Add workplace before you want to see your income.",Toast.LENGTH_SHORT);
         }
     }
 
@@ -130,11 +167,6 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
     }
 
 
-    private void openChooseIncomeActivity() {
-        Intent intent = new Intent(this, ChooseIncomeActivity.class);
-//        intent.putExtra("username",intent.getStringExtra("username"));
-        startActivity(intent);
-    }
 
     private void findViews() {
         main_BTN_viewIncome = findViewById(R.id.main_BTN_viewIncome);

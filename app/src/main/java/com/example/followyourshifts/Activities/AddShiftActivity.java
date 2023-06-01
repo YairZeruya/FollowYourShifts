@@ -1,5 +1,7 @@
 package com.example.followyourshifts.Activities;
 
+import static com.example.followyourshifts.Logic.DataManager.VIBRATE_TIME;
+
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -24,12 +26,11 @@ import java.util.ArrayList;
 
 public class AddShiftActivity extends AppCompatActivity {
 
-    private DatePicker datePicker;
-    private Button submitButton;
-    private Button startTimeButton;
-    private Button endTimeButton;
-    private Spinner workplaceSpinner;
-
+    private DatePicker date_picker;
+    private Button add_shift_button;
+    private Button start_time_button;
+    private Button end_time_button;
+    private Spinner workplace_spinner;
     private LocalTime startTime;
     private LocalTime endTime;
 
@@ -39,18 +40,17 @@ public class AddShiftActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_shift_layout);
-
         findViews();
         populateWorkplaceSpinner();
         onClickListeners();
     }
 
     private void findViews() {
-        datePicker = findViewById(R.id.datePicker);
-        submitButton = findViewById(R.id.submitButton);
-        startTimeButton = findViewById(R.id.startTimeButton);
-        endTimeButton = findViewById(R.id.endTimeButton);
-        workplaceSpinner = findViewById(R.id.workplaceSpinner);
+        date_picker = findViewById(R.id.date_picker);
+        add_shift_button = findViewById(R.id.add_shift_button);
+        start_time_button = findViewById(R.id.start_time_button);
+        end_time_button = findViewById(R.id.end_time_button);
+        workplace_spinner = findViewById(R.id.workplace_spinner);
     }
 
     private void populateWorkplaceSpinner() {
@@ -59,28 +59,28 @@ public class AddShiftActivity extends AppCompatActivity {
         if (workplaces != null && !workplaces.isEmpty()) {
             ArrayAdapter<Workplace> workplaceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, workplaces);
             workplaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            workplaceSpinner.setAdapter(workplaceAdapter);
+            workplace_spinner.setAdapter(workplaceAdapter);
         } else {
             SignalGenerator.getInstance().toast( "No workplaces found.", Toast.LENGTH_SHORT);
         }
     }
 
     private void onClickListeners() {
-        startTimeButton.setOnClickListener(new View.OnClickListener() {
+        start_time_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTimePickerDialog(true);
             }
         });
 
-        endTimeButton.setOnClickListener(new View.OnClickListener() {
+        end_time_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTimePickerDialog(false);
             }
         });
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        add_shift_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleShiftSubmission();
@@ -89,16 +89,13 @@ public class AddShiftActivity extends AppCompatActivity {
     }
 
     private void handleShiftSubmission() {
-        // Retrieve the selected date from the DatePicker
-        int year = datePicker.getYear();
-        int month = datePicker.getMonth() + 1;
-        int day = datePicker.getDayOfMonth();
+
+        int year = date_picker.getYear();
+        int month = date_picker.getMonth() + 1;
+        int day = date_picker.getDayOfMonth();
         LocalDate selectedDate = LocalDate.of(year, month, day);
+        Workplace selectedWorkplace = (Workplace) workplace_spinner.getSelectedItem();
 
-        // Retrieve the selected workplace from the spinner
-        Workplace selectedWorkplace = (Workplace) workplaceSpinner.getSelectedItem();
-
-        // Check if both start time and end time are selected
         if (startTime == null || endTime == null) {
             SignalGenerator.getInstance().toast("Please select start and end times", Toast.LENGTH_SHORT);
             return;
@@ -110,7 +107,6 @@ public class AddShiftActivity extends AppCompatActivity {
             return;
         }
 
-        // Check if a workplace is selected
         if (selectedWorkplace == null) {
             SignalGenerator.getInstance().toast("Please select a workplace", Toast.LENGTH_SHORT);
             return;
@@ -127,6 +123,8 @@ public class AddShiftActivity extends AppCompatActivity {
                 DataManager.getShifts().add(shift);
                 selectedWorkplace.addShift(shift);
                 SignalGenerator.getInstance().toast("Shift added successfully!", Toast.LENGTH_SHORT);
+                SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
+                SignalGenerator.getInstance().playSound(R.raw.money_sound);
                 SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in white indicate shifts.", Toast.LENGTH_LONG);
                 finish();
             }
@@ -139,23 +137,19 @@ public class AddShiftActivity extends AppCompatActivity {
         for (Workplace workplace : DataManager.getWorkPlace()) {
             for (Shift shift : workplace.getShifts()) {
                 if (shift.getDate().isEqual(date)) {
-                    // Check if the new shift's start time is between the existing shift's start and end times
+                    //Check overlapping options:
                     if (startTime.isAfter(shift.getStartTime()) && startTime.isBefore(shift.getEndTime())) {
                         return true;
                     }
-                    // Check if the new shift's end time is between the existing shift's start and end times
                     if (endTime.isAfter(shift.getStartTime()) && endTime.isBefore(shift.getEndTime())) {
                         return true;
                     }
-                    // Check if the new shift's start and end times fully encompass the existing shift's start and end times
                     if (startTime.isBefore(shift.getStartTime()) && endTime.isAfter(shift.getEndTime())) {
                         return true;
                     }
-                    // Check if the new shift's start time is equal to the existing shift's start time, and the end time is after the existing shift's end time
                     if (startTime.equals(shift.getStartTime()) && endTime.isAfter(shift.getEndTime())) {
                         return true;
                     }
-                    // Check if the new shift's start time is before the existing shift's start time, and the end time is equal to the existing shift's end time
                     if (startTime.isBefore(shift.getStartTime()) && endTime.equals(shift.getEndTime())) {
                         return true;
                     }
@@ -173,17 +167,17 @@ public class AddShiftActivity extends AppCompatActivity {
 
     private void showTimePickerDialog(final boolean isStartTime) {
         TimePickerDialog timePickerDialog = new TimePickerDialog(
-                this,
+                this, R.style.CustomTimePickerDialog,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         LocalTime selectedTime = LocalTime.of(hourOfDay, minute);
                         if (isStartTime) {
                             startTime = selectedTime;
-                            startTimeButton.setText(selectedTime.toString());
+                            start_time_button.setText(selectedTime.toString());
                         } else {
                             endTime = selectedTime;
-                            endTimeButton.setText(selectedTime.toString());
+                            end_time_button.setText(selectedTime.toString());
                         }
                     }
                 },
@@ -191,5 +185,6 @@ public class AddShiftActivity extends AppCompatActivity {
 
         timePickerDialog.show();
     }
+
 
 }

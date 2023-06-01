@@ -27,28 +27,26 @@ public class Shift {
     public double calculateIncome() {
         double duration = calculateDuration();
         double salaryPerHour = workplace.getSalaryPerHour();
-        double baseSalary = salaryPerHour;
+        double tempIncome = 0;
 
-        double extraHours1_25 = 0; // Variable to store the number of hours worked with 1.25 multiplier
-        double extraHours1_5 = 0;  // Variable to store the number of hours worked with 1.5 multiplier
-
-        if (duration > 9) {
-            extraHours1_25 = Math.min(duration - 9, 2); // Calculate the number of hours with 1.25 multiplier (up to 2 hours)
-            baseSalary *= 1.25; // Apply 1.25 multiplier for hours from 9-11
-        }
-
-        if (duration > 11) {
+        if (duration <= 9) {
+            tempIncome = salaryPerHour * duration; // Calculate base salary for hours up to 9
+        } else if (duration <= 11) {
+            tempIncome = salaryPerHour * 9; // Calculate base salary for the first 9 hours
+            extraHours1_25 = duration - 9; // Calculate the number of hours with 1.25 multiplier
+            tempIncome = salaryPerHour * 1.25 * extraHours1_25; // Add the extra hours with 1.25 multiplier
+        } else {
+            tempIncome = salaryPerHour * 9; // Calculate base salary for the first 9 hours
+            extraHours1_25 = 2; // Number of hours with 1.25 multiplier (9-11)
+            tempIncome += salaryPerHour * 1.25 * extraHours1_25; // Add the extra hours with 1.25 multiplier
             extraHours1_5 = duration - 11; // Calculate the number of hours with 1.5 multiplier (hours after 11)
-            baseSalary *= 1.5; // Apply 1.5 multiplier for hours from 11 onwards
+            tempIncome += salaryPerHour * 1.5 * extraHours1_5; // Add the extra hours with 1.5 multiplier
         }
 
-        income = baseSalary * duration;
-
-        // Store the extra hours worked with multipliers in the shift object
-        this.extraHours1_25 = extraHours1_25;
-        this.extraHours1_5 = extraHours1_5;
+        income = tempIncome;
 
         return income;
+
     }
 
     @Override

@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/strong_green2"
-    android:gravity="center">
+    android:gravity="center_horizontal">
 
     <Spinner
         android:id="@+id/shiftSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="30dp"
         android:padding="5dp"/>
 
     <Button
@@ -22,6 +22,16 @@
         android:layout_margin="16dp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:text="Remove Shift" />
+        android:text="Remove Shift"
+        android:layout_marginBottom="30dp"/>
+
+    <ImageView
+        android:id="@+id/salary_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="351dp"
+        android:layout_margin="30dp"
+        android:layout_below="@id/workplace_list"
+        android:padding="16dp"
+        android:src="@drawable/workplace2" />
 
 </LinearLayout>

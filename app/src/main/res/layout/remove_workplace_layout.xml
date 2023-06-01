@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:background="@color/strong_green2">
 
     <TextView
@@ -14,13 +14,15 @@
         android:text="Select a workplace to remove:"
         android:textSize="18sp"
         android:textColor="@color/black"
+        android:layout_margin="30dp"
         android:textStyle="bold"
         android:padding="16dp" />
 
     <Spinner
-        android:id="@+id/workplaceSpinner"
+        android:id="@+id/workplace_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="30dp"
         android:padding="16dp" />
 
     <Button
@@ -28,8 +30,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:text="Remove" />
+
+    <ImageView
+        android:id="@+id/salary_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="351dp"
+        android:layout_below="@id/workplace_list"
+        android:padding="16dp"
+        android:src="@drawable/workplace4" />
 
 </LinearLayout>

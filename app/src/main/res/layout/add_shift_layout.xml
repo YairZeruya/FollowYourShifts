@@ -8,42 +8,47 @@
     tools:context=".Activities.AddShiftActivity">
 
     <DatePicker
-        android:id="@+id/datePicker"
+        android:id="@+id/date_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"/>
+        android:layout_margin= "10dp"
+        android:theme="@style/CustomDatePickerStyle" />
 
     <Button
-        android:id="@+id/startTimeButton"
+        android:id="@+id/start_time_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Start Time"
         android:textColor="@color/black"
+        android:layout_margin="10dp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:id="@+id/endTimeButton"
+        android:id="@+id/end_time_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select End Time"
+        android:layout_margin="10dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
 
     <Spinner
-        android:id="@+id/workplaceSpinner"
+        android:id="@+id/workplace_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
+        android:layout_margin="10dp"
         android:padding="16dp" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/add_shift_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="Add Shift"
         android:textColor="@color/black"
+        android:layout_margin="10dp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
 

@@ -1,5 +1,7 @@
 package com.example.followyourshifts.Activities;
 
+import static com.example.followyourshifts.Logic.DataManager.VIBRATE_TIME;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,32 +18,31 @@ import com.example.followyourshifts.Utilities.SignalGenerator;
 
 public class AddWorkplaceActivity extends AppCompatActivity {
 
-    private EditText nameEditText;
-    private EditText salaryEditText;
-    private Button addButton;
+    private EditText name_edit_text;
+    private EditText salary_edit_text;
+    private Button add_workplace_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_workplace_layout);
-
         findViews();
         setupAddButtonListener();
     }
 
     private void findViews() {
-        nameEditText = findViewById(R.id.nameEditText);
-        salaryEditText = findViewById(R.id.salaryEditText);
-        addButton = findViewById(R.id.addButton);
+        name_edit_text = findViewById(R.id.name_edit_text);
+        salary_edit_text = findViewById(R.id.salary_edit_text);
+        add_workplace_button = findViewById(R.id.add_workplace_button);
     }
 
     private void setupAddButtonListener() {
-        addButton.setOnClickListener(new View.OnClickListener() {
+        add_workplace_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retrieve the input values
-                String name = nameEditText.getText().toString();
-                String salaryInput = salaryEditText.getText().toString();
+
+                String name = name_edit_text.getText().toString();
+                String salaryInput = salary_edit_text.getText().toString();
 
                 if (TextUtils.isEmpty(salaryInput)) {
                     SignalGenerator.getInstance().toast("Please enter the salary per hour", Toast.LENGTH_SHORT);
@@ -75,15 +76,10 @@ public class AddWorkplaceActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Create a new Workplace object
                 Workplace newWorkplace = new Workplace(name, salaryPerHour);
                 DataManager.getWorkPlace().add(newWorkplace);
-
-                // Perform any necessary actions with the new Workplace object
-                // ...
-                SignalGenerator.getInstance().toast("Workplace added successfully!",Toast.LENGTH_SHORT);
-
-                // Finish the current activity and return to the previous one
+                SignalGenerator.getInstance().toast("Workplace: " + newWorkplace.getName() + " added successfully!",Toast.LENGTH_SHORT);
+                SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
                 finish();
             }
         });

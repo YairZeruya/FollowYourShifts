@@ -4,38 +4,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:background="@color/strong_green2"
     tools:context=".Activities.AddWorkplaceActivity">
 
     <EditText
-        android:id="@+id/nameEditText"
+        android:id="@+id/name_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Workplace Name"
         android:padding="30dp"
         android:textColor="@color/black"
         android:textStyle="bold"
+        android:layout_marginBottom="20dp"
         android:textSize="35dp"/>
 
     <EditText
-        android:id="@+id/salaryEditText"
+        android:id="@+id/salary_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Salary per Hour"
         android:inputType="numberDecimal"
         android:padding="30dp"
+        android:layout_marginBottom="20dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="35dp"/>
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/add_workplace_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="Add Workplace"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        />
+        android:layout_marginBottom="30dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="351dp"
+        android:layout_below="@id/workplace_list"
+        android:padding="16dp"
+        android:src="@drawable/workplace3" />
 
 </LinearLayout>
