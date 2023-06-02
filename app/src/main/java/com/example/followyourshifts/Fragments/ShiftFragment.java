@@ -68,10 +68,26 @@ public class ShiftFragment extends Fragment implements CalendarCallBack {
 
     @Override
     public void onDateSelected(LocalDate selectedDate) {
-        // Filter shifts based on the selected date
+//        DataManager.getAllShifts(new DataManager.CallBack_ShiftArrayList() {
+//            @Override
+//            public void onDataReceived(ArrayList<Shift> shifts) {
+//                displayedShifts.clear();
+//                for(Shift shift : shifts){
+//                    if (shift.getDate().equals(selectedDate.toString())) {
+//                        displayedShifts.add(shift);
+//                    }
+//                }
+//
+//                showShifts();
+//                if (displayedShifts.isEmpty()) {
+//                    SignalGenerator.getInstance().toast("No shifts available for selected date", Toast.LENGTH_SHORT);
+//                }
+//            }
+//        });
+
         displayedShifts.clear();
         for (Shift shift : DataManager.getShifts()) {
-            if (shift.getDate().isEqual(selectedDate)) {
+            if (shift.getDate().equals(selectedDate.toString())) {
                 displayedShifts.add(shift);
             }
         }

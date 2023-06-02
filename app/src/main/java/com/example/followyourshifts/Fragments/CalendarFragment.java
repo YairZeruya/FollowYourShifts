@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.followyourshifts.Adapters.CalendarAdapter;
 import com.example.followyourshifts.Interfaces.CalendarCallBack;
+import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Utilities.CalendarUtils;
 import com.example.followyourshifts.R;
 
@@ -134,6 +135,30 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             }
         }
     }
+//@Override
+//public void onItemClick(int position, String dayText) {
+//    if (!dayText.isEmpty()) {
+//        int day = Integer.parseInt(dayText);
+//        int currentYear = CalendarUtils.selectedDate.getYear();
+//        int currentMonth = CalendarUtils.selectedDate.getMonthValue();
+//
+//        boolean hasShifts = DataManager.hasShiftsForDayAndMonth(day, currentMonth, currentYear);
+//
+//        if (hasShifts) {
+//            selectedItemPosition = position;
+//            // Update the selected date and highlight the selected day
+//            setSelectedDate(CalendarUtils.selectedDate.withDayOfMonth(day));
+//            if (calendarCallBack != null) {
+//                calendarCallBack.onDateSelected(CalendarUtils.selectedDate);
+//            }
+//
+//            // Refresh the calendar view to update the shifts
+//            setMonthView(getView());
+//        }
+//    }
+//}
+
+
 
     public void setCalendarCallBack(CalendarCallBack calendarCallBack) {
         this.calendarCallBack = calendarCallBack;

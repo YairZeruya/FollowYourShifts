@@ -16,6 +16,14 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
     private RecyclerView workplace_list;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.choose_income_board);
+        findViews();
+        initViews();
+    }
+
+    @Override
     public void workplaceClicked(String workplaceName, int position) {
         openViewIncomeActivity(workplaceName);
         SignalGenerator.getInstance().toast("Your " + workplaceName + " Income", Toast.LENGTH_LONG);
@@ -28,13 +36,6 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
         startActivity(intent);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.choose_income_board);
-        findViews();
-        initViews();
-    }
 
     private void initViews() {
         WorkplaceAdapter workplaceAdapter = new WorkplaceAdapter(DataManager.getWorkPlace());

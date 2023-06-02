@@ -54,9 +54,10 @@ public class ViewIncomeActivity extends AppCompatActivity {
                 if (workplace.getShifts().size() > 0) {
                     // here move for all the workplaces and their shifts
                     for (Shift shift : workplace.getShifts()) {
-                        Month month = shift.getDate().getMonth();
+                        // Month month = shift.getDate().getMonth();
+                        Month month = LocalDate.parse(shift.getDate()).getMonth();
                         displayShiftsInfoByMonthAndWorkplace(month, workplace, work_place_name_textView,salary_text_view, hours_days_text_view,hours_worked_text_view
-                        ,extra_hours_125_text_view, extra_hours_150_text_view);
+                                ,extra_hours_125_text_view, extra_hours_150_text_view);
                     }
                 } else {
                     displayShiftsInfoByMonthAndWorkplace(selectedDate.getMonth(),workplace, work_place_name_textView,salary_text_view, hours_days_text_view,hours_worked_text_view

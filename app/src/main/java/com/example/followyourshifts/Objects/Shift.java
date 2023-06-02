@@ -1,27 +1,35 @@
 package com.example.followyourshifts.Objects;
 
 
+import com.example.followyourshifts.Logic.DataManager;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Shift {
-        private LocalDate date;
-        private LocalTime startTime;
-        private LocalTime endTime;
+        private String date;
+        private String startTime;
+        private String endTime;
         private double income;
         private double extraHours1_25;
         private double extraHours1_5;
         private Workplace workplace;
 
-        public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, Workplace workplace) {
+    public Shift() {
+    }
+
+    public Shift(String date, String startTime, String endTime, Workplace workplace) {
             this.date = date;
             this.startTime = startTime;
             this.endTime = endTime;
             this.workplace = workplace;
             calculateIncome();
         }
+
 
     public double calculateIncome() {
         double duration = calculateDuration();
@@ -79,33 +87,37 @@ public class Shift {
     }
 
     public double calculateDuration() {
-        Duration duration = Duration.between(startTime, endTime);
+        LocalTime start = LocalTime.parse(startTime);
+        LocalTime end = LocalTime.parse(endTime);
+        Duration duration = Duration.between(start,end);
         long minutes = duration.toMinutes();
         double hours = minutes / 60.0;
         return hours;
     }
 
-    public LocalDate getDate() {
+
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -125,11 +137,26 @@ public class Shift {
             return income;
         }
 
-    @Override
-    public String toString() {
-        return  date +
-                " ," + startTime +
-                "-" + endTime +
-                ", Workplace-" + workplace.getName();
-    }
+//    @Override
+//    public String toString() {
+//        return  date +
+//                " ," + startTime +
+//                "-" + endTime +
+//                ", Workplace-" + workplace.getName() + " " + (workplace.getSalaryPerHour() + "");
+//    }
+@Override
+public String toString() {
+    String formattedDate = date.toString().replace("-", "");
+    String formattedStartTime = startTime.toString().replace(":", "");
+    String formattedEndTime = endTime.toString().replace(":", "");
+    String formattedWorkplaceName = workplace.getName().replace(" ", "_");
+    String formattedSalaryPerHour = Double.toString(workplace.getSalaryPerHour()).replace(".", "_");
+
+    return formattedDate +
+            "_" + formattedStartTime +
+            "_" + formattedEndTime +
+            "_" + formattedWorkplaceName +
+            "_" + formattedSalaryPerHour;
+}
+
 }

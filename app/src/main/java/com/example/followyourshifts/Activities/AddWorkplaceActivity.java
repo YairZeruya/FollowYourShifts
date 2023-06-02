@@ -12,9 +12,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.followyourshifts.Logic.DataManager;
+import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.R;
 import com.example.followyourshifts.Utilities.SignalGenerator;
+
+import java.util.ArrayList;
 
 public class AddWorkplaceActivity extends AppCompatActivity {
 
@@ -78,6 +81,8 @@ public class AddWorkplaceActivity extends AppCompatActivity {
 
                 Workplace newWorkplace = new Workplace(name, salaryPerHour);
                 DataManager.getWorkPlace().add(newWorkplace);
+                DataManager.addWorkplaceToDB(newWorkplace);
+                //DataManager.getWorkPlace().add(newWorkplace);
                 SignalGenerator.getInstance().toast("Workplace: " + newWorkplace.getName() + " added successfully!",Toast.LENGTH_SHORT);
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
                 finish();

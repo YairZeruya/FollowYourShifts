@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.followyourshifts.Interfaces.CalendarCallBack;
+import com.example.followyourshifts.Interfaces.DataCallBack;
 import com.example.followyourshifts.Logic.DataManager;
+import com.example.followyourshifts.Objects.Shift;
+import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.Utilities.CalendarUtils;
 import com.example.followyourshifts.Fragments.CalendarFragment;
 import com.example.followyourshifts.Fragments.ShiftFragment;
@@ -18,8 +22,12 @@ import com.example.followyourshifts.R;
 
 import com.example.followyourshifts.Utilities.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CalendarCallBack {
     private CalendarFragment calendarFragment;
@@ -35,6 +43,25 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initFragments();
+        LocalDate selectedDate = LocalDate.of(2023, 6, 1);
+        LocalTime startTime = LocalTime.of(9, 0);
+        LocalTime endTime = LocalTime.of(17, 0);
+        LocalDate selectedDate2 = LocalDate.of(2023, 6, 2);
+        LocalTime startTime2 = LocalTime.of(8, 0);
+        LocalTime endTime2 = LocalTime.of(14, 0);
+        Workplace selectedWorkplace = new Workplace("Office A", 45);
+        Workplace selectedWorkplace2 = new Workplace("Office B", 46);
+        DataManager.addWorkplaceToDB(selectedWorkplace);
+        DataManager.addWorkplaceToDB(selectedWorkplace2);
+        Shift shift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace);
+        DataManager.addShift(shift);
+        Shift shift2 = new Shift(selectedDate2.toString(), startTime2.toString(), endTime2.toString(), selectedWorkplace2);
+        DataManager.addShift(shift2);
+
+        DataManager.getAllWorkPlaces();
+        DataManager.getAllShifts();
+        DataManager.assignShiftsToWorkplaces(DataManager.getShifts(),DataManager.getWorkPlace());
+
         findViews();
         initViews();
         beginTransactions();
@@ -92,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 
         if (id == R.id.add_shift_BTN) {
             openAddShiftActivity();
-
         } else if (id == R.id.add_workplace_BTN) {
             openAddWorkplaceActivity();
 
@@ -137,13 +163,13 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         }
     }
     private void openChooseIncomeActivity() {
-        if(DataManager.getWorkPlace().size() > 0) {
+        //if(DataManager.getWorkPlace().size() > 0) {
             Intent intent = new Intent(this, ChooseIncomeActivity.class);
             startActivity(intent);
-        }
-        else{
-            SignalGenerator.getInstance().toast("Add workplace before you want to see your income.",Toast.LENGTH_SHORT);
-        }
+        //}
+        //else{
+          //  SignalGenerator.getInstance().toast("Add workplace before you want to see your income.",Toast.LENGTH_SHORT);
+        //}
     }
 
     private void toggleOptionsVisibility() {

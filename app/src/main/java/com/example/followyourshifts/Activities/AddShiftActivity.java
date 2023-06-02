@@ -119,8 +119,9 @@ public class AddShiftActivity extends AppCompatActivity {
                 SignalGenerator.getInstance().toast("Shift overlaps with existing shifts", Toast.LENGTH_SHORT);
             } else {
                 // Create and add the new shift
-                Shift shift = new Shift(selectedDate, startTime, endTime, selectedWorkplace);
+                Shift shift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace);
                 DataManager.getShifts().add(shift);
+                DataManager.addShift(shift);
                 selectedWorkplace.addShift(shift);
                 SignalGenerator.getInstance().toast("Shift added successfully!", Toast.LENGTH_SHORT);
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
@@ -136,21 +137,25 @@ public class AddShiftActivity extends AppCompatActivity {
     private boolean hasOverlappingShifts(LocalDate date, LocalTime startTime, LocalTime endTime) {
         for (Workplace workplace : DataManager.getWorkPlace()) {
             for (Shift shift : workplace.getShifts()) {
-                if (shift.getDate().isEqual(date)) {
+                if (shift.getDate().equals(date.toString())) {
                     //Check overlapping options:
-                    if (startTime.isAfter(shift.getStartTime()) && startTime.isBefore(shift.getEndTime())) {
+                    LocalTime shiftStartTime = LocalTime.parse(shift.getStartTime());
+                    LocalTime shiftEndTime = LocalTime.parse(shift.getEndTime());
+
+                    // Check overlapping options:
+                    if (startTime.isAfter(shiftStartTime) && startTime.isBefore(shiftEndTime)) {
                         return true;
                     }
-                    if (endTime.isAfter(shift.getStartTime()) && endTime.isBefore(shift.getEndTime())) {
+                    if (endTime.isAfter(shiftStartTime) && endTime.isBefore(shiftEndTime)) {
                         return true;
                     }
-                    if (startTime.isBefore(shift.getStartTime()) && endTime.isAfter(shift.getEndTime())) {
+                    if (startTime.isBefore(shiftStartTime) && endTime.isAfter(shiftEndTime)) {
                         return true;
                     }
-                    if (startTime.equals(shift.getStartTime()) && endTime.isAfter(shift.getEndTime())) {
+                    if (startTime.equals(shiftStartTime) && endTime.isAfter(shiftEndTime)) {
                         return true;
                     }
-                    if (startTime.isBefore(shift.getStartTime()) && endTime.equals(shift.getEndTime())) {
+                    if (startTime.isBefore(shiftStartTime) && endTime.equals(shiftEndTime)) {
                         return true;
                     }
                 }
