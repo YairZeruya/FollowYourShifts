@@ -43,25 +43,59 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initFragments();
-        LocalDate selectedDate = LocalDate.of(2023, 6, 1);
-        LocalTime startTime = LocalTime.of(9, 0);
-        LocalTime endTime = LocalTime.of(17, 0);
-        LocalDate selectedDate2 = LocalDate.of(2023, 6, 2);
-        LocalTime startTime2 = LocalTime.of(8, 0);
-        LocalTime endTime2 = LocalTime.of(14, 0);
+//        LocalDate selectedDate = LocalDate.of(2023, 6, 1);
+//        LocalTime startTime = LocalTime.of(9, 0);
+//        LocalTime endTime = LocalTime.of(17, 0);
+//        LocalDate selectedDate2 = LocalDate.of(2023, 6, 2);
+//        LocalTime startTime2 = LocalTime.of(8, 0);
+//        LocalTime endTime2 = LocalTime.of(14, 0);
         Workplace selectedWorkplace = new Workplace("Office A", 45);
         Workplace selectedWorkplace2 = new Workplace("Office B", 46);
-        DataManager.addWorkplaceToDB(selectedWorkplace);
-        DataManager.addWorkplaceToDB(selectedWorkplace2);
-        Shift shift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace);
-        DataManager.addShift(shift);
-        Shift shift2 = new Shift(selectedDate2.toString(), startTime2.toString(), endTime2.toString(), selectedWorkplace2);
-        DataManager.addShift(shift2);
 
-        DataManager.getAllWorkPlaces();
-        DataManager.getAllShifts();
-        DataManager.assignShiftsToWorkplaces(DataManager.getShifts(),DataManager.getWorkPlace());
+//        ArrayList<Workplace> workplaceArrayList = new ArrayList<>();
+//        workplaceArrayList.add(selectedWorkplace);
+//        workplaceArrayList.add(selectedWorkplace2);
+//        DataManager.addWorkplaceToDB(selectedWorkplace);
+//        DataManager.addWorkplaceToDB(selectedWorkplace2);
+//        Shift shift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace);
+//        DataManager.addShift(shift);
+//        Shift shift2 = new Shift(selectedDate2.toString(), startTime2.toString(), endTime2.toString(), selectedWorkplace2);
+//        DataManager.addShift(shift2);
+//
+//        DataManager.getAllShifts();
+//        DataManager.getAllWorkPlaces();
+//        if(DataManager.getWorkPlace().size() == 0){
+//            DataManager.setWorkplaceArrayList(workplaceArrayList);
+//            DataManager.assignShiftsToWorkplaces(DataManager.getShifts(),workplaceArrayList);
+//        }
+//        else {
+//            DataManager.assignShiftsToWorkplaces(DataManager.getShifts(), DataManager.getWorkPlace());
+//        }
+        DataManager dataManager = new DataManager();
+        //dataManager.addWorkplaceToDB(selectedWorkplace);
+        //dataManager.addWorkplaceToDB(selectedWorkplace2);
+        dataManager.getAllShifts2(new DataManager.DataStatusShifts() {
+            @Override
+            public void DataIsLoaded(ArrayList<Shift> shifts, ArrayList<Workplace> workplaces) {
+                for(Shift shift: shifts){
+                    SignalGenerator.getInstance().toast(shift.toString(),Toast.LENGTH_SHORT);
+                }
 
+                dataManager.setShiftsArrayList(shifts);
+                dataManager.setWorkplaceArrayList(workplaces);
+//                dataManager.assignShiftsToWorkplaces(DataManager.getShifts(), DataManager.getWorkPlace());
+            }
+        });
+//        dataManager.getAllWorkPlaces2(new DataManager.DataStatusWorkplaces() {
+//            @Override
+//            public void DataIsLoaded(ArrayList<Workplace> workplaces, ArrayList<String> keys) {
+//                for (Workplace workplace: workplaces){
+//                    SignalGenerator.getInstance().toast(workplace.getName(),Toast.LENGTH_SHORT);
+//                }
+//                dataManager.setWorkplaceArrayList(workplaces);
+//            }
+//        });
+//        dataManager.assignShiftsToWorkplaces(DataManager.getShifts(), DataManager.getWorkPlace());
         findViews();
         initViews();
         beginTransactions();

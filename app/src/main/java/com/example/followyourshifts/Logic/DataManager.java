@@ -27,18 +27,20 @@ public class DataManager {
     public static final int VIBRATE_TIME = 1000;
     public static ArrayList<Workplace> workplaces = new ArrayList();
     public static ArrayList<Shift> shifts = new ArrayList();
-    public static FirebaseDatabase database = FirebaseDatabase.getInstance();
-    public static DatabaseReference workplacesRef = database.getReference("Workplaces");
-    public static DatabaseReference shiftsRef = database.getReference("Shifts");
+    public static FirebaseDatabase database;
+    public static DatabaseReference workplacesRef;
+    public static DatabaseReference shiftsRef;
 
     public static ArrayList<Shift> getShifts() {
         return shifts;
     }
 
-
-
-
-//    public static void removeWorkplace(Workplace selectedWorkplace) {
+    public DataManager() {
+        database = FirebaseDatabase.getInstance();
+        workplacesRef = database.getReference("Workplaces");
+        shiftsRef = database.getReference("Shifts");
+    }
+    //    public static void removeWorkplace(Workplace selectedWorkplace) {
 //        workplaces.remove(selectedWorkplace);
 //        DatabaseReference workplacesRef = database.getReference("Workplaces");
 //        workplacesRef.child(selectedWorkplace.getName()).removeValue();
@@ -127,7 +129,7 @@ public class DataManager {
     }
     public static void getAllShifts(){
 
-        DatabaseReference shiftsRef = database.getReference("Shifts");
+        //DatabaseReference shiftsRef = database.getReference("Shifts");
         shiftsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,15 +143,7 @@ public class DataManager {
 
                         }
                     }
-                    DataManager.setShiftsArrayList(shifts);
-//                        if(callBack_shift != null) {
-//                            callBack_shift.onDataReceived(shifts);
-//                        }
-//                    }
-//                } else {
-//                    if(callBack_shift != null) {
-//                        callBack_shift.onDataReceived(null);
-//                    }
+                    setShiftsArrayList(shifts);
                 }
             }
 
@@ -164,8 +158,77 @@ public class DataManager {
         public void onDataReceived(ArrayList<Workplace> workplaces);
     }
 
+    public interface DataStatusWorkplaces{
+        void DataIsLoaded(ArrayList<Workplace> workplaces, ArrayList<String> keys);
+    }
+
+
+    public static void getAllWorkPlaces2(final DataStatusWorkplaces dataStatus) {
+        //DatabaseReference workplacesRef = database.getReference("Workplaces");
+        workplacesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                workplaces.clear();
+                ArrayList<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode: snapshot.getChildren()){
+                    keys.add(keyNode.getKey());
+                    Workplace workplace = keyNode.getValue(Workplace.class);
+                    workplaces.add(workplace);
+                }
+                dataStatus.DataIsLoaded(workplaces,keys);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle any cancellation events or errors
+            }
+        });
+    }
+    public interface DataStatusShifts{
+        void DataIsLoaded(ArrayList<Shift> shifts, ArrayList<Workplace> workplaces);
+    }
+    public static void getAllShifts2(final DataStatusShifts dataStatusShifts){
+        shiftsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                shifts.clear();
+                ArrayList<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode: snapshot.getChildren()){
+                    keys.add(keyNode.getKey());
+                    Shift shift = keyNode.getValue(Shift.class);
+                    shifts.add(shift);
+                }
+                for (Shift shift: shifts){
+                    Workplace temp = shift.getWorkplace();
+                    Workplace workplace = new Workplace(temp.getName(),temp.getSalaryPerHour());
+                    if(workplaces.size() == 0){
+                        workplaces.add(workplace);
+                    }
+                    else {
+                        for (Workplace workplace1 : workplaces) {
+                            if (!(workplace.getName().equals(workplace1.getName()))) {
+                                workplaces.add(workplace);
+                            }
+                        }
+                    }
+                }
+                assignShiftsToWorkplaces(shifts, workplaces);
+                dataStatusShifts.DataIsLoaded(shifts,workplaces);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle any cancellation events or errors
+            }
+        });
+    }
+
+
+
+
     public static void getAllWorkPlaces() {
-        DatabaseReference workplacesRef = database.getReference("Workplaces");
+        //DatabaseReference workplacesRef = database.getReference("Workplaces");
         workplacesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -179,7 +242,7 @@ public class DataManager {
                             // Handle any exceptions that occur during data retrieval
                         }
                     }
-                    DataManager.setWorkplaceArrayList(workplaces);
+                    setWorkplaceArrayList(workplaces);
 //                    // Invoke the callback function if it hasn't been invoked already
 //                    if (callBack_workplaces != null) {
 //                        callBack_workplaces.onDataReceived(workplaces);

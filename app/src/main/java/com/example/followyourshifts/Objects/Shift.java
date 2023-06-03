@@ -18,6 +18,7 @@ public class Shift {
         private double extraHours1_25;
         private double extraHours1_5;
         private Workplace workplace;
+        private boolean isHoliday_isSaturday;
 
     public Shift() {
     }

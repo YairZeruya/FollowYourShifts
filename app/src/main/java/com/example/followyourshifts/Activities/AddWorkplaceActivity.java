@@ -81,7 +81,7 @@ public class AddWorkplaceActivity extends AppCompatActivity {
 
                 Workplace newWorkplace = new Workplace(name, salaryPerHour);
                 DataManager.getWorkPlace().add(newWorkplace);
-                DataManager.addWorkplaceToDB(newWorkplace);
+                //+DataManager.addWorkplaceToDB(newWorkplace);
                 //DataManager.getWorkPlace().add(newWorkplace);
                 SignalGenerator.getInstance().toast("Workplace: " + newWorkplace.getName() + " added successfully!",Toast.LENGTH_SHORT);
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
