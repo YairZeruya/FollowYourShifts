@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dataManager = new DataManager();
         setContentView(R.layout.activity_main);
         dataManager.getWorkplacesFromFirestore(new DataManager.WorkplaceListener() {
             @Override
@@ -66,14 +67,6 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 
             }
         });
-//        Workplace workplace = new Workplace("Example Workplace", 10.0);
-//        Shift shift = new Shift("2023-06-01", "07:00", "12:00",workplace.getName(), false);
-//        workplace.addShift(shift);
-        dataManager = new DataManager();
-        //dataManager.addShift3(shift);
-        //dataManager.addWorkplace3(workplace);
-
-        //dataManager.assignShiftsToWorkplaces(shifts, workplaces);
         initFragments();
         findViews();
         initViews();
@@ -125,6 +118,24 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
                 }
             });
         }
+        MaterialButton main_BTN_logout = findViewById(R.id.main_BTN_logout);
+//        main_BTN_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                logoutUser();
+//            }
+//        });
+    }
+    private void logoutUser() {
+        // Clear any user-related data or preferences
+        // For example, you can clear the user session or user preferences
+
+
+        // Navigate back to the login screen
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        // Finish the current activity
+        finish();
     }
 
     private void handleOptionClick(View option) {

@@ -17,6 +17,7 @@ import com.example.followyourshifts.R;
 import com.example.followyourshifts.Objects.Workplace;
 
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -95,12 +96,15 @@ public class ViewIncomeActivity extends AppCompatActivity {
                 extraHours1_25 += shift.getExtraHours1_25();
                 extraHours1_5 += shift.getExtraHours1_5();
             }
+            // Create a DecimalFormat object with the desired format
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            
             work_place_name_textView.setText("Workplace Name: " + name);
-            salary_text_view.setText("Total Income: " + totalIncome + "$");
-            hours_days_text_view.setText(totalHoursWorked + " Hours Total ," + numShifts + " Days");
-            hours_worked_text_view.setText("Hours (1.0x): " + (totalHoursWorked- extraHours1_5- extraHours1_25) + " Hours");
-            extra_hours_125_text_view.setText("Extra Hours (1.25x): " + extraHours1_25);
-            extra_hours_150_text_view.setText("Extra Hours (1.50x): " + extraHours1_5);
+            salary_text_view.setText("Total Income: " + decimalFormat.format(totalIncome) + "$");
+            hours_days_text_view.setText(decimalFormat.format(totalHoursWorked) + " Hours Total ," + numShifts + " Days");
+            hours_worked_text_view.setText("Hours (1.0x): " + decimalFormat.format(totalHoursWorked- extraHours1_5- extraHours1_25) + " Hours");
+            extra_hours_125_text_view.setText("Extra Hours (1.25x): " + decimalFormat.format(extraHours1_25));
+            extra_hours_150_text_view.setText("Extra Hours (1.50x): " + decimalFormat.format(extraHours1_5));
         }
     }
 

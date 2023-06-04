@@ -81,7 +81,7 @@ public class AddWorkplaceActivity extends AppCompatActivity {
                 }
 
                 Workplace newWorkplace = new Workplace(name, salaryPerHour);
-                DataManager.getWorkPlaces().add(newWorkplace);
+                //DataManager.getWorkPlaces().add(newWorkplace);
                 //+DataManager.addWorkplaceToDB(newWorkplace);
                 //DataManager.addWorkplaceFireStore(newWorkplace);
                 DataManager.getWorkPlaces().add(newWorkplace);
