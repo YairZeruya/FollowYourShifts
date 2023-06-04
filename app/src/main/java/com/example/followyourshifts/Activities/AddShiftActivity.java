@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -30,9 +34,11 @@ public class AddShiftActivity extends AppCompatActivity {
     private Button add_shift_button;
     private Button start_time_button;
     private Button end_time_button;
+    private CheckBox is_holiday_is_saturday_checkbox;
     private Spinner workplace_spinner;
     private LocalTime startTime;
     private LocalTime endTime;
+    private boolean isHoliday_isSaturdayFlag = false;
 
     private ArrayList<Workplace> workplaces; // List of available workplaces
 
@@ -51,10 +57,11 @@ public class AddShiftActivity extends AppCompatActivity {
         start_time_button = findViewById(R.id.start_time_button);
         end_time_button = findViewById(R.id.end_time_button);
         workplace_spinner = findViewById(R.id.workplace_spinner);
+        is_holiday_is_saturday_checkbox = findViewById(R.id.is_holiday_is_saturday_checkbox);
     }
 
     private void populateWorkplaceSpinner() {
-        workplaces = DataManager.getWorkPlace();
+        workplaces = DataManager.getWorkPlaces();
 
         if (workplaces != null && !workplaces.isEmpty()) {
             ArrayAdapter<Workplace> workplaceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, workplaces);
@@ -102,7 +109,7 @@ public class AddShiftActivity extends AppCompatActivity {
         }
 
         // Check if any workplaces are available
-        if (DataManager.getWorkPlace().isEmpty()) {
+        if (DataManager.getWorkPlaces().isEmpty()) {
             SignalGenerator.getInstance().toast("No workplaces found. Please add a workplace before adding a shift.", Toast.LENGTH_SHORT);
             return;
         }
@@ -119,11 +126,12 @@ public class AddShiftActivity extends AppCompatActivity {
                 SignalGenerator.getInstance().toast("Shift overlaps with existing shifts", Toast.LENGTH_SHORT);
             } else {
                 // Create and add the new shift
-                Shift shift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace);
-                DataManager.getShifts().add(shift);
-                DataManager.addShift(shift);
-                selectedWorkplace.addShift(shift);
-                SignalGenerator.getInstance().toast("Shift added successfully!", Toast.LENGTH_SHORT);
+                isHoliday_isSaturdayFlag = is_holiday_is_saturday_checkbox.isChecked();
+                Shift selectedShift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace.getName(), isHoliday_isSaturdayFlag);
+                DataManager.getShifts().add(selectedShift);
+                selectedWorkplace.addShift(selectedShift);
+                DataManager.updateWorkplaceShiftsInFirestore(selectedWorkplace);
+                DataManager.addShift(selectedShift, selectedShift.getId());
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
                 SignalGenerator.getInstance().playSound(R.raw.money_sound);
                 SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in white indicate shifts.", Toast.LENGTH_LONG);
@@ -135,7 +143,7 @@ public class AddShiftActivity extends AppCompatActivity {
     }
 
     private boolean hasOverlappingShifts(LocalDate date, LocalTime startTime, LocalTime endTime) {
-        for (Workplace workplace : DataManager.getWorkPlace()) {
+        for (Workplace workplace : DataManager.getWorkPlaces()) {
             for (Shift shift : workplace.getShifts()) {
                 if (shift.getDate().equals(date.toString())) {
                     //Check overlapping options:

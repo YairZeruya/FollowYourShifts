@@ -35,6 +35,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.calendar_fragment, container, false);
         findViews(view);
+
         onClickListeners(view);
         setMonthView(view);
         return view;

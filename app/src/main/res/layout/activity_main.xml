@@ -111,6 +111,15 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             />
+        <!-- Option 5 - Logout button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/main_BTN_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 

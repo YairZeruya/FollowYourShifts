@@ -32,7 +32,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftsViewHo
     @Override
     public void onBindViewHolder(@NonNull ShiftAdapter.ShiftsViewHolder holder, int position) {
         Shift shift = getItem(position);
-        holder.shift_LBL_workplace.setText(shift.getWorkplace().getName());
+        holder.shift_LBL_workplace.setText(shift.getWorkplaceName());
         holder.shift_LBL_hours.setText(shift.getStartTime() + "-" + shift.getEndTime() + "");
     }
 

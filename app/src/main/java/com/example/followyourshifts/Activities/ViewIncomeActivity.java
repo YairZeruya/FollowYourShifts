@@ -48,7 +48,7 @@ public class ViewIncomeActivity extends AppCompatActivity {
     }
     public void handleIntentData(){
         Intent previousIntent = getIntent();
-        for (Workplace workplace: DataManager.getWorkPlace()) {
+        for (Workplace workplace: DataManager.getWorkPlaces()) {
             if(workplace.getName().equals(previousIntent.getStringExtra(DataManager.KEY_WORKPLACE_NAME))) {
                 this.workplace = workplace;
                 if (workplace.getShifts().size() > 0) {
@@ -86,7 +86,7 @@ public class ViewIncomeActivity extends AppCompatActivity {
             double extraHours1_5 = 0;
             int numShifts = shifts.size();
             if(numShifts > 0) {
-                name = shifts.get(0).getWorkplace().getName();
+                name = shifts.get(0).getWorkplaceName();
             }
 
             for (Shift shift : shifts) {

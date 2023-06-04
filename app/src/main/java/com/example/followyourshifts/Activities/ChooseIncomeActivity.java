@@ -26,8 +26,13 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
     @Override
     public void workplaceClicked(String workplaceName, int position) {
         openViewIncomeActivity(workplaceName);
-        SignalGenerator.getInstance().toast("Your " + workplaceName + " Income", Toast.LENGTH_LONG);
-        SignalGenerator.getInstance().playSound(R.raw.view_income_sound);
+        if(DataManager.getWorkplaceByName(workplaceName).getShifts().size() > 0) {
+            SignalGenerator.getInstance().playSound(R.raw.view_income_sound);
+            SignalGenerator.getInstance().toast("You deserve it! \uD83D\uDC4F", Toast.LENGTH_LONG);
+        }
+        else{
+            SignalGenerator.getInstance().toast("You didn't work yet at " + workplaceName, Toast.LENGTH_SHORT);
+        }
     }
 
     private void openViewIncomeActivity(String workplaceName) {
@@ -38,7 +43,7 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
 
 
     private void initViews() {
-        WorkplaceAdapter workplaceAdapter = new WorkplaceAdapter(DataManager.getWorkPlace());
+        WorkplaceAdapter workplaceAdapter = new WorkplaceAdapter(DataManager.getWorkPlaces());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         workplace_list.setAdapter(workplaceAdapter);

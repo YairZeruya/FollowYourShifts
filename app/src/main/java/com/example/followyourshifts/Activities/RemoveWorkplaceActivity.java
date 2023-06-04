@@ -39,7 +39,7 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
     }
 
     private void setupWorkplaceSpinner() {
-        workplaces = DataManager.getWorkPlace();
+        workplaces = DataManager.getWorkPlaces();
 
         if (workplaces != null && !workplaces.isEmpty()) {
             ArrayAdapter<Workplace> workplaceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, workplaces);
@@ -72,7 +72,7 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
             ArrayList<Shift> shifts = DataManager.getShifts();
             for (int i = shifts.size() - 1; i >= 0; i--) {
                 Shift shift = shifts.get(i);
-                if (shift.getWorkplace().getName().equals(removedWorkplace.getName())) {
+                if (shift.getWorkplaceName().equals(removedWorkplace.getName())) {
                     //shifts.remove(i);
                     DataManager.removeShift(shifts.get(i));
                 }

@@ -3,17 +3,21 @@ package com.example.followyourshifts.Objects;
 import java.util.ArrayList;
 
 public class Workplace {
+    private String id; // Firestore document ID
     private String name;
     private double salaryPerHour;
     private ArrayList<Shift> shifts;
 
+
     public Workplace() {
     }
+
 
     public Workplace(String name, double salaryPerHour) {
         this.name = name;
         this.salaryPerHour = salaryPerHour;
         shifts = new ArrayList<>();
+        this.id = name;
     }
 
     public void addShift(Shift shift) {
@@ -43,6 +47,14 @@ public class Workplace {
 
     public ArrayList<Shift> getShifts() {
         return shifts;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Workplace getWorkplaceByName(String name) {

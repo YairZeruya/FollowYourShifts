@@ -1,6 +1,7 @@
 package com.example.followyourshifts.Activities;
 
 import static com.example.followyourshifts.Logic.DataManager.VIBRATE_TIME;
+import static com.example.followyourshifts.Logic.DataManager.workplaces;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -67,7 +68,7 @@ public class AddWorkplaceActivity extends AppCompatActivity {
 
                 // Check if a workplace with the same name already exists
                 boolean duplicateFound = false;
-                for (Workplace workplace : DataManager.getWorkPlace()) {
+                for (Workplace workplace : DataManager.getWorkPlaces()) {
                     if (workplace.getName().equals(name)) {
                         duplicateFound = true;
                         break;
@@ -80,10 +81,11 @@ public class AddWorkplaceActivity extends AppCompatActivity {
                 }
 
                 Workplace newWorkplace = new Workplace(name, salaryPerHour);
-                DataManager.getWorkPlace().add(newWorkplace);
+                DataManager.getWorkPlaces().add(newWorkplace);
                 //+DataManager.addWorkplaceToDB(newWorkplace);
-                //DataManager.getWorkPlace().add(newWorkplace);
-                SignalGenerator.getInstance().toast("Workplace: " + newWorkplace.getName() + " added successfully!",Toast.LENGTH_SHORT);
+                //DataManager.addWorkplaceFireStore(newWorkplace);
+                DataManager.getWorkPlaces().add(newWorkplace);
+                DataManager.addWorkplace(newWorkplace,newWorkplace.getId());
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
                 finish();
             }

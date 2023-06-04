@@ -11,31 +11,43 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Shift {
+        private String id; // Firestore document ID
         private String date;
         private String startTime;
         private String endTime;
         private double income;
         private double extraHours1_25;
         private double extraHours1_5;
-        private Workplace workplace;
+        //private Workplace workplace;
+        String workplaceName;
         private boolean isHoliday_isSaturday;
 
     public Shift() {
     }
 
-    public Shift(String date, String startTime, String endTime, Workplace workplace) {
+    public Shift(String date, String startTime, String endTime,String workplaceName, boolean isHoliday_isSaturday) {
             this.date = date;
             this.startTime = startTime;
             this.endTime = endTime;
-            this.workplace = workplace;
-            calculateIncome();
+            this.workplaceName = workplaceName;
+            this.isHoliday_isSaturday = isHoliday_isSaturday;
+            this.id = this.toString();
         }
 
-
-    public double calculateIncome() {
+    public String getWorkplaceName() {
+        return workplaceName;
+    }
+        public double calculateIncome() {
         double duration = calculateDuration();
-        double salaryPerHour = workplace.getSalaryPerHour();
+        double salaryPerHour;
         double tempIncome = 0;
+        Workplace workplace = DataManager.getWorkplaceByName(workplaceName);
+        if(isHoliday_isSaturday) {
+            salaryPerHour = workplace.getSalaryPerHour() * 1.5;
+            extraHours1_5 = duration;
+            return salaryPerHour * duration;
+        }
+        salaryPerHour = workplace.getSalaryPerHour();
 
         if (duration <= 9) {
             tempIncome = salaryPerHour * duration;
@@ -57,6 +69,10 @@ public class Shift {
 
     }
 
+    public boolean isHoliday_isSaturday() {
+        return isHoliday_isSaturday;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,8 +83,17 @@ public class Shift {
                 Double.compare(shift.extraHours1_5, extraHours1_5) == 0 &&
                 Objects.equals(date, shift.date) &&
                 Objects.equals(startTime, shift.startTime) &&
-                Objects.equals(endTime, shift.endTime) &&
-                Objects.equals(workplace, shift.workplace);
+                Objects.equals(endTime, shift.endTime);
+                //&&
+               // Objects.equals(workplace, shift.workplace);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getExtraHours1_25() {
@@ -126,38 +151,30 @@ public class Shift {
         this.income = income;
     }
 
-    public Workplace getWorkplace() {
-        return workplace;
-    }
-
-    public void setWorkplace(Workplace workplace) {
-        this.workplace = workplace;
-    }
 
     public double getIncome() {
             return income;
         }
 
-//    @Override
-//    public String toString() {
-//        return  date +
-//                " ," + startTime +
-//                "-" + endTime +
-//                ", Workplace-" + workplace.getName() + " " + (workplace.getSalaryPerHour() + "");
-//    }
-@Override
-public String toString() {
-    String formattedDate = date.toString().replace("-", "");
-    String formattedStartTime = startTime.toString().replace(":", "");
-    String formattedEndTime = endTime.toString().replace(":", "");
-    String formattedWorkplaceName = workplace.getName().replace(" ", "_");
-    String formattedSalaryPerHour = Double.toString(workplace.getSalaryPerHour()).replace(".", "_");
-
-    return formattedDate +
-            "_" + formattedStartTime +
-            "_" + formattedEndTime +
-            "_" + formattedWorkplaceName +
-            "_" + formattedSalaryPerHour;
-}
+    @Override
+    public String toString() {
+        return  date +
+                ", " + startTime +
+                "-" + endTime + ", " + workplaceName;
+    }
+//@Override
+//public String toString() {
+//    String formattedDate = date.toString().replace("-", "");
+//    String formattedStartTime = startTime.toString().replace(":", "");
+//    String formattedEndTime = endTime.toString().replace(":", "");
+//    String formattedWorkplaceName = workplace.getName().replace(" ", "_");
+//    String formattedSalaryPerHour = Double.toString(workplace.getSalaryPerHour()).replace(".", "_");
+//
+//    return formattedDate +
+//            "_" + formattedStartTime +
+//            "_" + formattedEndTime +
+//            "_" + formattedWorkplaceName +
+//            "_" + formattedSalaryPerHour;
+//}
 
 }
