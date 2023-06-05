@@ -127,10 +127,10 @@ public class AddShiftActivity extends AppCompatActivity {
             } else {
                 // Create and add the new shift
                 isHoliday_isSaturdayFlag = is_holiday_is_saturday_checkbox.isChecked();
-                Shift selectedShift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace.getName(), isHoliday_isSaturdayFlag);
+                Shift selectedShift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace.getName(),selectedWorkplace.getSalaryPerHour(), isHoliday_isSaturdayFlag);
                 DataManager.getShifts().add(selectedShift);
                 selectedWorkplace.addShift(selectedShift);
-                DataManager.updateWorkplaceShiftsInFirestore(selectedWorkplace);
+                //DataManager.updateWorkplaceShiftsInFirestore(selectedWorkplace,selectedWorkplace.getId());
                 DataManager.addShift(selectedShift, selectedShift.getId());
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
                 SignalGenerator.getInstance().playSound(R.raw.money_sound);

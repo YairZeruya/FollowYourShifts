@@ -19,19 +19,22 @@ public class Shift {
         private double extraHours1_25;
         private double extraHours1_5;
         //private Workplace workplace;
-        String workplaceName;
+        private String workplaceName;
+        private double workplaceSalaryPerHour;
+
         private boolean isHoliday_isSaturday;
 
     public Shift() {
     }
 
-    public Shift(String date, String startTime, String endTime,String workplaceName, boolean isHoliday_isSaturday) {
+    public Shift(String date, String startTime, String endTime,String workplaceName,double workplaceSalaryPerHour, boolean isHoliday_isSaturday) {
             this.date = date;
             this.startTime = startTime;
             this.endTime = endTime;
             this.workplaceName = workplaceName;
             this.isHoliday_isSaturday = isHoliday_isSaturday;
             this.id = this.toString();
+            this.workplaceSalaryPerHour = workplaceSalaryPerHour;
         }
 
     public String getWorkplaceName() {
@@ -67,6 +70,14 @@ public class Shift {
 
         return income;
 
+    }
+
+    public double getWorkplaceSalaryPerHour() {
+        return workplaceSalaryPerHour;
+    }
+
+    public void setWorkplaceSalaryPerHour(double workplaceSalaryPerHour) {
+        this.workplaceSalaryPerHour = workplaceSalaryPerHour;
     }
 
     public boolean isHoliday_isSaturday() {

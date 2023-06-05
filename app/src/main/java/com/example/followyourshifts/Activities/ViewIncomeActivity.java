@@ -42,6 +42,7 @@ public class ViewIncomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_income_board);
         selectedDate = LocalDate.now();
+        DataManager.assignShiftsToWorkplaces();
         findViews();
         setMonthView();
         handleIntentData();
@@ -52,6 +53,7 @@ public class ViewIncomeActivity extends AppCompatActivity {
         for (Workplace workplace: DataManager.getWorkPlaces()) {
             if(workplace.getName().equals(previousIntent.getStringExtra(DataManager.KEY_WORKPLACE_NAME))) {
                 this.workplace = workplace;
+                //DataManager.assignShiftsToWorkplaces();
                 if (workplace.getShifts().size() > 0) {
                     // here move for all the workplaces and their shifts
                     for (Shift shift : workplace.getShifts()) {
@@ -75,7 +77,8 @@ public class ViewIncomeActivity extends AppCompatActivity {
             TextView salary_text_view,TextView hours_days_text_view,
             TextView hours_worked_text_view,TextView extra_hours_125_text_view,TextView extra_hours_150_text_view) {
 
-        ArrayList<Shift> shifts = getShiftsByMonthAndWorkplace(month, workplace);
+        //here put callback
+        ArrayList<Shift> shifts = getShiftsByMonthAndWorkplace(month,workplace);
         if (month == selectedDate.getMonth()) {
             String name = "";
             if(workplace !=null) {
@@ -98,7 +101,7 @@ public class ViewIncomeActivity extends AppCompatActivity {
             }
             // Create a DecimalFormat object with the desired format
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
-            
+
             work_place_name_textView.setText("Workplace Name: " + name);
             salary_text_view.setText("Total Income: " + decimalFormat.format(totalIncome) + "$");
             hours_days_text_view.setText(decimalFormat.format(totalHoursWorked) + " Hours Total ," + numShifts + " Days");

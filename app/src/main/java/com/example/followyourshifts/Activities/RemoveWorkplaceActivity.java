@@ -56,8 +56,8 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Workplace selectedWorkplace = (Workplace) workplace_spinner.getSelectedItem();
                 if(selectedWorkplace != null) {
-                    DataManager.removeWorkplace(selectedWorkplace);
                     removeShiftsForWorkplace(selectedWorkplace);
+                    DataManager.removeWorkplace(selectedWorkplace);
                     SignalGenerator.getInstance().toast( "Workplace removed successfully!", Toast.LENGTH_SHORT);
                     finish();
                 }

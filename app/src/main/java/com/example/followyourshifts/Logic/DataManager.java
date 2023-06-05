@@ -144,6 +144,23 @@ public class DataManager {
         return workplacesCollection.document(workplaceId).set(workplace);
     }
 
+    public static void assignShiftsToWorkplaces() {
+        // Clear shifts list for all workplaces
+//        for (Workplace workplace : workplaces) {
+//            workplace.getShifts().clear();
+//        }
+
+        for (Shift shift : shifts) {
+            for (Workplace workplace : workplaces) {
+                if (workplace.getName().equals(shift.getWorkplaceName()) && workplace.getSalaryPerHour() == shift.getWorkplaceSalaryPerHour()) {
+                    workplace.getShifts().add(shift);
+                    break;
+                }
+            }
+        }
+    }
+
+
     public static void removeWorkplace(Workplace selectedWorkplace) {
         workplaces.remove(selectedWorkplace);
 
@@ -162,7 +179,7 @@ public class DataManager {
 
     public static void removeShift(Shift selectedShift) {
         // Remove the shift from the ArrayList
-      shifts.remove(selectedShift);
+        shifts.remove(selectedShift);
 
         // Remove the shift from Firestore
         shiftsCollection.document(selectedShift.getId())
@@ -176,6 +193,69 @@ public class DataManager {
                     SignalGenerator.getInstance().toast("Failed to delete shift", Toast.LENGTH_SHORT);
                 });
     }
+
+    private static void removeShiftFromWorkplace(Shift shift) {
+        String workplaceId = shift.getWorkplaceName();
+
+        // Get the workplace document reference
+        DocumentReference workplaceRef = workplacesCollection.document(workplaceId);
+
+        // Get the shifts collection of the workplace
+        CollectionReference shiftsRef = workplaceRef.collection("shifts");
+
+        // Remove the shift from the shifts collection
+        shiftsRef.document(shift.getId())
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    // Shift removed from workplace successfully
+                    SignalGenerator.getInstance().toast("Shift removed from workplace", Toast.LENGTH_SHORT);
+                })
+                .addOnFailureListener(e -> {
+                    // Error occurred while removing the shift from the workplace
+                    SignalGenerator.getInstance().toast("Failed to remove shift from workplace", Toast.LENGTH_SHORT);
+                });
+    }
+
+//public static void removeShift(Shift selectedShift) {
+//    String workplaceName = selectedShift.getWorkplaceName();
+//    // Iterate over the workplaces collection to find the corresponding workplace
+//    workplacesCollection.whereEqualTo("name", workplaceName)
+//            .get()
+//            .addOnCompleteListener(workplacesTask -> {
+//                if (workplacesTask.isSuccessful()) {
+//                    for (QueryDocumentSnapshot workplaceDoc : workplacesTask.getResult()) {
+//                        Workplace workplace = workplaceDoc.toObject(Workplace.class);
+//                        if (workplace.getShifts().contains(selectedShift)) {
+//                            // Remove the shift from the workplace's shifts list
+//                            workplace.getShifts().remove(selectedShift);
+//                            // Update the shifts list of the workplace in Firestore
+//                            updateWorkplaceShiftsInFirestore(workplace, workplaceDoc.getId());
+//                            break; // Exit the loop since the shift is found and removed
+//                        }
+//                    }
+//
+//                    // Remove the shift from the ArrayList
+//                    shifts.remove(selectedShift);
+//
+//                    // Remove the shift from Firestore
+//                    shiftsCollection.document(selectedShift.getId())
+//                            .delete()
+//                            .addOnSuccessListener(aVoid -> {
+//                                // Shift deleted successfully
+//                                SignalGenerator.getInstance().toast("Shift deleted", Toast.LENGTH_SHORT);
+//                            })
+//                            .addOnFailureListener(e -> {
+//                                // Error occurred while deleting the shift
+//                                SignalGenerator.getInstance().toast("Failed to delete shift", Toast.LENGTH_SHORT);
+//                            });
+//                } else {
+//                    // Error occurred while retrieving workplaces
+//                    Exception e = workplacesTask.getException();
+//                    SignalGenerator.getInstance().toast("Failed to retrieve workplaces", Toast.LENGTH_SHORT);
+//                }
+//            });
+//}
+
 
 
 
@@ -191,14 +271,18 @@ public class DataManager {
 
     public static ArrayList<Shift> getShiftsByMonthAndWorkplace(Month month, Workplace workplace) {
         ArrayList<Shift> shiftsByMonthAndWorkplace = new ArrayList<>();
-        for (Shift shift : workplace.getShifts()) {
+
+        for (Shift shift : shifts) {
             Month shiftMonth = LocalDate.parse(shift.getDate()).getMonth();
-            if (shiftMonth.equals(month)) {
+            if (shiftMonth.equals(month) && shift.getWorkplaceName().equals(workplace.getName())) {
                 shiftsByMonthAndWorkplace.add(shift);
             }
         }
+
         return shiftsByMonthAndWorkplace;
     }
+
+
 
     public static void updateDatabaseOnAppFinish() {
         // Get the Firestore instance
@@ -233,12 +317,11 @@ public class DataManager {
     }
 
 
-    public static void updateWorkplaceShiftsInFirestore(Workplace workplace) {
-        // Get the Firestore document reference for the specific workplace
-        DocumentReference workplaceRef = workplacesCollection.document(workplace.getId());
-
-        // Update the shifts field of the workplace document with the updated shifts list
-        workplaceRef.update("shifts", workplace.getShifts())
+    public static void updateWorkplaceShiftsInFirestore(Workplace workplace, String workplaceId) {
+        DocumentReference workplaceRef = workplacesCollection.document(workplaceId);
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("shifts", workplace.getShifts());
+        workplaceRef.update(updates)
                 .addOnSuccessListener(aVoid -> {
                     // Shifts updated successfully
                     SignalGenerator.getInstance().toast("Workplace shifts updated", Toast.LENGTH_SHORT);
@@ -248,6 +331,7 @@ public class DataManager {
                     SignalGenerator.getInstance().toast("Failed to update workplace shifts", Toast.LENGTH_SHORT);
                 });
     }
+
 
 
 

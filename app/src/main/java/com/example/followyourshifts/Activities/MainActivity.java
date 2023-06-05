@@ -2,6 +2,7 @@ package com.example.followyourshifts.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 
             }
         });
+        //dataManager.assignShiftsToWorkplaces();
         initFragments();
         findViews();
         initViews();
@@ -126,6 +128,15 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 //            }
 //        });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == requestCode && resultCode == Activity.RESULT_OK) {
+            dataManager.updateDatabaseOnAppFinish();
+        }
+    }
+
     private void logoutUser() {
         // Clear any user-related data or preferences
         // For example, you can clear the user session or user preferences

@@ -13,11 +13,5 @@ public class App extends Application {
         SignalGenerator.init(this);
     }
 
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
 
-        // Call the method to update the database on app finish
-        DataManager.updateDatabaseOnAppFinish();
-    }
 }
