@@ -5,12 +5,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.followyourshifts.Activities.MainActivity;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.Utilities.SignalGenerator;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,8 +42,9 @@ public class DataManager {
     public static ArrayList<Shift> shifts = new ArrayList();
     public static FirebaseDatabase database;
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public static CollectionReference shiftsCollection = db.collection("Shifts");
-    public static CollectionReference workplacesCollection = db.collection("Workplaces");
+    public static FirebaseAuth auth = FirebaseAuth.getInstance();
+    public static CollectionReference shiftsCollection;
+    public static CollectionReference workplacesCollection;
     public static DatabaseReference workplacesRef;
     public static DatabaseReference shiftsRef;
 
@@ -52,6 +56,21 @@ public class DataManager {
         database = FirebaseDatabase.getInstance();
         workplacesRef = database.getReference("Workplaces");
         shiftsRef = database.getReference("Shifts");
+    }
+
+    private static String userId; // Store the user ID here
+
+    public static void init() {
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            userId = MainActivity.getUserID();
+
+            // Initialize the Firestore collection references with the correct user ID
+            shiftsCollection = db.collection("Users").document(userId).collection("Shifts");
+            workplacesCollection = db.collection("Users").document(userId).collection("Workplaces");
+        } else {
+            // Handle the case when the user is not authenticated
+        }
     }
 
 
@@ -72,6 +91,8 @@ public class DataManager {
         });
     }
 
+
+
     public static void addWorkplace(Workplace workplace, String workplaceId) {
         // Set the desired ID for the workplace object
         workplace.setId(workplaceId);
@@ -89,22 +110,34 @@ public class DataManager {
         });
     }
     public static void getShiftsFromFirestore(ShiftListener listener) {
-        shiftsCollection.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                // Shifts retrieved successfully
-                ArrayList<Shift> shifts = new ArrayList<>();
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    Shift shift = document.toObject(Shift.class);
-                    shifts.add(shift);
+            shiftsCollection.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    // Shifts retrieved successfully
+                    ArrayList<Shift> shifts = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Shift shift = document.toObject(Shift.class);
+                        shifts.add(shift);
+                    }
+                    listener.onShiftsRetrieved(shifts);
+                } else {
+                    // Error occurred while retrieving shifts
+                    Exception e = task.getException();
+                    listener.onError(e);
                 }
-                listener.onShiftsRetrieved(shifts);
-            } else {
-                // Error occurred while retrieving shifts
-                Exception e = task.getException();
-                listener.onError(e);
-            }
-        });
+            });
+        }
+
+
+    private static String getCurrentUserId() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            String currentUserid = currentUser.getUid();
+            return  currentUserid;
+        }
+        return null;
     }
+
 
     public static void getWorkplacesFromFirestore(WorkplaceListener listener) {
         workplacesCollection.get().addOnCompleteListener(task -> {
@@ -134,15 +167,45 @@ public class DataManager {
         void onError(Exception e);
     }
 
+//    public static Task<Void> addShiftFireStore(Shift shift, String shiftId) {
+//        // Create a new document in the "shifts" collection with the specified ID
+//        return shiftsCollection.document(shiftId).set(shift);
+//    }
     public static Task<Void> addShiftFireStore(Shift shift, String shiftId) {
-        // Create a new document in the "shifts" collection with the specified ID
-        return shiftsCollection.document(shiftId).set(shift);
+        // Get the UID of the current user
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser == null) {
+            // User not authenticated
+            return null;
+        }
+        String uid = currentUser.getUid();
+
+        // Create a new document in the "shifts" subcollection of the user's document with the specified ID
+        DocumentReference shiftDocRef = db.collection("Users").document(uid).collection("Shifts").document(shiftId);
+        return shiftDocRef.set(shift);
+    }
+    public static Task<Void> addWorkplaceFireStore(Workplace workplace, String workplaceId) {
+        // Get the UID of the current user
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser == null) {
+            // User not authenticated
+            return null;
+        }
+        String uid = currentUser.getUid();
+
+        // Create a new document in the "workplaces" subcollection of the user's document with the specified ID
+        DocumentReference workplaceDocRef = db.collection("Users").document(uid)
+                .collection("Workplaces").document(workplaceId);
+
+        // Set the document data
+        return workplaceDocRef.set(workplace);
     }
 
-    public static Task<Void> addWorkplaceFireStore(Workplace workplace, String workplaceId) {
-        // Create a new document in the "workplaces" collection with the specified ID
-        return workplacesCollection.document(workplaceId).set(workplace);
-    }
+
+//    public static Task<Void> addWorkplaceFireStore(Workplace workplace, String workplaceId) {
+//        // Create a new document in the "workplaces" collection with the specified ID
+//        return workplacesCollection.document(workplaceId).set(workplace);
+//    }
 
     public static void assignShiftsToWorkplaces() {
         // Clear shifts list for all workplaces

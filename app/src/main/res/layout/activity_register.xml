@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".Activities.LoginActivity">
+    tools:context=".Activities.RegisterActivity">
 
     <EditText
         android:id="@+id/edit_text_email"
@@ -21,25 +21,26 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Password" />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btn_login"
+     <Button
+        android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:text="Register" />
 
     <TextView
         android:textStyle="bold"
         android:textSize="20sp"
         android:gravity="center"
         android:layout_marginTop="20dp"
-        android:id="@+id/tv_register"
+        android:id="@+id/move_to_login"
+        android:text="Click to login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Don't have an account? Register" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -23,6 +23,8 @@ import com.example.followyourshifts.R;
 
 import com.example.followyourshifts.Utilities.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,12 +42,18 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
     private boolean optionsIsOpen = false;
     private boolean optionsVisible = false;
     private DataManager dataManager;
+    private FirebaseUser user;
+    private static String UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataManager = new DataManager();
         setContentView(R.layout.activity_main);
+        //dataManager.assignShiftsToWorkplaces();
+        initFragments();
+        findViews();
+        initViews();
+        dataManager = new DataManager();
         dataManager.getWorkplacesFromFirestore(new DataManager.WorkplaceListener() {
             @Override
             public void onWorkplacesRetrieved(ArrayList<Workplace> workplaces) {
@@ -68,19 +76,25 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 
             }
         });
-        //dataManager.assignShiftsToWorkplaces();
-        initFragments();
-        findViews();
-        initViews();
         beginTransactions();
         setOnClickListeners();
         calendarFragment.setCalendarCallBack(this);
     }
 
     private void initViews() {
-        Intent intent = getIntent();
-        main_LBL_message.setText("Welcome Back " + intent.getStringExtra("username"));
-        SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in green indicate shifts.", Toast.LENGTH_LONG);
+        if(user == null){
+            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            Intent intent = getIntent();
+            main_LBL_message.setText("Welcome Back " + intent.getStringExtra("username"));
+            SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in green indicate shifts.", Toast.LENGTH_LONG);
+            UserID = getIntent().getStringExtra("userId");
+            DataManager.init();
+            //main_LBL_message.setText(user.getEmail());
+        }
 //        main_BTN_update.setOnClickListener(v -> {
 //            changeTitle(main_ET_text.getText().toString());
 //        });
@@ -93,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 //        main_BTN_load.setOnClickListener(v -> {
 //            loadVehicleFromDB();
 //        });
+    }
+
+    public static String getUserID() {
+        return UserID;
     }
 
     private void setOnClickListeners() {
@@ -166,6 +184,14 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         } else if (id == R.id.main_BTN_viewIncome) {
             openChooseIncomeActivity();
         }
+        else if(id == R.id.main_BTN_logout){
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            // Finish the current activity
+            finish();
+
+        }
     }
 
     private void openRemoveShiftActivity() {
@@ -224,6 +250,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         toolbarOptions = findViewById(R.id.main_TOOLBAR_options);
         main_LBL_message = findViewById(R.id.main_LBL_message);
         main_BTN_logout = findViewById(R.id.main_BTN_logout);
+        user =  dataManager.auth.getCurrentUser();
     }
 
     private void beginTransactions() {

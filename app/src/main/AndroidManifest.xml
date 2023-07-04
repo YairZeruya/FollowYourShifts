@@ -21,6 +21,7 @@
         <activity android:name = ".Activities.RemoveWorkplaceActivity"/>
         <activity android:name = ".Activities.RemoveShiftActivity"/>
         <activity android:name = ".Activities.MainActivity"/>
+        <activity android:name = ".Activities.RegisterActivity"/>
 
         <activity
             android:name=".Activities.LoginActivity"
