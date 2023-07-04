@@ -131,6 +131,7 @@ public class AddShiftActivity extends AppCompatActivity {
                 DataManager.getShifts().add(selectedShift);
                 selectedWorkplace.addShift(selectedShift);
                 //DataManager.updateWorkplaceShiftsInFirestore(selectedWorkplace,selectedWorkplace.getId());
+                selectedShift.setIncome(selectedShift.calculateIncome());
                 DataManager.addShift(selectedShift, selectedShift.getId());
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
                 SignalGenerator.getInstance().playSound(R.raw.money_sound);

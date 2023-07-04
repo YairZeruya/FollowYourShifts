@@ -284,37 +284,37 @@ public class DataManager {
 
 
 
-    public static void updateDatabaseOnAppFinish() {
-        // Get the Firestore instance
-
-        // Create a new batch write operation
-        WriteBatch batch = db.batch();
-
-        // Update the shifts collection
-        ArrayList<Shift> shifts = DataManager.getShifts();
-        for (Shift shift : shifts) {
-            DocumentReference shiftDocRef = shiftsCollection.document(shift.getId());
-            batch.set(shiftDocRef, shift);
-        }
-
-        // Update the workplaces collection
-        ArrayList<Workplace> workplaces = DataManager.getWorkPlaces();
-        for (Workplace workplace : workplaces) {
-            DocumentReference workplaceDocRef = workplacesCollection.document(workplace.getId());
-            batch.set(workplaceDocRef, workplace);
-        }
-
-        // Commit the batched write operation
-        batch.commit()
-                .addOnSuccessListener(aVoid -> {
-                    // Batch write operation successful
-                    SignalGenerator.getInstance().toast("Database updated on app finish", Toast.LENGTH_SHORT);
-                })
-                .addOnFailureListener(e -> {
-                    // Error occurred during batch write operation
-                    SignalGenerator.getInstance().toast("Failed to update database on app finish", Toast.LENGTH_SHORT);
-                });
-    }
+//    public static void updateDatabaseOnAppFinish() {
+//        // Get the Firestore instance
+//
+//        // Create a new batch write operation
+//        WriteBatch batch = db.batch();
+//
+//        // Update the shifts collection
+//        ArrayList<Shift> shifts = DataManager.getShifts();
+//        for (Shift shift : shifts) {
+//            DocumentReference shiftDocRef = shiftsCollection.document(shift.getId());
+//            batch.set(shiftDocRef, shift);
+//        }
+//
+//        // Update the workplaces collection
+//        ArrayList<Workplace> workplaces = DataManager.getWorkPlaces();
+//        for (Workplace workplace : workplaces) {
+//            DocumentReference workplaceDocRef = workplacesCollection.document(workplace.getId());
+//            batch.set(workplaceDocRef, workplace);
+//        }
+//
+//        // Commit the batched write operation
+//        batch.commit()
+//                .addOnSuccessListener(aVoid -> {
+//                    // Batch write operation successful
+//                    SignalGenerator.getInstance().toast("Database updated on app finish", Toast.LENGTH_SHORT);
+//                })
+//                .addOnFailureListener(e -> {
+//                    // Error occurred during batch write operation
+//                    SignalGenerator.getInstance().toast("Failed to update database on app finish", Toast.LENGTH_SHORT);
+//                });
+//    }
 
 
     public static void updateWorkplaceShiftsInFirestore(Workplace workplace, String workplaceId) {

@@ -94,7 +94,11 @@ public class ViewIncomeActivity extends AppCompatActivity {
             }
 
             for (Shift shift : shifts) {
-                totalIncome += shift.calculateIncome();
+//                totalIncome += shift.calculateIncome();
+//                totalHoursWorked += shift.calculateDuration();
+//                extraHours1_25 += shift.getExtraHours1_25();
+//                extraHours1_5 += shift.getExtraHours1_5();
+                totalIncome += shift.getIncome();
                 totalHoursWorked += shift.calculateDuration();
                 extraHours1_25 += shift.getExtraHours1_25();
                 extraHours1_5 += shift.getExtraHours1_5();

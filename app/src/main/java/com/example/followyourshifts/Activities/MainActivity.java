@@ -121,21 +121,21 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
             });
         }
         MaterialButton main_BTN_logout = findViewById(R.id.main_BTN_logout);
-//        main_BTN_logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                logoutUser();
-//            }
-//        });
+        main_BTN_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == requestCode && resultCode == Activity.RESULT_OK) {
-            dataManager.updateDatabaseOnAppFinish();
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == requestCode && resultCode == Activity.RESULT_OK) {
+//            dataManager.updateDatabaseOnAppFinish();
+//        }
+//    }
 
     private void logoutUser() {
         // Clear any user-related data or preferences

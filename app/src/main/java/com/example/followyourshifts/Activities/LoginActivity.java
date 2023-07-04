@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("username", user.getDisplayName());
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private void login() {
