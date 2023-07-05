@@ -65,35 +65,13 @@ public class Workplace {
     }
 
 
-//    @Override
-//    public String toString() {
-//        return name  + ", salary Per Hour-" + salaryPerHour;
-//    }
-@Override
-public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append(name).append(", salary Per Hour-").append(salaryPerHour);
-    return sb.toString();
-}
 
-//    public static Workplace fromString(String workplaceString) {
-//        String[] parts = workplaceString.split("\n");
-//
-//        String workplaceInfo = parts[0];
-//        String[] workplaceInfoParts = workplaceInfo.split(", salary Per Hour-");
-//        String name = workplaceInfoParts[0];
-//        double salaryPerHour = Double.parseDouble(workplaceInfoParts[1]);
-//
-//        Workplace workplace = new Workplace(name, salaryPerHour);
-//
-//        for (int i = 1; i < parts.length; i++) {
-//            Shift shift = Shift.fromString(parts[i]);
-//            workplace.addShift(shift);
-//        }
-//
-//        return workplace;
-//    }
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(name).append(", salary Per Hour-").append(salaryPerHour);
+        return sb.toString();
+    }
 
 
     public void removeShift(Shift selectedShift) {

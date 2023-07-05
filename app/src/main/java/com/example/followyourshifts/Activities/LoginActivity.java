@@ -11,9 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.followyourshifts.Activities.MainActivity;
-import com.example.followyourshifts.Activities.RegisterActivity;
 import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.R;
 import com.example.followyourshifts.Utilities.SignalGenerator;
@@ -101,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if user is signed in and update UI accordingly.
         FirebaseUser currentUser = DataManager.auth.getCurrentUser();
         if(currentUser != null){
             String email = currentUser.getEmail();

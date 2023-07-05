@@ -8,10 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -108,7 +105,6 @@ public class AddShiftActivity extends AppCompatActivity {
             return;
         }
 
-        // Check if any workplaces are available
         if (DataManager.getWorkPlaces().isEmpty()) {
             SignalGenerator.getInstance().toast("No workplaces found. Please add a workplace before adding a shift.", Toast.LENGTH_SHORT);
             return;
@@ -121,7 +117,6 @@ public class AddShiftActivity extends AppCompatActivity {
 
         // Check if the start time is before the end time
         if (startTime.isBefore(endTime)) {
-            // Check for overlapping shifts
             if (hasOverlappingShifts(selectedDate, startTime, endTime)) {
                 SignalGenerator.getInstance().toast("Shift overlaps with existing shifts", Toast.LENGTH_SHORT);
             } else {
@@ -130,7 +125,6 @@ public class AddShiftActivity extends AppCompatActivity {
                 Shift selectedShift = new Shift(selectedDate.toString(), startTime.toString(), endTime.toString(), selectedWorkplace.getName(),selectedWorkplace.getSalaryPerHour(), isHoliday_isSaturdayFlag);
                 DataManager.getShifts().add(selectedShift);
                 selectedWorkplace.addShift(selectedShift);
-                //DataManager.updateWorkplaceShiftsInFirestore(selectedWorkplace,selectedWorkplace.getId());
                 selectedShift.setIncome(selectedShift.calculateIncome());
                 DataManager.addShift(selectedShift, selectedShift.getId());
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
@@ -147,7 +141,6 @@ public class AddShiftActivity extends AppCompatActivity {
         for (Workplace workplace : DataManager.getWorkPlaces()) {
             for (Shift shift : workplace.getShifts()) {
                 if (shift.getDate().equals(date.toString())) {
-                    //Check overlapping options:
                     LocalTime shiftStartTime = LocalTime.parse(shift.getStartTime());
                     LocalTime shiftEndTime = LocalTime.parse(shift.getEndTime());
 

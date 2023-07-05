@@ -173,19 +173,4 @@ public class Shift {
                 ", " + startTime +
                 "-" + endTime + ", " + workplaceName;
     }
-//@Override
-//public String toString() {
-//    String formattedDate = date.toString().replace("-", "");
-//    String formattedStartTime = startTime.toString().replace(":", "");
-//    String formattedEndTime = endTime.toString().replace(":", "");
-//    String formattedWorkplaceName = workplace.getName().replace(" ", "_");
-//    String formattedSalaryPerHour = Double.toString(workplace.getSalaryPerHour()).replace(".", "_");
-//
-//    return formattedDate +
-//            "_" + formattedStartTime +
-//            "_" + formattedEndTime +
-//            "_" + formattedWorkplaceName +
-//            "_" + formattedSalaryPerHour;
-//}
-
 }

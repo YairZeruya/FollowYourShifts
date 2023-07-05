@@ -1,7 +1,7 @@
 package com.example.followyourshifts.Activities;
 
 import static com.example.followyourshifts.Logic.DataManager.VIBRATE_TIME;
-import static com.example.followyourshifts.Logic.DataManager.workplaces;
+
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,12 +13,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.followyourshifts.Logic.DataManager;
-import com.example.followyourshifts.Objects.Shift;
+
 import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.R;
 import com.example.followyourshifts.Utilities.SignalGenerator;
 
-import java.util.ArrayList;
 
 public class AddWorkplaceActivity extends AppCompatActivity {
 

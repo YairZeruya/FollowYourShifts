@@ -1,36 +1,24 @@
 package com.example.followyourshifts.Logic;
 
-import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 
 import com.example.followyourshifts.Activities.MainActivity;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
 import com.example.followyourshifts.Utilities.SignalGenerator;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.WriteBatch;
 
 
 public class DataManager {
@@ -39,24 +27,16 @@ public class DataManager {
     public static final int VIBRATE_TIME = 1000;
     public static ArrayList<Workplace> workplaces = new ArrayList();
     public static ArrayList<Shift> shifts = new ArrayList();
-    public static FirebaseDatabase database;
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static FirebaseAuth auth = FirebaseAuth.getInstance();
     public static CollectionReference shiftsCollection;
     public static CollectionReference workplacesCollection;
-    public static DatabaseReference workplacesRef;
-    public static DatabaseReference shiftsRef;
     private static String userId;
 
     public static ArrayList<Shift> getShifts() {
         return shifts;
     }
 
-    public DataManager() {
-        database = FirebaseDatabase.getInstance();
-        workplacesRef = database.getReference("Workplaces");
-        shiftsRef = database.getReference("Shifts");
-    }
 
     public static void init() {
         FirebaseUser currentUser = auth.getCurrentUser();

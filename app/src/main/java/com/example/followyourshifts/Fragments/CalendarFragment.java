@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.followyourshifts.Adapters.CalendarAdapter;
 import com.example.followyourshifts.Interfaces.CalendarCallBack;
-import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Utilities.CalendarUtils;
 import com.example.followyourshifts.R;
 
