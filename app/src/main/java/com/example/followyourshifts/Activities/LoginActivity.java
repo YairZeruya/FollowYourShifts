@@ -29,17 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView tv_register;
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if(currentUser != null){
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
+                showProgressBar();
                 String email = edit_text_email.getText().toString();
                 String[] parts = email.split("@");
                 String emailUserName = parts[0];
@@ -82,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
+                                hideProgressBar();
                                 if (task.isSuccessful()) {
                                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                     SignalGenerator.getInstance().toast("Welcome " + emailUserName, Toast.LENGTH_SHORT);
@@ -100,5 +89,32 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });
+    }
+
+    private void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = DataManager.auth.getCurrentUser();
+        if(currentUser != null){
+            String email = currentUser.getEmail();
+            String[] parts = email.split("@");
+            String emailUserName = parts[0];
+            String userId = currentUser.getUid();
+
+            SignalGenerator.getInstance().toast("Welcome " + emailUserName, Toast.LENGTH_SHORT);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("username", emailUserName);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
+            finish();
+        }
     }
 }

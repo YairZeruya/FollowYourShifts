@@ -7,7 +7,11 @@
     android:padding="20dp"
     tools:context=".Activities.MainActivity"
     tools:ignore="ExtraText"
-    android:background="@color/strong_green2">
+    android:background="@drawable/bullish_svgrepo_com_35"
+    android:backgroundTint="@color/strong_green2"
+    android:backgroundTintMode="src_atop">
+
+
     <TextView
         android:id="@+id/main_LBL_message"
         android:layout_width="match_parent"

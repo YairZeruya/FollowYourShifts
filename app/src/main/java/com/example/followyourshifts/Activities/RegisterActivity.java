@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
+                showProgressBar();
                 String email = edit_text_email.getText().toString();
                 String password = edit_text_password.getText().toString();
 
@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
+                                hideProgressBar();
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = DataManager.auth.getCurrentUser();
                                     if (user != null) {
@@ -108,6 +108,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
     private void createUserDataInFirestore(String uid) {
         // Create a user document in Firestore with the UID as the document ID
         DocumentReference userDocRef = DataManager.db.collection("Users").document(uid);

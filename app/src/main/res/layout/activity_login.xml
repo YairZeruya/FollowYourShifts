@@ -6,13 +6,33 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".Activities.LoginActivity">
+    tools:context=".Activities.LoginActivity"
+    android:background="@drawable/bullish_svgrepo_com_35"
+    android:backgroundTint="@color/strong_green2"
+    android:backgroundTintMode="src_atop"
+    >
+
+    <TextView
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/login_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Follow Your Shifts! This app allows you to easily track your work shifts and stay informed about your earnings across different workplaces."
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="start"/>
+
 
     <EditText
         android:id="@+id/edit_text_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:hint="Email"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
 
 
     <EditText
@@ -20,26 +40,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="Password" />
+        android:hint="Password"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_margin="20dp"/>
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:text="Login"
+        android:layout_margin="25dp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:textStyle="bold"
         android:textSize="20sp"
         android:gravity="center"
-        android:layout_marginTop="20dp"
         android:id="@+id/tv_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Register" />
+        android:text="Don't have an account? Click to Register" />
 
 </LinearLayout>

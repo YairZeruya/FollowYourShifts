@@ -6,13 +6,19 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".Activities.RegisterActivity">
+    tools:context=".Activities.RegisterActivity"
+    android:background="@drawable/bullish_svgrepo_com_35"
+    android:backgroundTint="@color/strong_green2"
+    android:backgroundTintMode="src_atop">
 
     <EditText
         android:id="@+id/edit_text_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:hint="Email"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
 
     <EditText
@@ -20,18 +26,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="Password" />
+        android:hint="Password"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_margin="20dp"/>
 
      <Button
         android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register" />
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Register"
+         android:layout_margin="25dp"
+         android:textColor="@color/black"/>
 
     <TextView
         android:textStyle="bold"

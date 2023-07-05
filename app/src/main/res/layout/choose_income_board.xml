@@ -2,15 +2,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/light_green">
+    android:background="@color/green">
 
 
     <RelativeLayout
         android:id="@+id/top_section"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="40"
-        android:background="@color/strong_green2">
+        android:layout_weight="20"
+        >
 
         <TextView
             android:id="@+id/top_text_view"
@@ -28,19 +28,23 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="70dp"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/workplace_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="60"
-        tools:listitem="@layout/workplace_item" />
+        android:layout_weight="80"
+        tools:listitem="@layout/workplace_item"
+        android:background="@drawable/bullish_svgrepo_com_35"
+        android:backgroundTint="@color/light_green2"
+        android:backgroundTintMode="src_atop"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/workplace_list"
-        android:src="@drawable/workpeople"
-        android:padding="16dp"
-        />
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/workplace_list"-->
+<!--        android:src="@drawable/workpeople"-->
+<!--        android:padding="16dp"-->
+<!--        />-->
 
 </LinearLayout>

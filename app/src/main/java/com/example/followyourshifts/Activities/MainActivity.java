@@ -2,14 +2,17 @@ package com.example.followyourshifts.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.followyourshifts.Interfaces.CalendarCallBack;
+import com.example.followyourshifts.Interfaces.DataCallBack;
 import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
@@ -22,8 +25,11 @@ import com.example.followyourshifts.Utilities.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CalendarCallBack {

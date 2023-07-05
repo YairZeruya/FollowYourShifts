@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/strong_green2"
+    android:background="@color/green"
     tools:context=".Activities.AddShiftActivity">
 
     <DatePicker

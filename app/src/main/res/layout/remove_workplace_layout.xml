@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/strong_green2">
+    android:background="@color/light_green2">
 
     <TextView
         android:id="@+id/instructionsTextView"
@@ -41,6 +41,6 @@
         android:layout_height="351dp"
         android:layout_below="@id/workplace_list"
         android:padding="16dp"
-        android:src="@drawable/workplace4" />
+        android:src="@drawable/workplace_table_interior_svgrepo_com" />
 
 </LinearLayout>

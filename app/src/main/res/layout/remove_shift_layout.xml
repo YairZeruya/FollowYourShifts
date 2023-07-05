@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/strong_green2"
+    android:background="@color/green"
     android:gravity="center_horizontal"
     >
 
@@ -33,6 +33,6 @@
         android:layout_margin="30dp"
         android:layout_below="@id/workplace_list"
         android:padding="16dp"
-        android:src="@drawable/workplace2" />
+        android:src="@drawable/managament_manager_organize_svgrepo_com" />
 
 </LinearLayout>
