@@ -64,14 +64,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                // Handle register button click
                 String email = edit_text_email.getText().toString();
                 String[] parts = email.split("@");
                 String emailUserName = parts[0];
                 String password = edit_text_password.getText().toString();
-                // Perform registration process here
 
-                // Dummy code to demonstrate registration success
                 if (TextUtils.isEmpty(email)) {
                     SignalGenerator.getInstance().toast("Enter Email", Toast.LENGTH_SHORT);
                     return;
@@ -88,23 +85,20 @@ public class LoginActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                    SignalGenerator.getInstance().toast("Login successfuly", Toast.LENGTH_SHORT);
+                                    SignalGenerator.getInstance().toast("Welcome " + emailUserName, Toast.LENGTH_SHORT);
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.putExtra("username", emailUserName);
                                     intent.putExtra("userId", userId);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    // If sign in fails, display a message to the user.
-                                    SignalGenerator.getInstance().toast("Authentication failed.",
+                                    SignalGenerator.getInstance().toast("Login failed.",
                                             Toast.LENGTH_SHORT);
 
                                 }
                             }
                         });
             }
-
-
         });
     }
 }

@@ -53,11 +53,8 @@ public class ViewIncomeActivity extends AppCompatActivity {
         for (Workplace workplace: DataManager.getWorkPlaces()) {
             if(workplace.getName().equals(previousIntent.getStringExtra(DataManager.KEY_WORKPLACE_NAME))) {
                 this.workplace = workplace;
-                //DataManager.assignShiftsToWorkplaces();
                 if (workplace.getShifts().size() > 0) {
-                    // here move for all the workplaces and their shifts
                     for (Shift shift : workplace.getShifts()) {
-                        // Month month = shift.getDate().getMonth();
                         Month month = LocalDate.parse(shift.getDate()).getMonth();
                         displayShiftsInfoByMonthAndWorkplace(month, workplace, work_place_name_textView,salary_text_view, hours_days_text_view,hours_worked_text_view
                                 ,extra_hours_125_text_view, extra_hours_150_text_view);
@@ -77,7 +74,6 @@ public class ViewIncomeActivity extends AppCompatActivity {
             TextView salary_text_view,TextView hours_days_text_view,
             TextView hours_worked_text_view,TextView extra_hours_125_text_view,TextView extra_hours_150_text_view) {
 
-        //here put callback
         ArrayList<Shift> shifts = getShiftsByMonthAndWorkplace(month,workplace);
         if (month == selectedDate.getMonth()) {
             String name = "";
@@ -94,10 +90,6 @@ public class ViewIncomeActivity extends AppCompatActivity {
             }
 
             for (Shift shift : shifts) {
-//                totalIncome += shift.calculateIncome();
-//                totalHoursWorked += shift.calculateDuration();
-//                extraHours1_25 += shift.getExtraHours1_25();
-//                extraHours1_5 += shift.getExtraHours1_5();
                 totalIncome += shift.getIncome();
                 totalHoursWorked += shift.calculateDuration();
                 extraHours1_25 += shift.getExtraHours1_25();

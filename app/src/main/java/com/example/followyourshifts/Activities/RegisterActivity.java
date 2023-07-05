@@ -74,12 +74,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                // Handle register button click
                 String email = edit_text_email.getText().toString();
                 String password = edit_text_password.getText().toString();
-                // Perform registration process here
 
-                // Dummy code to demonstrate registration success
                 if (TextUtils.isEmpty(email)) {
                     SignalGenerator.getInstance().toast("Enter Email", Toast.LENGTH_SHORT);
                     return;
@@ -104,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    SignalGenerator.getInstance().toast("Authentication failed.", Toast.LENGTH_SHORT);
+                                    SignalGenerator.getInstance().toast("Registration failed.", Toast.LENGTH_SHORT);
                                 }
                             }
                         });
@@ -116,18 +113,15 @@ public class RegisterActivity extends AppCompatActivity {
         DocumentReference userDocRef = DataManager.db.collection("Users").document(uid);
         Map<String, Object> userData = new HashMap<>();
         userData.put("email", edit_text_email.getText().toString());
-        // Add other user data as needed
         userDocRef.set(userData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                       SignalGenerator.getInstance().toast("user create",1000);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        SignalGenerator.getInstance().toast("user dont create",1000);
                     }
                 });
     }

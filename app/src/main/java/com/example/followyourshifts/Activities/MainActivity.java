@@ -2,17 +2,14 @@ package com.example.followyourshifts.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.followyourshifts.Interfaces.CalendarCallBack;
-import com.example.followyourshifts.Interfaces.DataCallBack;
 import com.example.followyourshifts.Logic.DataManager;
 import com.example.followyourshifts.Objects.Shift;
 import com.example.followyourshifts.Objects.Workplace;
@@ -25,11 +22,8 @@ import com.example.followyourshifts.Utilities.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CalendarCallBack {
@@ -49,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //dataManager.assignShiftsToWorkplaces();
         initFragments();
         findViews();
         initViews();
@@ -93,20 +86,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
             SignalGenerator.getInstance().toast( "Click on a date to see its shifts, days in green indicate shifts.", Toast.LENGTH_LONG);
             UserID = getIntent().getStringExtra("userId");
             DataManager.init();
-            //main_LBL_message.setText(user.getEmail());
         }
-//        main_BTN_update.setOnClickListener(v -> {
-//            changeTitle(main_ET_text.getText().toString());
-//        });
-//        main_BTN_save.setOnClickListener(v -> {
-//            saveVehicleToDB();
-//        });
-//        main_BTN_updatePrice.setOnClickListener(v -> {
-//            updatePrice();
-//        });
-//        main_BTN_load.setOnClickListener(v -> {
-//            loadVehicleFromDB();
-//        });
     }
 
     public static String getUserID() {
@@ -146,24 +126,11 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
             }
         });
     }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == requestCode && resultCode == Activity.RESULT_OK) {
-//            dataManager.updateDatabaseOnAppFinish();
-//        }
-//    }
 
     private void logoutUser() {
-        // Clear any user-related data or preferences
-        // For example, you can clear the user session or user preferences
-
-
-        // Navigate back to the login screen
+        FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
-        // Finish the current activity
         finish();
     }
 
@@ -183,14 +150,6 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
 
         } else if (id == R.id.main_BTN_viewIncome) {
             openChooseIncomeActivity();
-        }
-        else if(id == R.id.main_BTN_logout){
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            // Finish the current activity
-            finish();
-
         }
     }
 
@@ -224,13 +183,8 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
         }
     }
     private void openChooseIncomeActivity() {
-        //if(DataManager.getWorkPlace().size() > 0) {
             Intent intent = new Intent(this, ChooseIncomeActivity.class);
             startActivity(intent);
-        //}
-        //else{
-          //  SignalGenerator.getInstance().toast("Add workplace before you want to see your income.",Toast.LENGTH_SHORT);
-        //}
     }
 
     private void toggleOptionsVisibility() {

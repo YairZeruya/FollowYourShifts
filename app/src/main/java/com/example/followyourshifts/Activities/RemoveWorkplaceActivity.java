@@ -73,7 +73,6 @@ public class RemoveWorkplaceActivity extends AppCompatActivity {
             for (int i = shifts.size() - 1; i >= 0; i--) {
                 Shift shift = shifts.get(i);
                 if (shift.getWorkplaceName().equals(removedWorkplace.getName())) {
-                    //shifts.remove(i);
                     DataManager.removeShift(shifts.get(i));
                 }
             }

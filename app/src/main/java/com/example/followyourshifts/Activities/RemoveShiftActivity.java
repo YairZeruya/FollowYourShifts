@@ -70,11 +70,6 @@ public class RemoveShiftActivity extends AppCompatActivity {
 
         if (selectedShift != null) {
             DataManager.removeShift(selectedShift);
-//            Workplace workplace = selectedShift.getWorkplace();
-//            if (workplace != null) {
-//                //workplace.removeShift(selectedShift);
-//            }
-
             SignalGenerator.getInstance().toast("Shift removed successfully!", Toast.LENGTH_SHORT);
             finish();
         } else {

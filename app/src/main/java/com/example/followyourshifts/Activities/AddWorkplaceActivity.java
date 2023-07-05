@@ -79,11 +79,7 @@ public class AddWorkplaceActivity extends AppCompatActivity {
                     SignalGenerator.getInstance().toast("A workplace with the same name already exists", Toast.LENGTH_SHORT);
                     return;
                 }
-
                 Workplace newWorkplace = new Workplace(name, salaryPerHour);
-                //DataManager.getWorkPlaces().add(newWorkplace);
-                //+DataManager.addWorkplaceToDB(newWorkplace);
-                //DataManager.addWorkplaceFireStore(newWorkplace);
                 DataManager.getWorkPlaces().add(newWorkplace);
                 DataManager.addWorkplace(newWorkplace,newWorkplace.getId());
                 SignalGenerator.getInstance().vibrate(VIBRATE_TIME);
