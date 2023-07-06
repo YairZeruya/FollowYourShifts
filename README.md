@@ -22,6 +22,7 @@ Add and remove workplaces effortlessly within the app.
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/04d92eb8-927c-4696-b383-615630e5f9e1" width="250" height="500">
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/f1040365-7a49-4e31-ae49-71d7cb980a1b" width="250" height="500">
 
+### Shift Management:
 Use the intuitive calendar view at the top of the screen to navigate through your shifts. Green-colored days on the calendar indicate days with scheduled shifts. By clicking on a day, you can view the corresponding shifts at the bottom of the screen.
 
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/b6bc9d81-f1b7-429d-a271-c8bba40774d5" width="250" height="500">
