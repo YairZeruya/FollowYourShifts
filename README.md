@@ -19,14 +19,22 @@ In addition, the "View Options" button also provides access to the view income b
 ### Workplace Management:
 Add and remove workplaces effortlessly within the app.
 
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/04d92eb8-927c-4696-b383-615630e5f9e1" width="250" height="500">
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/9ded49cd-81b0-4736-aa49-3df60c8cf27c" width="250" height="500">
+
 ### Shift Management:
 Use the intuitive calendar view at the top of the screen to navigate through your shifts. Green-colored days on the calendar indicate days with scheduled shifts. By clicking on a day, you can view the corresponding shifts at the bottom of the screen.
 
-### Automatic Income Calculation:
-The app automatically calculates your income based on the hourly rate and the number of hours worked per shift. Say goodbye to manual calculations and let Follow Your Shifts do the math for you!
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/b6bc9d81-f1b7-429d-a271-c8bba40774d5" width="250" height="500">
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/7e4d2322-9211-4f9d-8d4d-4a5c9e19c22b" width="250" height="500">
 
 ### Income Tracking:
 Keep track of your income across multiple workplaces. The app provides an overview of your earnings, allowing you to track your income by workplace. Gain valuable insights into your overall income trends.## 
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/198ff40c-4aa6-4a40-a466-f8a8445ac89f" width="250" height="500">
+
+### Automatic Income Calculation:
+The app automatically calculates your income based on the hourly rate and the number of hours worked per shift. Say goodbye to manual calculations and let Follow Your Shifts do the math for you!
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/72cd1096-1189-47a7-a664-a166c3fed3dc" width="250" height="500">
 
 ### Logout:
 Safely log out of the app with the "Logout" button, ensuring the security of your account and data.
