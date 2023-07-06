@@ -2,7 +2,7 @@
 Welcome to Follow Your Shifts! This application, built with Android Studio and Java, allows you to easily track your work shifts and stay informed about your earnings across different workplaces. The app integrates with Firebase Firestore Database for seamless data management and Firebase Authentication for secure user authentication.
 
 # Features
-## User Authentication: Securely log in to the app using your email and password. Firebase Authentication ensures a reliable and secure login process.
+## User Authentication ## Securely log in to the app using your email and password. Firebase Authentication ensures a reliable and secure login process.
 
 ## Easy Access to Workplace and Shift Management
 The "View Options" button, conveniently located at the bottom left of the screen, grants you effortless access to workplace and shift management features. With just a tap, you can easily add, remove, and update workplace and shift details within the app. Stay in control of your work schedule and effortlessly manage your shifts.
