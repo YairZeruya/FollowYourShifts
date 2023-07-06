@@ -17,12 +17,10 @@ import com.example.followyourshifts.Utilities.CalendarUtils;
 import com.example.followyourshifts.Fragments.CalendarFragment;
 import com.example.followyourshifts.Fragments.ShiftFragment;
 import com.example.followyourshifts.R;
-
 import com.example.followyourshifts.Utilities.SignalGenerator;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -51,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
             @Override
             public void onWorkplacesRetrieved(ArrayList<Workplace> workplaces) {
                 dataManager.setWorkplaceArrayList(workplaces);
+                DataManager.assignShiftsToWorkplaces();
             }
 
             @Override
@@ -62,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements CalendarCallBack 
             @Override
             public void onShiftsRetrieved(ArrayList<Shift> shifts) {
                 dataManager.setShiftsArrayList(shifts);
+                DataManager.assignShiftsToWorkplaces();
             }
 
             @Override

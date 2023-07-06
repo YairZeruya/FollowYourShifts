@@ -19,6 +19,9 @@ public class ChooseIncomeActivity extends AppCompatActivity implements Workplace
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_income_board);
+        if(DataManager.getWorkPlaces().size() == 0){
+            SignalGenerator.getInstance().toast("You don't have a workplaces", Toast.LENGTH_SHORT);
+        }
         findViews();
         initViews();
     }

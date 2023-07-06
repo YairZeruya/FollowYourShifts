@@ -143,21 +143,12 @@ public class AddShiftActivity extends AppCompatActivity {
                 if (shift.getDate().equals(date.toString())) {
                     LocalTime shiftStartTime = LocalTime.parse(shift.getStartTime());
                     LocalTime shiftEndTime = LocalTime.parse(shift.getEndTime());
-
                     // Check overlapping options:
-                    if (startTime.isAfter(shiftStartTime) && startTime.isBefore(shiftEndTime)) {
-                        return true;
-                    }
-                    if (endTime.isAfter(shiftStartTime) && endTime.isBefore(shiftEndTime)) {
-                        return true;
-                    }
-                    if (startTime.isBefore(shiftStartTime) && endTime.isAfter(shiftEndTime)) {
-                        return true;
-                    }
-                    if (startTime.equals(shiftStartTime) && endTime.isAfter(shiftEndTime)) {
-                        return true;
-                    }
-                    if (startTime.isBefore(shiftStartTime) && endTime.equals(shiftEndTime)) {
+                    if ((startTime.isAfter(shiftStartTime) && startTime.isBefore(shiftEndTime)) ||
+                            (endTime.isAfter(shiftStartTime) && endTime.isBefore(shiftEndTime)) ||
+                            (startTime.isBefore(shiftStartTime) && endTime.isAfter(shiftStartTime)) ||
+                            (startTime.isBefore(shiftEndTime) && endTime.isAfter(shiftEndTime)) ||
+                            (startTime.equals(shiftStartTime) && endTime.equals(shiftEndTime))) {
                         return true;
                     }
                 }

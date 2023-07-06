@@ -95,23 +95,24 @@ public class LoginActivity extends AppCompatActivity {
     private void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in and update UI accordingly.
-        FirebaseUser currentUser = DataManager.auth.getCurrentUser();
-        if(currentUser != null){
-            String email = currentUser.getEmail();
-            String[] parts = email.split("@");
-            String emailUserName = parts[0];
-            String userId = currentUser.getUid();
-
-            SignalGenerator.getInstance().toast("Welcome " + emailUserName, Toast.LENGTH_SHORT);
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.putExtra("username", emailUserName);
-            intent.putExtra("userId", userId);
-            startActivity(intent);
-            finish();
-        }
-    }
+    
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in and update UI accordingly.
+//        FirebaseUser currentUser = DataManager.auth.getCurrentUser();
+//        if(currentUser != null){
+//            String email = currentUser.getEmail();
+//            String[] parts = email.split("@");
+//            String emailUserName = parts[0];
+//            String userId = currentUser.getUid();
+//
+//            SignalGenerator.getInstance().toast("Welcome " + emailUserName, Toast.LENGTH_SHORT);
+//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            intent.putExtra("username", emailUserName);
+//            intent.putExtra("userId", userId);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
 }
