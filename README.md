@@ -12,7 +12,7 @@ Securely log in to the app using your email and password. Firebase Authenticatio
 ### Easy Access to Workplace and Shift Management:
 The "View Options" button, conveniently located at the bottom left of the screen, grants you effortless access to workplace and shift management features. With just a tap, you can easily add, remove, and update workplace and shift details within the app. Stay in control of your work schedule and effortlessly manage your shifts.
 
-In addition, the "View Options" button also provides access to the view income board, allowing you to track your earnings across multiple workplaces. Stay informed about your income trends and make data-driven financial decisions.
+In addition, the "View Options" button also provides access to the view income board, allowing you to track your earnings across multiple workplaces. Stay informed about your income trends.
 
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/1cc3be2c-6f62-401b-8bf8-6f06aed0c1ae" width="250" height="500">
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/754039ce-323c-4371-9c8c-b9e9bb9d824a" width="250" height="500">
