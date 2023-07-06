@@ -46,7 +46,7 @@ Safely log out of the app with the "Logout" button, ensuring the security of you
 Android Studio: The app is built using Android Studio, the official integrated development environment (IDE) for Android application development.
 
 ### Java:
-The primary programming language used for developing the app, providing a robust and flexible foundation for Android development.
+The primary programming language used for developing the app.
 
 ### Firebase Firestore Database:
 The app integrates with Firestore, a cloud-based NoSQL database, to store and manage shifts, workplaces, and user data in real time.
