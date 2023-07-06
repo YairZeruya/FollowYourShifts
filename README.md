@@ -28,11 +28,13 @@ Use the intuitive calendar view at the top of the screen to navigate through you
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/7e4d2322-9211-4f9d-8d4d-4a5c9e19c22b" width="250" height="500">
 
 ### Income Tracking:
-Keep track of your income across multiple workplaces. The app provides an overview of your earnings, allowing you to track your income by workplace. Gain valuable insights into your overall income trends.## 
+Keep track of your income across multiple workplaces. The app provides an overview of your earnings, allowing you to track your income by workplace. Gain valuable insights into your overall income trends.
+
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/198ff40c-4aa6-4a40-a466-f8a8445ac89f" width="250" height="500">
 
 ### Automatic Income Calculation:
 The app automatically calculates your income based on the hourly rate and the number of hours worked per shift. Say goodbye to manual calculations and let Follow Your Shifts do the math for you!
+
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/72cd1096-1189-47a7-a664-a166c3fed3dc" width="250" height="500">
 
 ### Logout:
@@ -59,3 +61,7 @@ User authentication is implemented using Firebase Authentication, ensuring secur
 ##### 4) Build and run the application on your Android device or emulator.
 ##### 5) Sign up or log in using your email and password.
 ##### 6) Add your workplaces and start tracking your shifts and income.
+
+
+# App Demo Video: A Step-by-Step Guide
+For a comprehensive guide on how to use the app, I recommend watching the app demo video titled "app_demo_video". This video provides a visual walkthrough of the app's features and functionality, from the registration process to tracking shifts. It covers important aspects such as workplace and shift management, income tracking, and more. By watching the video, you'll gain a better understanding of how to effectively utilize the app's capabilities.
