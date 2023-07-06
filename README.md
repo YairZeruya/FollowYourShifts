@@ -1,16 +1,21 @@
 # FollowYourShifts
 Welcome to Follow Your Shifts! This application, built with Android Studio and Java, allows you to easily track your work shifts and stay informed about your earnings across different workplaces. The app integrates with Firebase Firestore Database for seamless data management and Firebase Authentication for secure user authentication.
 
-<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/0d1b9848-dcc9-46d0-90e9-49915de97fa6" width="250" height="500">
+
 
 # Features
 ### User Authentication:
 Securely log in to the app using your email and password. Firebase Authentication ensures a reliable and secure login process.
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/0d1b9848-dcc9-46d0-90e9-49915de97fa6" width="250" height="500">
 
 ### Easy Access to Workplace and Shift Management:
 The "View Options" button, conveniently located at the bottom left of the screen, grants you effortless access to workplace and shift management features. With just a tap, you can easily add, remove, and update workplace and shift details within the app. Stay in control of your work schedule and effortlessly manage your shifts.
 
 In addition, the "View Options" button also provides access to the view income board, allowing you to track your earnings across multiple workplaces. Stay informed about your income trends and make data-driven financial decisions.
+
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/1cc3be2c-6f62-401b-8bf8-6f06aed0c1ae" width="250" height="500">
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/754039ce-323c-4371-9c8c-b9e9bb9d824a" width="250" height="500">
+
 ### Workplace Management:
 Add and remove workplaces effortlessly within the app.
 
