@@ -1,7 +1,7 @@
 # FollowYourShifts
 Welcome to Follow Your Shifts! This application, built with Android Studio and Java, allows you to easily track your work shifts and stay informed about your earnings across different workplaces. The app integrates with Firebase Firestore Database for seamless data management and Firebase Authentication for secure user authentication.
 
-<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/0d1b9848-dcc9-46d0-90e9-49915de97fa6" width="200" height="400">
+<img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/0d1b9848-dcc9-46d0-90e9-49915de97fa6" width="250" height="500">
 
 # Features
 ### User Authentication:
