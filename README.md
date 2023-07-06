@@ -6,6 +6,7 @@ Welcome to Follow Your Shifts! This application, built with Android Studio and J
 # Features
 ### User Authentication:
 Securely log in to the app using your email and password. Firebase Authentication ensures a reliable and secure login process.
+
 <img src="https://github.com/YairZeruya/FollowYourShifts/assets/108290381/0d1b9848-dcc9-46d0-90e9-49915de97fa6" width="250" height="500">
 
 ### Easy Access to Workplace and Shift Management:
