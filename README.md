@@ -5,7 +5,7 @@ Welcome to Follow Your Shifts! This application, built with Android Studio and J
 ### User Authentication:
 Securely log in to the app using your email and password. Firebase Authentication ensures a reliable and secure login process.
 
-### Easy Access to Workplace and Shift Management
+### Easy Access to Workplace and Shift Management:
 The "View Options" button, conveniently located at the bottom left of the screen, grants you effortless access to workplace and shift management features. With just a tap, you can easily add, remove, and update workplace and shift details within the app. Stay in control of your work schedule and effortlessly manage your shifts.
 
 In addition, the "View Options" button also provides access to the view income board, allowing you to track your earnings across multiple workplaces. Stay informed about your income trends and make data-driven financial decisions.
@@ -39,9 +39,9 @@ User authentication is implemented using Firebase Authentication, ensuring secur
 # Getting Started
 ### To get started with Follow Your Shifts, follow these steps:
 
-###### 1) Clone the repository to your local machine.
-###### 2) Set up Firebase Authentication and Firestore in your Firebase project.
-###### 3) Import the project into Android Studio.
-###### 4) Build and run the application on your Android device or emulator.
-###### 5) Sign up or log in using your email and password.
-###### 6) Add your workplaces and start tracking your shifts and income.
+##### 1) Clone the repository to your local machine.
+##### 2) Set up Firebase Authentication and Firestore in your Firebase project.
+##### 3) Import the project into Android Studio.
+##### 4) Build and run the application on your Android device or emulator.
+##### 5) Sign up or log in using your email and password.
+##### 6) Add your workplaces and start tracking your shifts and income.
